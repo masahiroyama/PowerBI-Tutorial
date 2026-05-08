@@ -171,61 +171,205 @@ export const steps: Step[] = [
     content: (
       <div className="space-y-4">
         <Accordion title="1.1 データ解析の定義" defaultOpen>
-          <p className="mb-3">
+          <p className="mb-4">
             データ解析とは、大量のデータから意味のある情報やパターンを抽出し、
             ビジネスの意思決定を支援するプロセスです。
           </p>
-          <CodeBlock code={`生データ（雑然データ）
-    ↓ データ整形・加工
-整理されたデータ（整然データ）
-    ↓ 分析・可視化
-洞察・ビジネス上の価値`} />
+          <div className="flex flex-col items-center gap-0">
+            <div className="w-full p-4 rounded-lg bg-red-50 dark:bg-red-900/20 border-2 border-red-200 dark:border-red-800 text-center">
+              <p className="font-bold text-red-800 dark:text-red-300">📊 生データ（雑然データ）</p>
+              <p className="text-xs text-red-600 dark:text-red-400 mt-1">月が列に並んだピボット形式・そのままでは分析しにくい</p>
+            </div>
+            <div className="flex flex-col items-center py-1">
+              <div className="w-0.5 h-4 bg-gray-300 dark:bg-gray-600" />
+              <span className="text-lg leading-none text-gray-400">▼</span>
+              <p className="text-xs font-medium text-gray-500 dark:text-gray-400 my-0.5">データ整形・加工（Power Query）</p>
+              <span className="text-lg leading-none text-gray-400">▼</span>
+              <div className="w-0.5 h-4 bg-gray-300 dark:bg-gray-600" />
+            </div>
+            <div className="w-full p-4 rounded-lg bg-blue-50 dark:bg-blue-900/20 border-2 border-blue-200 dark:border-blue-800 text-center">
+              <p className="font-bold text-blue-800 dark:text-blue-300">🗂️ 整理されたデータ（整然データ）</p>
+              <p className="text-xs text-blue-600 dark:text-blue-400 mt-1">1行 = 1観測値のロング形式・BI ツールが処理しやすい</p>
+            </div>
+            <div className="flex flex-col items-center py-1">
+              <div className="w-0.5 h-4 bg-gray-300 dark:bg-gray-600" />
+              <span className="text-lg leading-none text-gray-400">▼</span>
+              <p className="text-xs font-medium text-gray-500 dark:text-gray-400 my-0.5">分析・可視化</p>
+              <span className="text-lg leading-none text-gray-400">▼</span>
+              <div className="w-0.5 h-4 bg-gray-300 dark:bg-gray-600" />
+            </div>
+            <div className="w-full p-4 rounded-lg bg-green-50 dark:bg-green-900/20 border-2 border-green-200 dark:border-green-800 text-center">
+              <p className="font-bold text-green-800 dark:text-green-300">💡 洞察・ビジネス上の価値</p>
+              <p className="text-xs text-green-600 dark:text-green-400 mt-1">データドリブンな意思決定の実現</p>
+            </div>
+          </div>
         </Accordion>
 
         <Accordion title="1.2 解析しやすいデータ vs. 人が見やすいデータ">
-          <p className="mb-3">
+          <p className="mb-4">
             コンピュータがデータを分析しやすい形と人間が見やすい形は異なります。
           </p>
-          <p className="font-semibold text-red-600 dark:text-red-400 mb-1">❌ 人間には見やすいが、解析に不適切な形（雑然データ）</p>
-          <CodeBlock language="csv" code={`タスク,1月,2月,3月,4月,5月
-営業報告,10,12,11,13,14
-データ分析,8,8,9,7,8
-マーケティング,15,14,16,15,17`} />
-          <ul className="mt-2 mb-4 text-sm space-y-1 text-red-700 dark:text-red-400">
-            <li>・月が列になっているため、新しい月を追加するたびに列を増やす必要がある</li>
-            <li>・グラフやピボットテーブルで分析するには前処理が必要</li>
-          </ul>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="rounded-lg border-2 border-red-300 dark:border-red-700 overflow-hidden">
+              <div className="bg-red-100 dark:bg-red-900/40 px-3 py-2">
+                <p className="font-bold text-red-800 dark:text-red-300">❌ 雑然データ（ピボット形式）</p>
+                <p className="text-xs text-red-600 dark:text-red-400">人間には見やすいが、解析に不適切</p>
+              </div>
+              <div className="p-3 overflow-x-auto">
+                <table className="text-xs border-collapse w-full">
+                  <thead>
+                    <tr className="bg-red-50 dark:bg-red-900/20">
+                      {['タスク', '1月', '2月', '3月', '4月', '5月'].map(h => (
+                        <th key={h} className="border border-red-200 dark:border-red-700 px-2 py-1 text-left">{h}</th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {[
+                      ['営業報告', 10, 12, 11, 13, 14],
+                      ['データ分析', 8, 8, 9, 7, 8],
+                      ['マーケティング', 15, 14, 16, 15, 17],
+                    ].map(row => (
+                      <tr key={row[0]}>
+                        {row.map((c, i) => (
+                          <td key={i} className="border border-red-200 dark:border-red-700 px-2 py-1">{c}</td>
+                        ))}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              <ul className="text-xs px-3 pb-3 space-y-1 text-red-700 dark:text-red-400">
+                <li>・月が増えるたびに列を追加する必要がある</li>
+                <li>・BI ツールでの分析に前処理が必要</li>
+                <li>・全期間の集計に複数列を参照する必要がある</li>
+              </ul>
+            </div>
 
-          <p className="font-semibold text-green-600 dark:text-green-400 mb-1">✅ コンピュータが処理しやすい形（整然データ）</p>
-          <CodeBlock language="csv" code={`タスク,月,工数
-営業報告,1月,10
-営業報告,2月,12
-営業報告,3月,11
-データ分析,1月,8
-データ分析,2月,8`} />
-          <ul className="mt-2 text-sm space-y-1 text-green-700 dark:text-green-400">
-            <li>・各行が1つの観測値を表す</li>
-            <li>・集計や集団ごとの分析が単純</li>
-            <li>・ピボットテーブルやグラフに直接使用可能</li>
-          </ul>
+            <div className="rounded-lg border-2 border-green-300 dark:border-green-700 overflow-hidden">
+              <div className="bg-green-100 dark:bg-green-900/40 px-3 py-2">
+                <p className="font-bold text-green-800 dark:text-green-300">✅ 整然データ（ロング形式）</p>
+                <p className="text-xs text-green-600 dark:text-green-400">コンピュータが処理しやすい形</p>
+              </div>
+              <div className="p-3 overflow-x-auto">
+                <table className="text-xs border-collapse w-full">
+                  <thead>
+                    <tr className="bg-green-50 dark:bg-green-900/20">
+                      {['タスク', '月', '工数'].map(h => (
+                        <th key={h} className="border border-green-200 dark:border-green-700 px-2 py-1 text-left">{h}</th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {[
+                      ['営業報告', '1月', 10],
+                      ['営業報告', '2月', 12],
+                      ['データ分析', '1月', 8],
+                      ['データ分析', '2月', 8],
+                      ['…', '…', '…'],
+                    ].map((row, i) => (
+                      <tr key={i}>
+                        {row.map((c, j) => (
+                          <td key={j} className="border border-green-200 dark:border-green-700 px-2 py-1">{c}</td>
+                        ))}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              <ul className="text-xs px-3 pb-3 space-y-1 text-green-700 dark:text-green-400">
+                <li>・各行が1つの観測値（タスク × 月）</li>
+                <li>・BI ツールに直接使用可能</li>
+                <li>・新しい月の追加が行を増やすだけ</li>
+              </ul>
+            </div>
+          </div>
         </Accordion>
 
         <Accordion title="1.3 整然データ（Tidy Data）の3つの原則">
-          <p className="mb-3 text-sm text-gray-500 dark:text-gray-400">データ科学者 Hadley Wickham が提唱した概念です。</p>
-          <ol className="space-y-3 list-decimal list-inside text-sm">
-            <li>
-              <strong>各行は1つの観測値である</strong>
-              <p className="ml-5 mt-1 text-gray-600 dark:text-gray-400">同一の対象に関するデータが1行に集約される</p>
-            </li>
-            <li>
-              <strong>各列は1つの変数である</strong>
-              <p className="ml-5 mt-1 text-gray-600 dark:text-gray-400">列ごとに1つの属性のみを持つ</p>
-            </li>
-            <li>
-              <strong>各セルは1つの値である</strong>
-              <p className="ml-5 mt-1 text-gray-600 dark:text-gray-400">セルには単一の値のみを含む</p>
-            </li>
-          </ol>
+          <p className="mb-4 text-sm text-gray-500 dark:text-gray-400">データ科学者 Hadley Wickham が提唱した概念です。</p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+            <div className="p-3 rounded-lg bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-700">
+              <p className="text-2xl text-center mb-2">📋</p>
+              <p className="font-bold text-center text-blue-800 dark:text-blue-300 mb-3 text-sm">原則1：各行 = 1観測値</p>
+              <table className="text-xs border-collapse w-full mb-2">
+                <thead>
+                  <tr className="bg-blue-100 dark:bg-blue-800/60">
+                    <th className="border border-blue-200 dark:border-blue-700 px-1 py-0.5 text-left">タスク</th>
+                    <th className="border border-blue-200 dark:border-blue-700 px-1 py-0.5 text-left">月</th>
+                    <th className="border border-blue-200 dark:border-blue-700 px-1 py-0.5 text-left">工数</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr className="bg-yellow-50 dark:bg-yellow-900/20">
+                    <td className="border border-blue-200 dark:border-blue-700 px-1 py-0.5">営業</td>
+                    <td className="border border-blue-200 dark:border-blue-700 px-1 py-0.5">1月</td>
+                    <td className="border border-blue-200 dark:border-blue-700 px-1 py-0.5">10</td>
+                  </tr>
+                  <tr>
+                    <td className="border border-blue-200 dark:border-blue-700 px-1 py-0.5">営業</td>
+                    <td className="border border-blue-200 dark:border-blue-700 px-1 py-0.5">2月</td>
+                    <td className="border border-blue-200 dark:border-blue-700 px-1 py-0.5">12</td>
+                  </tr>
+                </tbody>
+              </table>
+              <p className="text-xs text-blue-600 dark:text-blue-400">↑ 黄色行 = 「営業×1月」という1事実</p>
+            </div>
+
+            <div className="p-3 rounded-lg bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-700">
+              <p className="text-2xl text-center mb-2">🏷️</p>
+              <p className="font-bold text-center text-purple-800 dark:text-purple-300 mb-3 text-sm">原則2：各列 = 1変数</p>
+              <table className="text-xs border-collapse w-full mb-2">
+                <thead>
+                  <tr className="bg-purple-100 dark:bg-purple-800/60">
+                    <th className="border border-purple-200 dark:border-purple-700 px-1 py-0.5 text-left bg-yellow-100 dark:bg-yellow-900/40">タスク</th>
+                    <th className="border border-purple-200 dark:border-purple-700 px-1 py-0.5 text-left bg-yellow-100 dark:bg-yellow-900/40">月</th>
+                    <th className="border border-purple-200 dark:border-purple-700 px-1 py-0.5 text-left bg-yellow-100 dark:bg-yellow-900/40">工数</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td className="border border-purple-200 dark:border-purple-700 px-1 py-0.5">営業</td>
+                    <td className="border border-purple-200 dark:border-purple-700 px-1 py-0.5">1月</td>
+                    <td className="border border-purple-200 dark:border-purple-700 px-1 py-0.5">10</td>
+                  </tr>
+                  <tr>
+                    <td className="border border-purple-200 dark:border-purple-700 px-1 py-0.5">営業</td>
+                    <td className="border border-purple-200 dark:border-purple-700 px-1 py-0.5">2月</td>
+                    <td className="border border-purple-200 dark:border-purple-700 px-1 py-0.5">12</td>
+                  </tr>
+                </tbody>
+              </table>
+              <p className="text-xs text-purple-600 dark:text-purple-400">↑ 黄色列 = それぞれ1属性のみ</p>
+            </div>
+
+            <div className="p-3 rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-700">
+              <p className="text-2xl text-center mb-2">🔢</p>
+              <p className="font-bold text-center text-green-800 dark:text-green-300 mb-3 text-sm">原則3：各セル = 1値</p>
+              <table className="text-xs border-collapse w-full mb-2">
+                <thead>
+                  <tr className="bg-green-100 dark:bg-green-800/60">
+                    <th className="border border-green-200 dark:border-green-700 px-1 py-0.5 text-left">タスク</th>
+                    <th className="border border-green-200 dark:border-green-700 px-1 py-0.5 text-left">月</th>
+                    <th className="border border-green-200 dark:border-green-700 px-1 py-0.5 text-left">工数</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td className="border border-green-200 dark:border-green-700 px-1 py-0.5">営業</td>
+                    <td className="border border-green-200 dark:border-green-700 px-1 py-0.5">1月</td>
+                    <td className="border border-green-200 dark:border-green-700 px-1 py-0.5 bg-yellow-50 dark:bg-yellow-900/20 font-bold">10</td>
+                  </tr>
+                  <tr>
+                    <td className="border border-green-200 dark:border-green-700 px-1 py-0.5">営業</td>
+                    <td className="border border-green-200 dark:border-green-700 px-1 py-0.5">2月</td>
+                    <td className="border border-green-200 dark:border-green-700 px-1 py-0.5 bg-yellow-50 dark:bg-yellow-900/20 font-bold">12</td>
+                  </tr>
+                </tbody>
+              </table>
+              <p className="text-xs text-green-600 dark:text-green-400">↑ 黄色セル = 単一の数値のみ</p>
+            </div>
+          </div>
         </Accordion>
 
         <Accordion title="1.4 なぜ整然データが重要か？">
@@ -397,28 +541,40 @@ export const steps: Step[] = [
           Power BI での作業は、大きく分けて以下の5つのステップで進みます。
         </p>
 
-        <div className="space-y-3">
-          {[
-            { num: 1, label: 'データの取得 (Get Data)', desc: '様々なソースからデータを読み込む。Excel、SQL Server、Web API など多彩なソースに対応。', color: 'yellow' },
-            { num: 2, label: 'データの整形 (Power Query)', desc: 'データの汚れを落とし、使いやすく加工する。ピボット解除もここで行います。', color: 'orange' },
-            { num: 3, label: 'データモデリング', desc: 'テーブル同士の関連付けを行う。複数のデータソースを使う場合に重要。', color: 'blue' },
-            { num: 4, label: '視覚化 (Report)', desc: 'グラフやチャートを配置してレポートを作成する。', color: 'green' },
-            { num: 5, label: '発行 (Publish)', desc: 'クラウドにアップロードして組織内で共有する。', color: 'purple' },
-          ].map((step, i, arr) => (
-            <div key={step.num} className="flex items-start gap-3">
-              <div className="flex flex-col items-center">
-                <div className={`w-9 h-9 rounded-full flex items-center justify-center text-white font-bold text-sm bg-yellow-500`}>
-                  {step.num}
+        {(() => {
+          const colorMap: Record<string, string> = {
+            yellow: 'bg-yellow-500',
+            orange: 'bg-orange-500',
+            blue: 'bg-blue-500',
+            green: 'bg-green-500',
+            purple: 'bg-purple-500',
+          }
+          const workflowSteps = [
+            { num: 1, label: 'データの取得 (Get Data)', desc: '様々なソースからデータを読み込む。Excel、SQL Server、Web API など多彩なソースに対応。', color: 'yellow', icon: '📥' },
+            { num: 2, label: 'データの整形 (Power Query)', desc: 'データの汚れを落とし、使いやすく加工する。ピボット解除もここで行います。', color: 'orange', icon: '⚙️' },
+            { num: 3, label: 'データモデリング', desc: 'テーブル同士の関連付けを行う。複数のデータソースを使う場合に重要。', color: 'blue', icon: '🔗' },
+            { num: 4, label: '視覚化 (Report)', desc: 'グラフやチャートを配置してレポートを作成する。', color: 'green', icon: '📊' },
+            { num: 5, label: '発行 (Publish)', desc: 'クラウドにアップロードして組織内で共有する。', color: 'purple', icon: '🚀' },
+          ]
+          return (
+            <div className="space-y-3">
+              {workflowSteps.map((step, i, arr) => (
+                <div key={step.num} className="flex items-start gap-3">
+                  <div className="flex flex-col items-center">
+                    <div className={`w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-sm ${colorMap[step.color]}`}>
+                      {step.num}
+                    </div>
+                    {i < arr.length - 1 && <div className="w-0.5 h-6 bg-gray-200 dark:bg-gray-700 mt-1" />}
+                  </div>
+                  <div className="flex-1 pb-2 pt-1">
+                    <p className="font-semibold text-gray-800 dark:text-gray-100">{step.icon} {step.label}</p>
+                    <p className="text-sm text-gray-600 dark:text-gray-400 mt-0.5">{step.desc}</p>
+                  </div>
                 </div>
-                {i < arr.length - 1 && <div className="w-0.5 h-6 bg-gray-200 dark:bg-gray-700 mt-1" />}
-              </div>
-              <div className="flex-1 pb-2">
-                <p className="font-semibold text-gray-800 dark:text-gray-100">{step.label}</p>
-                <p className="text-sm text-gray-600 dark:text-gray-400">{step.desc}</p>
-              </div>
+              ))}
             </div>
-          ))}
-        </div>
+          )
+        })()}
       </div>
     ),
   },
@@ -462,33 +618,76 @@ export const steps: Step[] = [
     content: (
       <div className="space-y-4">
         <Accordion title="6.1 データ構造について" defaultOpen>
-          <p className="text-sm mb-3">
-            準備したサンプルデータ（テーブル名：<code className="bg-gray-100 dark:bg-gray-800 px-1 rounded">ProjectTasks</code>）は、
-            以下のピボット形式（雑然データ）です。Power BI での分析には不適切なため、整然データに変換します。
+          <p className="text-sm mb-4">
+            準備したサンプルデータ（テーブル名：<code className="bg-gray-100 dark:bg-gray-800 px-1 rounded">ProjectTasks</code>）は
+            ピボット形式（雑然データ）です。Power BI での分析には不適切なため、整然データに変換します。
           </p>
-          <div className="overflow-x-auto">
-            <table className="text-xs border-collapse border border-gray-300 dark:border-gray-600">
-              <thead>
-                <tr className="bg-gray-100 dark:bg-gray-800">
-                  {['タスク', '1月', '2月', '3月', '4月', '5月'].map(h => (
-                    <th key={h} className="border border-gray-300 dark:border-gray-600 px-3 py-1">{h}</th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td className="border border-gray-300 dark:border-gray-600 px-3 py-1">営業報告</td>
-                  <td className="border border-gray-300 dark:border-gray-600 px-3 py-1">10</td>
-                  <td className="border border-gray-300 dark:border-gray-600 px-3 py-1">12</td>
-                  <td className="border border-gray-300 dark:border-gray-600 px-3 py-1">11</td>
-                  <td className="border border-gray-300 dark:border-gray-600 px-3 py-1">13</td>
-                  <td className="border border-gray-300 dark:border-gray-600 px-3 py-1">14</td>
-                </tr>
-                <tr>
-                  <td className="border border-gray-300 dark:border-gray-600 px-3 py-1 text-gray-400" colSpan={6}>...</td>
-                </tr>
-              </tbody>
-            </table>
+          <div className="flex flex-col md:flex-row items-center gap-3">
+            <div className="flex-1 w-full rounded-lg border-2 border-red-200 dark:border-red-700 overflow-hidden">
+              <div className="bg-red-50 dark:bg-red-900/20 px-3 py-1.5">
+                <p className="text-xs font-bold text-red-700 dark:text-red-300">変換前（ワイド形式）</p>
+                <p className="text-xs text-red-500 dark:text-red-400">月が列に並んでいる</p>
+              </div>
+              <div className="p-2 overflow-x-auto">
+                <table className="text-xs border-collapse w-full">
+                  <thead>
+                    <tr className="bg-red-50 dark:bg-red-900/20">
+                      {['タスク', '1月', '2月', '3月', '4月', '5月'].map(h => (
+                        <th key={h} className="border border-red-200 dark:border-red-700 px-2 py-1 text-left">{h}</th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      {['営業報告', 10, 12, 11, 13, 14].map((c, i) => (
+                        <td key={i} className="border border-red-200 dark:border-red-700 px-2 py-1">{c}</td>
+                      ))}
+                    </tr>
+                    <tr>
+                      <td className="border border-red-200 dark:border-red-700 px-2 py-1 text-gray-400" colSpan={6}>…</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div className="flex flex-col items-center gap-0.5 text-gray-500 flex-shrink-0">
+              <p className="text-xs font-medium text-center">ピボット解除</p>
+              <span className="text-2xl md:rotate-0 rotate-90">→</span>
+              <p className="text-xs text-center">Power Query</p>
+            </div>
+
+            <div className="flex-1 w-full rounded-lg border-2 border-green-200 dark:border-green-700 overflow-hidden">
+              <div className="bg-green-50 dark:bg-green-900/20 px-3 py-1.5">
+                <p className="text-xs font-bold text-green-700 dark:text-green-300">変換後（ロング形式）</p>
+                <p className="text-xs text-green-500 dark:text-green-400">月が行として展開される</p>
+              </div>
+              <div className="p-2 overflow-x-auto">
+                <table className="text-xs border-collapse w-full">
+                  <thead>
+                    <tr className="bg-green-50 dark:bg-green-900/20">
+                      {['タスク', '月', '工数'].map(h => (
+                        <th key={h} className="border border-green-200 dark:border-green-700 px-2 py-1 text-left">{h}</th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {[
+                      ['営業報告', '1月', 10],
+                      ['営業報告', '2月', 12],
+                      ['営業報告', '3月', 11],
+                      ['…', '…', '…'],
+                    ].map((row, i) => (
+                      <tr key={i}>
+                        {row.map((c, j) => (
+                          <td key={j} className="border border-green-200 dark:border-green-700 px-2 py-1">{c}</td>
+                        ))}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
           </div>
         </Accordion>
 
@@ -596,6 +795,65 @@ export const steps: Step[] = [
     estimatedMinutes: 20,
     content: (
       <div className="space-y-4">
+        <Accordion title="8.0 完成イメージ" defaultOpen>
+          <p className="text-sm mb-3">このセクションで作成するレポートのレイアウトです。スライサーを操作するとグラフとテーブルが連動します。</p>
+          <div className="border-2 border-gray-300 dark:border-gray-600 rounded-lg p-3 bg-gray-50 dark:bg-gray-800 space-y-2">
+            <div className="border border-blue-300 dark:border-blue-600 rounded p-2 bg-white dark:bg-gray-700">
+              <p className="text-xs font-bold text-blue-600 dark:text-blue-300 mb-1.5">🔽 スライサー（タスク）</p>
+              <div className="flex flex-wrap gap-1.5">
+                {['営業報告', 'データ分析', 'マーケティング', 'プロジェクト管理', 'システム開発'].map(t => (
+                  <span key={t} className="text-xs px-2 py-0.5 bg-blue-100 dark:bg-blue-900/40 rounded border border-blue-200 dark:border-blue-700 text-blue-700 dark:text-blue-300">
+                    {t}
+                  </span>
+                ))}
+              </div>
+            </div>
+            <div className="grid grid-cols-2 gap-2">
+              <div className="border border-yellow-300 dark:border-yellow-600 rounded p-2 bg-white dark:bg-gray-700 flex flex-col" style={{minHeight: '7rem'}}>
+                <p className="text-xs font-bold text-yellow-600 dark:text-yellow-300">📈 折れ線グラフ</p>
+                <p className="text-xs text-gray-400 mt-0.5 mb-1">タスク別の月ごとの工数推移</p>
+                <svg viewBox="0 0 120 55" className="flex-1 w-full">
+                  <line x1="10" y1="50" x2="115" y2="50" stroke="#d1d5db" strokeWidth="1"/>
+                  <line x1="10" y1="10" x2="10" y2="50" stroke="#d1d5db" strokeWidth="1"/>
+                  <polyline points="10,42 34,35 58,38 82,25 106,18" fill="none" stroke="#f59e0b" strokeWidth="1.5"/>
+                  <polyline points="10,46 34,44 58,42 82,45 106,38" fill="none" stroke="#3b82f6" strokeWidth="1.5"/>
+                  <polyline points="10,32 34,28 58,30 82,20 106,12" fill="none" stroke="#10b981" strokeWidth="1.5"/>
+                  {['1月','2月','3月','4月','5月'].map((m, i) => (
+                    <text key={m} x={10 + i * 24} y="55" fontSize="5" fill="#9ca3af" textAnchor="middle">{m}</text>
+                  ))}
+                </svg>
+              </div>
+              <div className="border border-green-300 dark:border-green-600 rounded p-2 bg-white dark:bg-gray-700">
+                <p className="text-xs font-bold text-green-600 dark:text-green-300 mb-1.5">📋 テーブル</p>
+                <table className="text-xs w-full border-collapse">
+                  <thead>
+                    <tr className="bg-green-50 dark:bg-green-900/30">
+                      {['タスク', '月', '工数'].map(h => (
+                        <th key={h} className="border border-green-200 dark:border-green-700 px-1 py-0.5 text-left font-semibold">{h}</th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {[
+                      ['営業報告', '1月', 10],
+                      ['営業報告', '2月', 12],
+                      ['データ分析', '1月', 8],
+                      ['…', '…', '…'],
+                    ].map((r, i) => (
+                      <tr key={i} className={i % 2 === 0 ? '' : 'bg-green-50/50 dark:bg-green-900/10'}>
+                        {r.map((c, j) => (
+                          <td key={j} className="border border-green-200 dark:border-green-700 px-1 py-0.5">{c}</td>
+                        ))}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <p className="text-xs text-center text-gray-400">↑ スライサーを選択するとグラフとテーブルが連動して絞り込まれます</p>
+          </div>
+        </Accordion>
+
         <Accordion title="8.1 レポートビューに切り替え" defaultOpen>
           <p className="text-sm">左側の「レポート」アイコンをクリックしてレポートビューに切り替えます。</p>
         </Accordion>
