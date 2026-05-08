@@ -1,0 +1,45 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --pbi-yellow: #F2C811;
+  }
+}
+
+/* Accordion open/close animation */
+details > summary {
+  list-style: none;
+  cursor: pointer;
+}
+details > summary::-webkit-details-marker {
+  display: none;
+}
+
+/* Print styles */
+@media print {
+  header,
+  nav,
+  .step-nav,
+  .complete-btn,
+  .print-btn {
+    display: none !important;
+  }
+
+  details {
+    display: block !important;
+  }
+
+  details > div {
+    display: block !important;
+  }
+
+  .step-section {
+    display: block !important;
+    page-break-before: auto;
+  }
+
+  main {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+}
