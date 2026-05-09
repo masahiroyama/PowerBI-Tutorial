@@ -22,8 +22,12 @@ CONTENTS.md を更新（骨子・構成・文章）
         ↓
 src/data/steps.tsx を更新（React コンテンツに反映）
         ↓
+src/data/scripts.ts を更新（対応するステップのスクリプトを同期）
+        ↓
 必要に応じてコンポーネントを更新
 ```
+
+> **スクリプトの同期ルール**: `steps.tsx` のコンテンツ（手順・用語・説明の流れ）を変更したら、`scripts.ts` の対応するステップ id のスクリプト文も必ずセットで修正する。スクリプトは講師が口頭で話す想定のテキストなので、コンテンツとの乖離が生じないよう管理する。
 
 ---
 
@@ -78,10 +82,14 @@ React アプリ（`src/data/steps.tsx`）では、HTML/JSX/Tailwind の自由度
 
 ## ファイル構成
 
+> **更新ルール**: ファイルの追加・削除・移動を行った場合は、必ずこのセクションも同時に更新する。
+
+
 ```
 src/
   data/
     steps.tsx       # チュートリアルの全コンテンツ（JSX）
+    scripts.ts      # 各ステップの口頭説明スクリプト（steps.tsx と常に同期）
   components/
     Accordion.tsx   # 折りたたみセクション
     CodeBlock.tsx   # コードブロック表示
@@ -89,12 +97,14 @@ src/
     Header.tsx
     Layout.tsx
     ProgressBar.tsx
+    ScriptPanel.tsx # スクリプト表示・読み上げパネル
     Sidebar.tsx
     StepNav.tsx
     StepPage.tsx
   hooks/
     useDarkMode.ts
     useProgress.ts
+    useSpeech.ts    # Web Speech API ラッパー
 CONTENTS.md         # コンテンツの骨子（Markdown）
 ```
 
