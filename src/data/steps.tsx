@@ -62,34 +62,60 @@ export const steps: Step[] = [
             </div>
 
             <div>
-              <p className="font-semibold mb-2">3️⃣ サンプルデータファイルの作成（重要）</p>
-              <p className="mb-2">Excel を開き、A1 セルから以下のデータを貼り付けてください：</p>
-              <div className="overflow-x-auto">
-                <table className="text-xs border-collapse border border-gray-300 dark:border-gray-600 w-full">
+              <p className="font-semibold mb-2">3️⃣ サンプルデータファイルの準備（重要）</p>
+
+              {/* ダウンロードボタン */}
+              <div className="mb-4 p-4 bg-green-50 dark:bg-green-900/20 border border-green-300 dark:border-green-700 rounded-lg">
+                <p className="text-sm font-semibold text-green-800 dark:text-green-300 mb-3">📥 サンプルデータをダウンロード</p>
+                <p className="text-xs text-gray-600 dark:text-gray-400 mb-3">
+                  このチュートリアルで使用する Excel ファイルを用意しています。以下のボタンからダウンロードしてください。
+                </p>
+                <a
+                  href="/sample-data.xlsx"
+                  download="sample-data.xlsx"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 bg-green-600 hover:bg-green-700 text-white text-sm font-semibold rounded-lg transition-colors"
+                >
+                  <span>⬇️</span>
+                  <span>sample-data.xlsx をダウンロード</span>
+                </a>
+                <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">
+                  ダウンロード後、ファイルをデスクトップなど分かりやすい場所に保存してください。
+                </p>
+              </div>
+
+              {/* ファイル内容プレビュー */}
+              <p className="text-sm font-medium mb-2">📋 ファイルの内容（プレビュー）</p>
+              <div className="overflow-x-auto mb-3">
+                <table className="text-xs border-collapse border border-gray-300 dark:border-gray-600">
                   <thead>
                     <tr className="bg-gray-100 dark:bg-gray-800">
-                      {['タスク', '1月', '2月', '3月', '4月', '5月'].map(h => (
-                        <th key={h} className="border border-gray-300 dark:border-gray-600 px-2 py-1 text-left">{h}</th>
+                      {['プロジェクト', 'タスク', '2022/01/01', '2022/02/01', '2022/03/01', '…', '2024/12/01'].map(h => (
+                        <th key={h} className="border border-gray-300 dark:border-gray-600 px-2 py-1 text-left whitespace-nowrap">{h}</th>
                       ))}
                     </tr>
                   </thead>
                   <tbody>
                     {[
-                      ['営業報告', 10, 12, 11, 13, 14],
-                      ['データ分析', 8, 8, 9, 7, 8],
-                      ['マーケティング', 15, 14, 16, 15, 17],
-                      ['プロジェクト管理', 12, 11, 12, 13, 12],
-                      ['システム開発', 20, 22, 21, 19, 20],
-                    ].map(row => (
-                      <tr key={row[0]}>
-                        {row.map((cell, i) => (
-                          <td key={i} className="border border-gray-300 dark:border-gray-600 px-2 py-1">{cell}</td>
+                      ['プロジェクトA', '要件定義', 14, 8, 3, '…', 11],
+                      ['プロジェクトA', '設計', 7, 19, 15, '…', 6],
+                      ['プロジェクトA', '開発', 17, 5, 12, '…', 9],
+                      ['プロジェクトB', '市場調査', 11, 13, 7, '…', 14],
+                      ['…', '…', '…', '…', '…', '…', '…'],
+                      ['プロジェクトC', '次期計画', 9, 16, 4, '…', 12],
+                    ].map((row, i) => (
+                      <tr key={i} className={i % 2 === 1 ? 'bg-gray-50 dark:bg-gray-800/50' : ''}>
+                        {row.map((cell, j) => (
+                          <td key={j} className="border border-gray-300 dark:border-gray-600 px-2 py-1 whitespace-nowrap">{cell}</td>
                         ))}
                       </tr>
                     ))}
                   </tbody>
                 </table>
               </div>
+              <div className="mb-3 p-2 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-700 rounded text-xs text-blue-700 dark:text-blue-300">
+                <span className="font-semibold">ℹ️ データ構成：</span> プロジェクト 3種 × タスク 10種 = 計 30行、日付列は 2022/01/01〜2024/12/01 の36ヶ月分（合計 38列）
+              </div>
+
               <p className="mt-3 font-medium">テーブルに変換する手順（図解）：</p>
               <div className="mt-2 space-y-3">
 
@@ -97,33 +123,32 @@ export const steps: Step[] = [
                 <div className="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
                   <div className="bg-gray-50 dark:bg-gray-800 px-3 py-2 flex items-center gap-2 border-b border-gray-200 dark:border-gray-700">
                     <span className="bg-blue-600 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center shrink-0">1</span>
-                    <span className="text-sm font-medium">A1〜F6を選択する（データ全体をドラッグ）</span>
+                    <span className="text-sm font-medium">A1〜AL31 を選択する（データ全体をドラッグ）</span>
                   </div>
                   <div className="p-3">
-                    <div className="border border-gray-400 dark:border-gray-500 rounded overflow-hidden text-xs font-mono bg-white dark:bg-gray-900 max-w-sm">
+                    <div className="border border-gray-400 dark:border-gray-500 rounded overflow-hidden text-xs font-mono bg-white dark:bg-gray-900 max-w-lg">
                       <div className="flex bg-gray-200 dark:bg-gray-700 border-b border-gray-400">
-                        <div className="w-5 border-r border-gray-400 text-center py-0.5 text-gray-500"></div>
-                        {[['A','w-24'],['B','w-9'],['C','w-9'],['D','w-9'],['E','w-9'],['F','w-9']].map(([col,w]) => (
-                          <div key={col} className={`${w} border-r border-gray-400 text-center py-0.5 font-bold bg-blue-200 dark:bg-blue-900/60 text-blue-800 dark:text-blue-300`}>{col}</div>
+                        <div className="w-5 border-r border-gray-400 text-center py-0.5 text-gray-500 shrink-0"></div>
+                        {[['A','w-20'],['B','w-16'],['C','w-16'],['D','w-16'],['…','w-8'],['AL','w-16']].map(([col, w]) => (
+                          <div key={col} className={`${w} border-r border-gray-400 text-center py-0.5 font-bold bg-blue-200 dark:bg-blue-900/60 text-blue-800 dark:text-blue-300 shrink-0`}>{col}</div>
                         ))}
                       </div>
                       {[
-                        ['タスク','1月','2月','3月','4月','5月'],
-                        ['営業報告','10','12','11','13','14'],
-                        ['データ分析','8','8','9','7','8'],
-                        ['マーケティング','15','14','16','15','17'],
-                        ['プロジェクト管理','12','11','12','13','12'],
-                        ['システム開発','20','22','21','19','20'],
+                        ['プロジェクト', 'タスク', '2022/01/01', '2022/02/01', '…', '2024/12/01'],
+                        ['プロジェクトA', '要件定義', '14', '8', '…', '11'],
+                        ['プロジェクトA', '設計', '7', '19', '…', '6'],
+                        ['…', '…', '…', '…', '…', '…'],
+                        ['プロジェクトC', '次期計画', '9', '16', '…', '12'],
                       ].map((row, rowIdx) => (
                         <div key={rowIdx} className="flex border-b border-gray-300 dark:border-gray-600">
-                          <div className="w-5 border-r border-gray-400 text-center py-0.5 bg-blue-200 dark:bg-blue-900/60 text-blue-700 dark:text-blue-300 font-bold">{rowIdx + 1}</div>
+                          <div className="w-5 border-r border-gray-400 text-center py-0.5 bg-blue-200 dark:bg-blue-900/60 text-blue-700 dark:text-blue-300 font-bold shrink-0">{rowIdx + 1}</div>
                           {row.map((cell, colIdx) => (
-                            <div key={colIdx} className={`border-r border-blue-300 dark:border-blue-600 px-1 py-0.5 bg-blue-100 dark:bg-blue-900/30 text-blue-900 dark:text-blue-200 truncate ${colIdx === 0 ? 'w-24' : 'w-9'}`}>{cell}</div>
+                            <div key={colIdx} className={`border-r border-blue-300 dark:border-blue-600 px-1 py-0.5 bg-blue-100 dark:bg-blue-900/30 text-blue-900 dark:text-blue-200 truncate shrink-0 ${colIdx === 0 ? 'w-20' : colIdx === 4 ? 'w-8' : 'w-16'}`}>{cell}</div>
                           ))}
                         </div>
                       ))}
                     </div>
-                    <p className="text-xs text-blue-600 dark:text-blue-400 mt-1">A1 をクリック → Shift を押しながら F6 をクリック（または A1 からドラッグ）</p>
+                    <p className="text-xs text-blue-600 dark:text-blue-400 mt-1">A1 をクリック → Ctrl+Shift+End で最終セル（AL31）まで一括選択</p>
                   </div>
                 </div>
 
@@ -170,7 +195,7 @@ export const steps: Step[] = [
                       <div className="p-4 space-y-3">
                         <div>
                           <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">テーブルに変換するデータ範囲：</p>
-                          <div className="border border-gray-300 dark:border-gray-600 rounded px-2 py-1 font-mono bg-gray-50 dark:bg-gray-700">=$A$1:$F$6</div>
+                          <div className="border border-gray-300 dark:border-gray-600 rounded px-2 py-1 font-mono bg-gray-50 dark:bg-gray-700">=$A$1:$AL$31</div>
                         </div>
                         <div className="flex items-center gap-2">
                           <div className="w-4 h-4 border-2 border-blue-500 bg-blue-100 dark:bg-blue-900/40 rounded-sm flex items-center justify-center shrink-0">
