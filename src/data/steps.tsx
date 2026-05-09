@@ -1464,12 +1464,49 @@ export const steps: Step[] = [
   },
 
   // ─────────────────────────────────────────────
-  // Step 9: ステップ5 共有と発行
-  // ─────────────────────────────────────────────
-  // Step 9: 追加で学習したい人向け
+  // Step 9: まとめ
   // ─────────────────────────────────────────────
   {
     id: 9,
+    title: 'まとめ',
+    estimatedMinutes: null,
+    content: (
+      <div className="space-y-6">
+        <p className="text-gray-700 dark:text-gray-300">
+          このチュートリアルでは、Power BI Desktop を使用して以下を習得しました：
+        </p>
+
+        <div className="space-y-3">
+          {[
+            'データの取得方法（Excel ファイルの読み込み）',
+            'ピボット解除によるデータ整形（雑然データ → 整然データ）',
+            '視覚化によるデータ分析（折れ線グラフ、テーブル）',
+            'インタラクティブなレポート作成（スライサー）',
+          ].map(item => (
+            <div key={item} className="flex items-start gap-3 p-3 rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800">
+              <span className="text-green-500 text-lg">✅</span>
+              <span className="text-sm text-gray-700 dark:text-gray-300">{item}</span>
+            </div>
+          ))}
+        </div>
+
+        <div className="p-4 rounded-lg bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-300 dark:border-yellow-700 text-center">
+          <p className="text-lg font-bold text-yellow-800 dark:text-yellow-300">⏱ 所要時間：約56分</p>
+          <p className="mt-2 text-sm text-gray-700 dark:text-gray-300">
+            Power BI は、データをビジネス上の意思決定に活用するための強力なツールです。<br />
+            実際の業務データで繰り返し実践することで、確実にスキルが向上します。
+          </p>
+          <p className="mt-3 text-lg">🎉 Happy analyzing!</p>
+        </div>
+      </div>
+    ),
+  },
+
+  // ─────────────────────────────────────────────
+  // Step 10: 追加で学習したい人向け
+  // ─────────────────────────────────────────────
+  {
+    id: 10,
     title: '追加で学習したい人向け',
     estimatedMinutes: null,
     content: (
@@ -1576,10 +1613,10 @@ export const steps: Step[] = [
   },
 
   // ─────────────────────────────────────────────
-  // Step 10: よくある質問
+  // Step 11: よくある質問
   // ─────────────────────────────────────────────
   {
-    id: 10,
+    id: 11,
     title: 'よくある質問（FAQ）',
     estimatedMinutes: null,
     content: (
@@ -1611,10 +1648,10 @@ export const steps: Step[] = [
   },
 
   // ─────────────────────────────────────────────
-  // Step 11: 次のステップ
+  // Step 12: 次のステップ
   // ─────────────────────────────────────────────
   {
-    id: 11,
+    id: 12,
     title: '次のステップ',
     estimatedMinutes: null,
     content: (
@@ -1655,45 +1692,6 @@ export const steps: Step[] = [
               <p className="text-sm text-gray-600 dark:text-gray-400">{item.desc}</p>
             </div>
           ))}
-        </div>
-      </div>
-    ),
-  },
-
-  // ─────────────────────────────────────────────
-  // Step 12: まとめ
-  // ─────────────────────────────────────────────
-  {
-    id: 12,
-    title: 'まとめ',
-    estimatedMinutes: null,
-    content: (
-      <div className="space-y-6">
-        <p className="text-gray-700 dark:text-gray-300">
-          このチュートリアルでは、Power BI Desktop を使用して以下を習得しました：
-        </p>
-
-        <div className="space-y-3">
-          {[
-            'データの取得方法（Excel ファイルの読み込み）',
-            'ピボット解除によるデータ整形（雑然データ → 整然データ）',
-            '視覚化によるデータ分析（折れ線グラフ、テーブル）',
-            'インタラクティブなレポート作成（スライサー）',
-          ].map(item => (
-            <div key={item} className="flex items-start gap-3 p-3 rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800">
-              <span className="text-green-500 text-lg">✅</span>
-              <span className="text-sm text-gray-700 dark:text-gray-300">{item}</span>
-            </div>
-          ))}
-        </div>
-
-        <div className="p-4 rounded-lg bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-300 dark:border-yellow-700 text-center">
-          <p className="text-lg font-bold text-yellow-800 dark:text-yellow-300">⏱ 所要時間：約56分</p>
-          <p className="mt-2 text-sm text-gray-700 dark:text-gray-300">
-            Power BI は、データをビジネス上の意思決定に活用するための強力なツールです。<br />
-            実際の業務データで繰り返し実践することで、確実にスキルが向上します。
-          </p>
-          <p className="mt-3 text-lg">🎉 Happy analyzing!</p>
         </div>
       </div>
     ),
