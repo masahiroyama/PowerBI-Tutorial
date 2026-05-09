@@ -53,7 +53,7 @@ export function StepPage({ stepId, isCompleted, onToggleComplete }: Props) {
                 ⏱ {step.estimatedMinutes}分
               </span>
             )}
-            {isCompleted(step.id) && (
+            {step.category === 'tutorial' && isCompleted(step.id) && (
               <span className="text-xs font-medium px-2 py-0.5 rounded-full bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400">
                 ✅ 完了
               </span>
@@ -67,11 +67,13 @@ export function StepPage({ stepId, isCompleted, onToggleComplete }: Props) {
 
       <div className="prose-sm">{step.content}</div>
 
-      <CompleteButton
-        stepId={step.id}
-        isCompleted={isCompleted(step.id)}
-        onToggle={onToggleComplete}
-      />
+      {step.category === 'tutorial' && (
+        <CompleteButton
+          stepId={step.id}
+          isCompleted={isCompleted(step.id)}
+          onToggle={onToggleComplete}
+        />
+      )}
 
       <StepNav currentStepId={step.id} />
 
