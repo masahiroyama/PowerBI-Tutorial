@@ -1,9 +1,11 @@
 type Props = {
   dark: boolean
   onToggleDark: () => void
+  showScript: boolean
+  onToggleScript: () => void
 }
 
-export function Header({ dark, onToggleDark }: Props) {
+export function Header({ dark, onToggleDark, showScript, onToggleScript }: Props) {
   const handlePrint = () => window.print()
 
   return (
@@ -15,6 +17,17 @@ export function Header({ dark, onToggleDark }: Props) {
           </span>
         </div>
         <div className="flex items-center gap-2">
+          <button
+            onClick={onToggleScript}
+            className={`px-3 py-1.5 rounded-md text-sm border transition-colors ${
+              showScript
+                ? 'bg-amber-100 dark:bg-amber-900/40 border-amber-300 dark:border-amber-700 text-amber-800 dark:text-amber-300'
+                : 'border-gray-200 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-600 dark:text-gray-300'
+            }`}
+            title={showScript ? 'スクリプトを非表示' : 'スクリプトを表示'}
+          >
+            📜 スクリプト
+          </button>
           <button
             onClick={onToggleDark}
             className="px-3 py-1.5 rounded-md text-sm border border-gray-200 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-600 dark:text-gray-300 transition-colors"

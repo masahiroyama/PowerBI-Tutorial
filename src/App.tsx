@@ -6,11 +6,13 @@ import { steps } from './data/steps'
 type OutletContext = {
   isCompleted: (id: number) => boolean
   toggleComplete: (id: number) => void
+  showScript: boolean
+  toggleScript: () => void
 }
 
 function StepRoute() {
   const { id } = useParams<{ id: string }>()
-  const { isCompleted, toggleComplete } = useOutletContext<OutletContext>()
+  const { isCompleted, toggleComplete, showScript, toggleScript } = useOutletContext<OutletContext>()
   const stepId = id !== undefined ? parseInt(id, 10) : 0
 
   if (isNaN(stepId) || stepId < 0 || stepId >= steps.length) {
@@ -22,6 +24,8 @@ function StepRoute() {
       stepId={stepId}
       isCompleted={isCompleted}
       onToggleComplete={toggleComplete}
+      showScript={showScript}
+      onToggleScript={toggleScript}
     />
   )
 }

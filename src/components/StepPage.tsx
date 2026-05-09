@@ -3,14 +3,17 @@ import { useNavigate } from 'react-router-dom'
 import { steps } from '../data/steps'
 import { StepNav } from './StepNav'
 import { CompleteButton } from './CompleteButton'
+import { ScriptPanel } from './ScriptPanel'
 
 type Props = {
   stepId: number
   isCompleted: (id: number) => boolean
   onToggleComplete: (id: number) => void
+  showScript: boolean
+  onToggleScript: () => void
 }
 
-export function StepPage({ stepId, isCompleted, onToggleComplete }: Props) {
+export function StepPage({ stepId, isCompleted, onToggleComplete, showScript, onToggleScript }: Props) {
   const step = steps.find(s => s.id === stepId)
   const navigate = useNavigate()
 
@@ -64,6 +67,8 @@ export function StepPage({ stepId, isCompleted, onToggleComplete }: Props) {
           </h1>
         </div>
       </div>
+
+      {showScript && <ScriptPanel stepId={step.id} onClose={onToggleScript} />}
 
       <div className="prose-sm">{step.content}</div>
 

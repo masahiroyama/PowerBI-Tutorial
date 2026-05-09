@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { Outlet, useParams } from 'react-router-dom'
 import { Header } from './Header'
 import { ProgressBar } from './ProgressBar'
@@ -11,20 +12,22 @@ export function Layout() {
   const { isCompleted, toggleComplete, completedCount, progressPercent } = useProgress(steps.length)
   const { id } = useParams<{ id: string }>()
   const currentStepId = id !== undefined ? parseInt(id, 10) : 0
+  const [showScript, setShowScript] = useState(false)
+  const toggleScript = () => setShowScript(prev => !prev)
 
   return (
     <div className="min-h-screen bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100">
-      <Header dark={dark} onToggleDark={toggle} />
+      <Header dark={dark} onToggleDark={toggle} showScript={showScript} onToggleScript={toggleScript} />
       <ProgressBar
         currentStepId={currentStepId}
         completedCount={completedCount}
         progressPercent={progressPercent}
       />
 
-      <div className="flex pt-[88px]">
+      <div className="flex pt-22">
         <Sidebar currentStepId={currentStepId} isCompleted={isCompleted} />
         <main className="flex-1 min-w-0 bg-white dark:bg-gray-950">
-          <Outlet context={{ isCompleted, toggleComplete }} />
+          <Outlet context={{ isCompleted, toggleComplete, showScript, toggleScript }} />
         </main>
       </div>
     </div>
