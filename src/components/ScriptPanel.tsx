@@ -5,6 +5,7 @@ import { useSpeech } from '../hooks/useSpeech'
 type Props = {
   stepId: number
   onClose: () => void
+  onHeightChange?: (height: number) => void
 }
 
 type Sentence = {
@@ -26,16 +27,26 @@ function splitIntoSentences(text: string): Sentence[] {
 
 const RATES = [0.75, 1.0, 1.25, 1.5, 2.0]
 
-export function ScriptPanel({ stepId, onClose }: Props) {
+export function ScriptPanel({ stepId, onClose, onHeightChange }: Props) {
   const script = scripts[stepId]
   const { state, rate, currentCharIndex, speak, pause, resume, stop, setRate } = useSpeech()
   const sentences = script ? splitIntoSentences(script) : []
   const activeRef = useRef<HTMLSpanElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
+  const panelRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     stop()
   }, [stepId, stop])
+
+  useEffect(() => {
+    if (!panelRef.current || !onHeightChange) return
+    const observer = new ResizeObserver(entries => {
+      onHeightChange(entries[0].borderBoxSize[0].blockSize)
+    })
+    observer.observe(panelRef.current)
+    return () => observer.disconnect()
+  }, [onHeightChange])
 
   // コンテナ内のみスクロール（pageスクロールに干渉しない）
   useEffect(() => {
@@ -60,7 +71,7 @@ export function ScriptPanel({ stepId, onClose }: Props) {
         })
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-40 bg-white dark:bg-gray-900 border-t-2 border-amber-300 dark:border-amber-700 shadow-[0_-4px_12px_rgba(0,0,0,0.08)] print:hidden">
+    <div ref={panelRef} className="fixed bottom-0 left-0 right-0 z-40 bg-white dark:bg-gray-900 border-t-2 border-amber-300 dark:border-amber-700 shadow-[0_-4px_12px_rgba(0,0,0,0.08)] print:hidden">
       <div className="px-6 py-3">
         {/* Controls row */}
         <div className="flex flex-wrap items-center gap-2 mb-2">

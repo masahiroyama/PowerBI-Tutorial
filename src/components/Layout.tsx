@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useCallback } from 'react'
 import { Outlet, useParams } from 'react-router-dom'
 import { Header } from './Header'
 import { ProgressBar } from './ProgressBar'
@@ -18,6 +18,8 @@ export function Layout() {
   const toggleScript = () => setShowScript(prev => !prev)
   const [showGlossary, setShowGlossary] = useState(false)
   const toggleGlossary = () => setShowGlossary(prev => !prev)
+  const [scriptPanelHeight, setScriptPanelHeight] = useState(0)
+  const handleScriptHeightChange = useCallback((h: number) => setScriptPanelHeight(h), [])
 
   return (
     <div className="min-h-screen bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100">
@@ -43,11 +45,11 @@ export function Layout() {
       </div>
 
       {showScript && (
-        <ScriptPanel stepId={currentStepId} onClose={toggleScript} />
+        <ScriptPanel stepId={currentStepId} onClose={toggleScript} onHeightChange={handleScriptHeightChange} />
       )}
 
       {showGlossary && (
-        <GlossaryPanel onClose={toggleGlossary} />
+        <GlossaryPanel onClose={toggleGlossary} scriptPanelHeight={showScript ? scriptPanelHeight : 0} />
       )}
     </div>
   )

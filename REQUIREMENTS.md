@@ -100,7 +100,8 @@ type Step = {
 
 - ヘッダーの「📖 用語集」ボタンでパネルの表示/非表示をトグル
   - 表示中はボタンを青色でハイライト
-- 右端からスライドインする固定パネル（`fixed right-0 top-[88px] bottom-0 w-80 z-40`）
+- 右端からスライドインする固定パネル（`fixed right-0 top-22 w-80 z-40`）
+  - 下端はスクリプトパネル非表示時 `bottom-0`・表示時 `bottom-44`（スクリプトパネルと重ならない）
   - ステップコンテンツを完全には隠さず、左側に内容が見える
   - 印刷時非表示（`print:hidden`）
 - 用語データは `src/data/glossary.ts` で管理（`{ term: string, definition: string }[]` 形式）

@@ -3,9 +3,10 @@ import { glossary } from '../data/glossary'
 
 type Props = {
   onClose: () => void
+  scriptPanelHeight?: number
 }
 
-export function GlossaryPanel({ onClose }: Props) {
+export function GlossaryPanel({ onClose, scriptPanelHeight = 0 }: Props) {
   const [query, setQuery] = useState('')
 
   const filtered = query.trim()
@@ -13,7 +14,7 @@ export function GlossaryPanel({ onClose }: Props) {
     : glossary
 
   return (
-    <div className="fixed right-0 top-[88px] bottom-0 w-80 z-40 flex flex-col bg-white dark:bg-gray-900 border-l border-gray-200 dark:border-gray-700 shadow-xl print:hidden">
+    <div className="fixed right-0 top-22 w-80 z-40 flex flex-col bg-white dark:bg-gray-900 border-l border-gray-200 dark:border-gray-700 shadow-xl print:hidden" style={{ bottom: scriptPanelHeight }}>
       <div className="flex items-center justify-between px-4 py-3 border-b border-gray-200 dark:border-gray-700">
         <span className="font-semibold text-gray-800 dark:text-gray-100">📖 用語集</span>
         <button
