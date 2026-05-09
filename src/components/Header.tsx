@@ -3,9 +3,11 @@ type Props = {
   onToggleDark: () => void
   showScript: boolean
   onToggleScript: () => void
+  showGlossary: boolean
+  onToggleGlossary: () => void
 }
 
-export function Header({ dark, onToggleDark, showScript, onToggleScript }: Props) {
+export function Header({ dark, onToggleDark, showScript, onToggleScript, showGlossary, onToggleGlossary }: Props) {
   const handlePrint = () => window.print()
 
   return (
@@ -17,6 +19,17 @@ export function Header({ dark, onToggleDark, showScript, onToggleScript }: Props
           </span>
         </div>
         <div className="flex items-center gap-2">
+          <button
+            onClick={onToggleGlossary}
+            className={`px-3 py-1.5 rounded-md text-sm border transition-colors ${
+              showGlossary
+                ? 'bg-blue-100 dark:bg-blue-900/40 border-blue-300 dark:border-blue-700 text-blue-800 dark:text-blue-300'
+                : 'border-gray-200 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-600 dark:text-gray-300'
+            }`}
+            title={showGlossary ? '用語集を非表示' : '用語集を表示'}
+          >
+            📖 用語集
+          </button>
           <button
             onClick={onToggleScript}
             className={`px-3 py-1.5 rounded-md text-sm border transition-colors ${

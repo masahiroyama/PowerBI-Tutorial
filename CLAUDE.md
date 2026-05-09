@@ -91,10 +91,12 @@ src/
   data/
     steps.tsx       # チュートリアルの全コンテンツ（JSX）
     scripts.ts      # 各ステップの口頭説明スクリプト（steps.tsx と常に同期）
+    glossary.ts     # 用語集データ（{ term, definition }[]）
   components/
     Accordion.tsx   # 折りたたみセクション
     CodeBlock.tsx   # コードブロック表示
     CompleteButton.tsx
+    GlossaryPanel.tsx # 用語集スライドインパネル
     Header.tsx
     Layout.tsx
     ProgressBar.tsx
