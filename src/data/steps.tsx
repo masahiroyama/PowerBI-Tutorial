@@ -1466,76 +1466,79 @@ export const steps: Step[] = [
   // ─────────────────────────────────────────────
   // Step 9: ステップ5 共有と発行
   // ─────────────────────────────────────────────
+  // Step 9: 追加で学習したい人向け
+  // ─────────────────────────────────────────────
   {
     id: 9,
-    title: 'ステップ5：共有と発行',
-    estimatedMinutes: 5,
+    title: '追加で学習したい人向け',
+    estimatedMinutes: null,
     content: (
-      <div className="space-y-4">
-        <Accordion title="9.1 ローカルファイルとして保存" defaultOpen>
-          <ol className="space-y-2 text-sm list-decimal list-inside">
-            <li><strong>「ファイル」</strong> → <strong>「保存」</strong></li>
-            <li>ファイル名を「project_analysis」として保存</li>
-            <li>Power BI Desktop ファイル（.pbix）として保存されます</li>
-          </ol>
-        </Accordion>
+      <div className="space-y-6">
+        <div className="p-4 rounded-lg bg-blue-50 dark:bg-blue-900/20 border border-blue-300 dark:border-blue-700">
+          <p className="text-sm text-blue-800 dark:text-blue-300">
+            メインのチュートリアルはセクション8で完了しています。以下は、さらに学習したい方向けのオプションコンテンツです。
+          </p>
+        </div>
 
-        <Accordion title="9.2 Power BI Service への発行（オプション）">
-          <p className="text-sm mb-3 text-gray-500 dark:text-gray-400">Microsoft 365 アカウントがある場合に利用できます。</p>
-          <ol className="space-y-2 text-sm list-decimal list-inside">
-            <li><strong>「ホーム」</strong> → <strong>「発行」</strong></li>
-            <li>発行先のワークスペースを選択</li>
-            <li><strong>「選択」</strong> をクリック</li>
-            <li>ブラウザで自動的に Power BI Service が開き、共有可能な状態になります</li>
-          </ol>
-        </Accordion>
+        <div>
+          <h3 className="font-semibold text-gray-800 dark:text-gray-100 mb-3">📤 共有と発行</h3>
+          <div className="space-y-3">
+            <Accordion title="ローカルファイルとして保存" defaultOpen>
+              <ol className="space-y-2 text-sm list-decimal list-inside">
+                <li><strong>「ファイル」</strong> → <strong>「保存」</strong></li>
+                <li>ファイル名を「project_analysis」として保存</li>
+                <li>Power BI Desktop ファイル（.pbix）として保存されます</li>
+              </ol>
+            </Accordion>
+            <Accordion title="Power BI Service への発行">
+              <p className="text-sm mb-3 text-gray-500 dark:text-gray-400">Microsoft 365 アカウントがある場合に利用できます。</p>
+              <ol className="space-y-2 text-sm list-decimal list-inside">
+                <li><strong>「ホーム」</strong> → <strong>「発行」</strong></li>
+                <li>発行先のワークスペースを選択</li>
+                <li><strong>「選択」</strong> をクリック</li>
+                <li>ブラウザで自動的に Power BI Service が開き、共有可能な状態になります</li>
+              </ol>
+            </Accordion>
+            <Accordion title="他のユーザーとの共有">
+              <ul className="text-sm space-y-2">
+                <li>・Power BI Service 上で <strong>「共有」</strong> をクリック</li>
+                <li>・メールアドレスを入力して、同僚と共有可能</li>
+                <li>・組織内での協業が実現できます</li>
+              </ul>
+            </Accordion>
+          </div>
+        </div>
 
-        <Accordion title="9.3 他のユーザーとの共有">
-          <ul className="text-sm space-y-2">
-            <li>・Power BI Service 上で <strong>「共有」</strong> をクリック</li>
-            <li>・メールアドレスを入力して、同僚と共有可能</li>
-            <li>・組織内での協業が実現できます</li>
-          </ul>
-        </Accordion>
+        <div>
+          <h3 className="font-semibold text-gray-800 dark:text-gray-100 mb-3">🧪 実践演習：自分のデータで試す</h3>
+          <div className="space-y-3">
+            <Accordion title="自分のデータを用意" defaultOpen>
+              <p className="text-sm mb-2">自部門の業務データを同じピボット形式で作成しましょう。</p>
+              <ul className="text-sm space-y-1 text-gray-600 dark:text-gray-400">
+                <li>例：プロジェクト別の進捗率</li>
+                <li>例：顧客別の売上</li>
+                <li>例：商品別の在庫</li>
+              </ul>
+            </Accordion>
+            <Accordion title="同じ手順を実行">
+              <ol className="space-y-2 text-sm list-decimal list-inside">
+                <li>データを読み込む</li>
+                <li>ピボット解除で整形</li>
+                <li>自部門に合わせたグラフを作成</li>
+                <li>同僚に共有</li>
+              </ol>
+            </Accordion>
+          </div>
+        </div>
       </div>
     ),
   },
 
   // ─────────────────────────────────────────────
-  // Step 10: 実践演習
+  // Step 10: よくある質問
   // ─────────────────────────────────────────────
   {
     id: 10,
-    title: '実践演習：自分のデータで試す',
-    estimatedMinutes: 10,
-    content: (
-      <div className="space-y-4">
-        <Accordion title="10.1 自分のデータを用意" defaultOpen>
-          <p className="text-sm mb-2">自部門の業務データを同じピボット形式で作成しましょう。</p>
-          <ul className="text-sm space-y-1 text-gray-600 dark:text-gray-400">
-            <li>例：プロジェクト別の進捗率</li>
-            <li>例：顧客別の売上</li>
-            <li>例：商品別の在庫</li>
-          </ul>
-        </Accordion>
-
-        <Accordion title="10.2 同じ手順を実行">
-          <ol className="space-y-2 text-sm list-decimal list-inside">
-            <li>データを読み込む</li>
-            <li>ピボット解除で整形</li>
-            <li>自部門に合わせたグラフを作成</li>
-            <li>同僚に共有</li>
-          </ol>
-        </Accordion>
-      </div>
-    ),
-  },
-
-  // ─────────────────────────────────────────────
-  // Step 11: よくある質問
-  // ─────────────────────────────────────────────
-  {
-    id: 11,
     title: 'よくある質問（FAQ）',
     estimatedMinutes: null,
     content: (
@@ -1567,10 +1570,10 @@ export const steps: Step[] = [
   },
 
   // ─────────────────────────────────────────────
-  // Step 12: 次のステップ
+  // Step 11: 次のステップ
   // ─────────────────────────────────────────────
   {
-    id: 12,
+    id: 11,
     title: '次のステップ',
     estimatedMinutes: null,
     content: (
@@ -1617,10 +1620,10 @@ export const steps: Step[] = [
   },
 
   // ─────────────────────────────────────────────
-  // Step 13: まとめ
+  // Step 12: まとめ
   // ─────────────────────────────────────────────
   {
-    id: 13,
+    id: 12,
     title: 'まとめ',
     estimatedMinutes: null,
     content: (
@@ -1635,7 +1638,6 @@ export const steps: Step[] = [
             'ピボット解除によるデータ整形（雑然データ → 整然データ）',
             '視覚化によるデータ分析（折れ線グラフ、テーブル）',
             'インタラクティブなレポート作成（スライサー）',
-            '基本的な共有方法（ローカル保存・Power BI Service）',
           ].map(item => (
             <div key={item} className="flex items-start gap-3 p-3 rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800">
               <span className="text-green-500 text-lg">✅</span>
@@ -1645,7 +1647,7 @@ export const steps: Step[] = [
         </div>
 
         <div className="p-4 rounded-lg bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-300 dark:border-yellow-700 text-center">
-          <p className="text-lg font-bold text-yellow-800 dark:text-yellow-300">⏱ 所要時間：約1時間</p>
+          <p className="text-lg font-bold text-yellow-800 dark:text-yellow-300">⏱ 所要時間：約56分</p>
           <p className="mt-2 text-sm text-gray-700 dark:text-gray-300">
             Power BI は、データをビジネス上の意思決定に活用するための強力なツールです。<br />
             実際の業務データで繰り返し実践することで、確実にスキルが向上します。
