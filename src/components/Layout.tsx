@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useEffect } from 'react'
 import { Outlet, useParams } from 'react-router-dom'
 import { Header } from './Header'
 import { ProgressBar } from './ProgressBar'
@@ -21,6 +21,15 @@ export function Layout() {
   const [scriptPanelHeight, setScriptPanelHeight] = useState(0)
   const handleScriptHeightChange = useCallback((h: number) => setScriptPanelHeight(h), [])
 
+  // sidebar(224) + content(768) + glossary(320) * 2(mx-auto の対称マージン分) = 1632
+  const GLOSSARY_OVERLAP_THRESHOLD = 1632
+  const [glossaryOverlaps, setGlossaryOverlaps] = useState(() => window.innerWidth < GLOSSARY_OVERLAP_THRESHOLD)
+  useEffect(() => {
+    const handler = () => setGlossaryOverlaps(window.innerWidth < GLOSSARY_OVERLAP_THRESHOLD)
+    window.addEventListener('resize', handler)
+    return () => window.removeEventListener('resize', handler)
+  }, [])
+
   return (
     <div className="min-h-screen bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100">
       <Header
@@ -37,7 +46,7 @@ export function Layout() {
         progressPercent={progressPercent}
       />
 
-      <div className={`flex pt-22 ${showScript ? 'pb-44' : ''} ${showGlossary ? 'pr-80' : ''}`}>
+      <div className={`flex pt-22 ${showScript ? 'pb-44' : ''} ${showGlossary && glossaryOverlaps ? 'pr-80' : ''}`}>
         <Sidebar currentStepId={currentStepId} isCompleted={isCompleted} />
         <main className="flex-1 min-w-0 bg-white dark:bg-gray-950">
           <Outlet context={{ isCompleted, toggleComplete }} />
