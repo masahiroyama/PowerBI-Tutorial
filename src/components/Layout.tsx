@@ -7,11 +7,13 @@ import { ScriptPanel } from './ScriptPanel'
 import { GlossaryPanel } from './GlossaryPanel'
 import { useDarkMode } from '../hooks/useDarkMode'
 import { useProgress } from '../hooks/useProgress'
+import { useTimer } from '../hooks/useTimer'
 import { steps } from '../data/steps'
 
 export function Layout() {
   const { dark, toggle } = useDarkMode()
   const { isCompleted, toggleComplete, completedCount, progressPercent } = useProgress(steps.length)
+  const { elapsed, isRunning: isTimerRunning, start: startTimer, reset: resetTimer } = useTimer()
   const { id } = useParams<{ id: string }>()
   const currentStepId = id !== undefined ? parseInt(id, 10) : 0
   const [showScript, setShowScript] = useState(false)
@@ -44,9 +46,13 @@ export function Layout() {
         currentStepId={currentStepId}
         completedCount={completedCount}
         progressPercent={progressPercent}
+        elapsed={elapsed}
+        isTimerRunning={isTimerRunning}
+        onStartTimer={startTimer}
+        onResetTimer={resetTimer}
       />
 
-      <div className={`flex pt-22 ${showScript ? 'pb-44' : ''} ${showGlossary && glossaryOverlaps ? 'pr-80' : ''}`}>
+      <div className={`flex pt-28 ${showScript ? 'pb-44' : ''} ${showGlossary && glossaryOverlaps ? 'pr-80' : ''}`}>
         <Sidebar currentStepId={currentStepId} isCompleted={isCompleted} />
         <main className="flex-1 min-w-0 bg-white dark:bg-gray-950">
           <Outlet context={{ isCompleted, toggleComplete }} />

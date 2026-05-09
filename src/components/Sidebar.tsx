@@ -8,7 +8,7 @@ type Props = {
 
 export function Sidebar({ currentStepId, isCompleted }: Props) {
   return (
-    <nav className="w-56 shrink-0 sticky top-[88px] h-[calc(100vh-88px)] overflow-y-auto border-r border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 print:hidden">
+    <nav className="w-56 shrink-0 sticky top-28 h-[calc(100vh-112px)] overflow-y-auto border-r border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 print:hidden">
       <ul className="py-3">
         {steps.map(step => {
           const isCurrent = step.id === currentStepId

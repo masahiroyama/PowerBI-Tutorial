@@ -110,6 +110,7 @@ src/
     useDarkMode.ts
     useProgress.ts
     useSpeech.ts    # Web Speech API ラッパー
+    useTimer.ts     # 実測タイマー（経過時間・ペース計算）
 CONTENTS.md         # コンテンツの骨子（Markdown）
 ```
 
