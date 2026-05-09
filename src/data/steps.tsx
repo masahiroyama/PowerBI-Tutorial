@@ -1,4 +1,5 @@
-import { Accordion } from '../components/Accordion'
+﻿import { Accordion } from '../components/Accordion'
+import { Section } from '../components/Section'
 import { CodeBlock } from '../components/CodeBlock'
 
 export type Step = {
@@ -23,7 +24,7 @@ export const steps: Step[] = [
           共有までの基本的な流れを学習します。
         </p>
 
-        <Accordion title="⏱️ 所要時間" defaultOpen>
+        <Section title="⏱️ 所要時間">
           <p className="font-semibold mb-3">約1時間</p>
           <ul className="space-y-1 text-sm">
             <li>・データ解析の基礎理解：5分</li>
@@ -32,17 +33,17 @@ export const steps: Step[] = [
             <li>・Power BI での実践（データ取得〜可視化）：40分</li>
             <li>・実践演習：10分</li>
           </ul>
-        </Accordion>
+        </Section>
 
-        <Accordion title="🎯 対象者" defaultOpen>
+        <Section title="🎯 対象者">
           <ul className="space-y-1 text-sm">
             <li>・Power BI を初めて使う方</li>
             <li>・ビジネスデータの分析に興味がある方</li>
             <li>・Excel の分析機能をさらに高めたい方</li>
           </ul>
-        </Accordion>
+        </Section>
 
-        <Accordion title="✅ チュートリアル開始前の準備">
+        <Section title="✅ チュートリアル開始前の準備">
           <div className="space-y-4 text-sm">
             <div>
               <p className="font-semibold mb-2">1️⃣ Power BI Desktop のインストール</p>
@@ -273,9 +274,9 @@ export const steps: Step[] = [
               </ul>
             </div>
           </div>
-        </Accordion>
+        </Section>
 
-        <Accordion title="📚 チュートリアルの構成">
+        <Section title="📚 チュートリアルの構成">
           <div className="overflow-x-auto">
             <table className="text-sm border-collapse w-full">
               <thead>
@@ -303,7 +304,7 @@ export const steps: Step[] = [
               </tbody>
             </table>
           </div>
-        </Accordion>
+        </Section>
 
         <Accordion title="⚠️ トラブルシューティング">
           <div className="space-y-4 text-sm">
@@ -334,7 +335,7 @@ export const steps: Step[] = [
     estimatedMinutes: 5,
     content: (
       <div className="space-y-4">
-        <Accordion title="1.1 データ解析の定義" defaultOpen>
+        <Section title="1.1 データ解析の定義">
           <p className="mb-4">
             データ解析とは、大量のデータから意味のある情報やパターンを抽出し、
             ビジネスの意思決定を支援するプロセスです。
@@ -367,9 +368,9 @@ export const steps: Step[] = [
               <p className="text-xs text-green-600 dark:text-green-400 mt-1">データドリブンな意思決定の実現</p>
             </div>
           </div>
-        </Accordion>
+        </Section>
 
-        <Accordion title="1.2 解析しやすいデータ vs. 人が見やすいデータ">
+        <Section title="1.2 解析しやすいデータ vs. 人が見やすいデータ">
           <p className="mb-4">
             コンピュータがデータを分析しやすい形と人間が見やすい形は異なります。
           </p>
@@ -448,9 +449,9 @@ export const steps: Step[] = [
               </ul>
             </div>
           </div>
-        </Accordion>
+        </Section>
 
-        <Accordion title="1.3 整然データ（Tidy Data）の3つの原則">
+        <Section title="1.3 整然データ（Tidy Data）の3つの原則">
           <p className="mb-4 text-sm text-gray-500 dark:text-gray-400">データ科学者 Hadley Wickham が提唱した概念です。</p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
             <div className="p-3 rounded-lg bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-700">
@@ -534,9 +535,9 @@ export const steps: Step[] = [
               <p className="text-xs text-green-600 dark:text-green-400">↑ 黄色セル = 単一の数値のみ</p>
             </div>
           </div>
-        </Accordion>
+        </Section>
 
-        <Accordion title="1.4 なぜ整然データが重要か？">
+        <Section title="1.4 なぜ整然データが重要か？">
           <ul className="space-y-2 text-sm">
             <li>✅ Power BI、Tableau などの BI ツールは整然データを想定して設計されている</li>
             <li>✅ SQL や Python などのプログラミング言語との相性が良い</li>
@@ -544,16 +545,16 @@ export const steps: Step[] = [
             <li>✅ データの保守・更新が簡単</li>
             <li>✅ 複数のデータセットの統合が容易</li>
           </ul>
-        </Accordion>
+        </Section>
 
-        <Accordion title="1.5 このチュートリアルでの実践">
+        <Section title="1.5 このチュートリアルでの実践">
           <p className="text-sm">
             このチュートリアルで使用するサンプルデータは、意図的に
             <strong>雑然データ（ピボット形式）</strong>として提供しています。
             Power Query でピボット解除を行い、<strong>整然データに変換するプロセス</strong>
             を学ぶことで、実務的なデータ整形スキルを習得できます。
           </p>
-        </Accordion>
+        </Section>
       </div>
     ),
   },
@@ -599,14 +600,14 @@ export const steps: Step[] = [
           Excel のテーブル機能を使うことで、データ管理と Power BI との連携がはるかに効率的になります。
         </p>
 
-        <Accordion title="3.1 テーブル機能とは" defaultOpen>
+        <Section title="3.1 テーブル機能とは">
           <p className="text-sm">
             テーブル機能は、Excel のデータを<strong>構造化された形式</strong>に変換する機能です。
             通常のセル範囲とは異なり、多くの利点が得られます。
           </p>
-        </Accordion>
+        </Section>
 
-        <Accordion title="3.2 テーブル機能の利点">
+        <Section title="3.2 テーブル機能の利点">
           <div className="space-y-4 text-sm">
             <div>
               <p className="font-semibold mb-2">📋 列名での式作成</p>
@@ -640,9 +641,9 @@ export const steps: Step[] = [
               </ul>
             </div>
           </div>
-        </Accordion>
+        </Section>
 
-        <Accordion title="3.3 テーブルの作成方法（図解）">
+        <Section title="3.3 テーブルの作成方法（図解）">
           <div className="space-y-4 text-sm">
 
             {/* 手順1: データ選択 */}
@@ -720,18 +721,18 @@ export const steps: Step[] = [
             </div>
 
           </div>
-        </Accordion>
+        </Section>
 
-        <Accordion title="3.4 テーブルでのデータ追加">
+        <Section title="3.4 テーブルでのデータ追加">
           <p className="text-sm mb-2">テーブルの最後の行の下に新しいデータを入力すると、自動的にテーブルが拡張されます。</p>
           <ul className="text-sm space-y-1">
             <li>✅ スタイルが自動適用される</li>
             <li>✅ テーブル内の式が自動的に新しい行に拡張される</li>
             <li>✅ Power BI が最新のデータを認識する</li>
           </ul>
-        </Accordion>
+        </Section>
 
-        <Accordion title="3.5 テーブルはいつ使うべき？">
+        <Section title="3.5 テーブルはいつ使うべき？">
           <div className="grid grid-cols-2 gap-4 text-sm">
             <div>
               <p className="font-semibold text-green-700 dark:text-green-400 mb-2">使うべき場合 ✅</p>
@@ -750,7 +751,7 @@ export const steps: Step[] = [
               </ul>
             </div>
           </div>
-        </Accordion>
+        </Section>
       </div>
     ),
   },
@@ -815,7 +816,7 @@ export const steps: Step[] = [
     estimatedMinutes: 3,
     content: (
       <div className="space-y-4">
-        <Accordion title="5.1 Power BI Desktop を起動" defaultOpen>
+        <Section title="5.1 Power BI Desktop を起動">
           <p className="text-sm mb-3">Power BI Desktop を開くと、以下のような画面が表示されます。</p>
           {/* Power BI 起動画面 */}
           <div className="border border-gray-400 dark:border-gray-500 rounded overflow-hidden text-xs bg-white dark:bg-gray-900">
@@ -837,9 +838,9 @@ export const steps: Step[] = [
             </div>
           </div>
           <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">新しいレポートを作成する場合は、起動後そのまま進めます。</p>
-        </Accordion>
+        </Section>
 
-        <Accordion title="5.2 Excel ファイルを取得" defaultOpen>
+        <Section title="5.2 Excel ファイルを取得">
           <div className="space-y-4 text-sm">
 
             {/* ① データを取得 */}
@@ -941,7 +942,7 @@ export const steps: Step[] = [
               ✅ 「読み込む」をクリックすると、タスク別の月ごとの工数データが Power BI に読み込まれます。
             </div>
           </div>
-        </Accordion>
+        </Section>
       </div>
     ),
   },
@@ -955,7 +956,7 @@ export const steps: Step[] = [
     estimatedMinutes: 15,
     content: (
       <div className="space-y-4">
-        <Accordion title="6.1 データ構造について" defaultOpen>
+        <Section title="6.1 データ構造について">
           <p className="text-sm mb-4">
             準備したサンプルデータ（テーブル名：<code className="bg-gray-100 dark:bg-gray-800 px-1 rounded">ProjectTasks</code>）は
             ピボット形式（雑然データ）です。Power BI での分析には不適切なため、整然データに変換します。
@@ -1027,9 +1028,9 @@ export const steps: Step[] = [
               </div>
             </div>
           </div>
-        </Accordion>
+        </Section>
 
-        <Accordion title="6.2 Power Query エディタを開く">
+        <Section title="6.2 Power Query エディタを開く">
           <div className="space-y-3 text-sm">
             <p>「読み込む」ではなく <strong>「データ変換」</strong> をクリックすると Power Query エディタが開きます。</p>
             <p className="text-gray-500 dark:text-gray-400">「読み込む」を押してしまった場合は、ホームタブの <strong>「データの変換」</strong> から開けます。</p>
@@ -1078,9 +1079,9 @@ export const steps: Step[] = [
               </div>
             </div>
           </div>
-        </Accordion>
+        </Section>
 
-        <Accordion title="6.3 ピボット解除の実行" defaultOpen>
+        <Section title="6.3 ピボット解除の実行">
           <div className="space-y-4 text-sm">
 
             {/* 推奨手順 */}
@@ -1129,9 +1130,9 @@ export const steps: Step[] = [
               </ol>
             </div>
           </div>
-        </Accordion>
+        </Section>
 
-        <Accordion title="6.4 列のリネームとデータ型の確認">
+        <Section title="6.4 列のリネームとデータ型の確認">
           <div className="space-y-3 text-sm">
             <div>
               <p className="font-semibold mb-2">列のリネーム</p>
@@ -1154,7 +1155,7 @@ export const steps: Step[] = [
 ...`} />
             </div>
           </div>
-        </Accordion>
+        </Section>
       </div>
     ),
   },
@@ -1168,7 +1169,7 @@ export const steps: Step[] = [
     estimatedMinutes: 5,
     content: (
       <div className="space-y-4">
-        <Accordion title="7.1 単一テーブルの確認" defaultOpen>
+        <Section title="7.1 単一テーブルの確認">
           <div className="space-y-3 text-sm">
             <p>このチュートリアルで使用するサンプルデータは、<strong>単一のテーブル</strong>で構成されています。</p>
             <div className="p-3 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg">
@@ -1183,7 +1184,7 @@ export const steps: Step[] = [
               </ul>
             </div>
           </div>
-        </Accordion>
+        </Section>
 
         <Accordion title="7.2 後に学ぶ内容（参考）">
           <p className="text-sm mb-2">実務では通常、複数のテーブルを組み合わせて分析を行います：</p>
@@ -1207,7 +1208,7 @@ export const steps: Step[] = [
     estimatedMinutes: 20,
     content: (
       <div className="space-y-4">
-        <Accordion title="8.0 完成イメージ" defaultOpen>
+        <Section title="8.0 完成イメージ">
           <p className="text-sm mb-3">このセクションで作成するレポートのレイアウトです。スライサーを操作するとグラフとテーブルが連動します。</p>
           <div className="border-2 border-gray-300 dark:border-gray-600 rounded-lg p-3 bg-gray-50 dark:bg-gray-800 space-y-2">
             <div className="border border-blue-300 dark:border-blue-600 rounded p-2 bg-white dark:bg-gray-700">
@@ -1264,9 +1265,9 @@ export const steps: Step[] = [
             </div>
             <p className="text-xs text-center text-gray-400">↑ スライサーを選択するとグラフとテーブルが連動して絞り込まれます</p>
           </div>
-        </Accordion>
+        </Section>
 
-        <Accordion title="8.1 レポートビューに切り替え" defaultOpen>
+        <Section title="8.1 レポートビューに切り替え">
           <div className="space-y-3 text-sm">
             <p>Power BI Desktop の左端にある3つのアイコンで画面を切り替えます。</p>
             {/* 左サイドバー図解 */}
@@ -1295,9 +1296,9 @@ export const steps: Step[] = [
               </div>
             </div>
           </div>
-        </Accordion>
+        </Section>
 
-        <Accordion title="8.2 折れ線グラフの作成：タスク別の工数比較" defaultOpen>
+        <Section title="8.2 折れ線グラフの作成：タスク別の工数比較">
           <div className="space-y-4 text-sm">
 
             {/* 視覚化ペイン説明 */}
@@ -1379,9 +1380,9 @@ export const steps: Step[] = [
             </div>
 
           </div>
-        </Accordion>
+        </Section>
 
-        <Accordion title="8.3 グラフの書式設定">
+        <Section title="8.3 グラフの書式設定">
           <div className="space-y-3 text-sm">
             <p>グラフをクリックした後、視覚化ペインの「書式」タブ（🎨 ブラシアイコン）をクリックします。</p>
             <div className="border border-gray-400 dark:border-gray-500 rounded overflow-hidden text-xs bg-white dark:bg-gray-900 max-w-xs">
@@ -1407,9 +1408,9 @@ export const steps: Step[] = [
               </div>
             </div>
           </div>
-        </Accordion>
+        </Section>
 
-        <Accordion title="8.4 テーブルの作成：詳細データの表示">
+        <Section title="8.4 テーブルの作成：詳細データの表示">
           <div className="space-y-3 text-sm">
             <ol className="space-y-2 list-decimal list-inside">
               <li>キャンバスの空きスペースをクリック（グラフ以外の場所）</li>
@@ -1435,9 +1436,9 @@ export const steps: Step[] = [
               </table>
             </div>
           </div>
-        </Accordion>
+        </Section>
 
-        <Accordion title="8.5 スライサーの追加：インタラクティブなフィルタリング">
+        <Section title="8.5 スライサーの追加：インタラクティブなフィルタリング">
           <div className="space-y-3 text-sm">
             <ol className="space-y-2 list-decimal list-inside">
               <li>キャンバスの上部の空きスペースをクリック</li>
@@ -1458,7 +1459,7 @@ export const steps: Step[] = [
               <p className="px-2 pb-2 text-xs text-blue-600 dark:text-blue-400">↑ チェックを入れるとグラフとテーブルが連動して絞り込まれます</p>
             </div>
           </div>
-        </Accordion>
+        </Section>
       </div>
     ),
   },

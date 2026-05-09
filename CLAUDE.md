@@ -68,7 +68,8 @@ React アプリ（`src/data/steps.tsx`）では、HTML/JSX/Tailwind の自由度
 | 手順説明 | 番号付きステップカード（アイコン・色付き） |
 | データ構造の説明 | スタイル付きテーブル（ヘッダー色付け等） |
 | コード・設定値 | `<CodeBlock>` コンポーネント |
-| 折りたたみ可能な補足情報 | `<Accordion>` コンポーネント |
+| 折りたたみ可能な補足情報（FAQ・トラブルシューティング等） | `<Accordion>` コンポーネント |
+| メインコンテンツのサブセクション見出し | `<Section>` コンポーネント |
 | チェックリスト | チェックボックス付きリスト |
 
 ### 視覚化の具体指針
@@ -93,7 +94,8 @@ src/
     scripts.ts      # 各ステップの口頭説明スクリプト（steps.tsx と常に同期）
     glossary.ts     # 用語集データ（{ term, definition }[]）
   components/
-    Accordion.tsx   # 折りたたみセクション
+    Accordion.tsx   # 折りたたみセクション（補足情報・FAQ 等の限定用途）
+    Section.tsx     # メインコンテンツのサブセクション見出し（常時展開）
     CodeBlock.tsx   # コードブロック表示
     CompleteButton.tsx
     GlossaryPanel.tsx # 用語集スライドインパネル
