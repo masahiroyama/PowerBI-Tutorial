@@ -71,7 +71,7 @@ export const steps: Step[] = [
                   このチュートリアルで使用する Excel ファイルを用意しています。以下のボタンからダウンロードしてください。
                 </p>
                 <a
-                  href="/sample-data.xlsx"
+                  href={`${import.meta.env.BASE_URL}sample-data.xlsx`}
                   download="sample-data.xlsx"
                   className="inline-flex items-center gap-2 px-5 py-2.5 bg-green-600 hover:bg-green-700 text-white text-sm font-semibold rounded-lg transition-colors"
                 >
