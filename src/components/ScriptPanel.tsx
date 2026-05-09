@@ -31,15 +31,24 @@ export function ScriptPanel({ stepId, onClose }: Props) {
   const { state, rate, currentCharIndex, speak, pause, resume, stop, setRate } = useSpeech()
   const sentences = script ? splitIntoSentences(script) : []
   const activeRef = useRef<HTMLSpanElement>(null)
+  const containerRef = useRef<HTMLDivElement>(null)
 
-  // Stop speech and reset when step changes
   useEffect(() => {
     stop()
   }, [stepId, stop])
 
-  // Scroll active sentence into view
+  // コンテナ内のみスクロール（pageスクロールに干渉しない）
   useEffect(() => {
-    activeRef.current?.scrollIntoView({ block: 'nearest', behavior: 'smooth' })
+    if (!activeRef.current || !containerRef.current) return
+    const container = containerRef.current
+    const el = activeRef.current
+    const containerRect = container.getBoundingClientRect()
+    const elRect = el.getBoundingClientRect()
+    if (elRect.bottom > containerRect.bottom) {
+      container.scrollTop += elRect.bottom - containerRect.bottom + 4
+    } else if (elRect.top < containerRect.top) {
+      container.scrollTop -= containerRect.top - elRect.top + 4
+    }
   }, [currentCharIndex])
 
   const activeSentenceIndex =
@@ -51,99 +60,101 @@ export function ScriptPanel({ stepId, onClose }: Props) {
         })
 
   return (
-    <div className="bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 rounded-xl p-4 mb-6">
-      {/* Header row */}
-      <div className="flex items-center justify-between mb-3">
-        <span className="text-sm font-semibold text-amber-900 dark:text-amber-200">
-          🎙️ 読み上げスクリプト
-        </span>
-        <button
-          onClick={() => { stop(); onClose() }}
-          className="text-amber-500 hover:text-amber-700 dark:hover:text-amber-300 text-lg leading-none px-1"
-          title="閉じる"
-          aria-label="スクリプトパネルを閉じる"
-        >
-          ✕
-        </button>
-      </div>
+    <div className="fixed bottom-0 left-0 right-0 z-40 bg-white dark:bg-gray-900 border-t-2 border-amber-300 dark:border-amber-700 shadow-[0_-4px_12px_rgba(0,0,0,0.08)] print:hidden">
+      <div className="px-6 py-3">
+        {/* Controls row */}
+        <div className="flex flex-wrap items-center gap-2 mb-2">
+          <span className="text-sm font-semibold text-amber-800 dark:text-amber-200 mr-1">
+            🎙️ スクリプト
+          </span>
 
-      {/* Controls */}
-      <div className="flex flex-wrap items-center gap-2 mb-3">
-        {state === 'idle' && (
-          <button
-            onClick={() => speak(script!)}
-            disabled={!script}
-            className="flex items-center gap-1 px-3 py-1.5 rounded-md text-sm bg-amber-500 hover:bg-amber-600 disabled:opacity-40 text-white font-medium transition-colors"
-          >
-            ▶ 再生
-          </button>
-        )}
-        {state === 'playing' && (
-          <button
-            onClick={pause}
-            className="flex items-center gap-1 px-3 py-1.5 rounded-md text-sm bg-amber-500 hover:bg-amber-600 text-white font-medium transition-colors"
-          >
-            ⏸ 一時停止
-          </button>
-        )}
-        {state === 'paused' && (
-          <button
-            onClick={resume}
-            className="flex items-center gap-1 px-3 py-1.5 rounded-md text-sm bg-amber-500 hover:bg-amber-600 text-white font-medium transition-colors"
-          >
-            ▶ 再開
-          </button>
-        )}
-        {state !== 'idle' && (
-          <button
-            onClick={stop}
-            className="flex items-center gap-1 px-3 py-1.5 rounded-md text-sm border border-amber-300 dark:border-amber-700 hover:bg-amber-100 dark:hover:bg-amber-900/40 text-amber-800 dark:text-amber-300 font-medium transition-colors"
-          >
-            ⏹ 停止
-          </button>
-        )}
-
-        {/* Speed selector */}
-        <div className="flex items-center gap-1 ml-auto">
-          <span className="text-xs text-amber-700 dark:text-amber-400 mr-1">速度:</span>
-          {RATES.map(r => (
+          {state === 'idle' && (
             <button
-              key={r}
-              onClick={() => setRate(r)}
-              className={`px-2 py-0.5 rounded text-xs transition-colors ${
-                rate === r
-                  ? 'bg-amber-500 text-white font-bold'
-                  : 'border border-amber-300 dark:border-amber-700 text-amber-700 dark:text-amber-400 hover:bg-amber-100 dark:hover:bg-amber-900/40'
-              }`}
+              onClick={() => speak(script!)}
+              disabled={!script}
+              className="flex items-center gap-1 px-3 py-1 rounded-md text-sm bg-amber-500 hover:bg-amber-600 disabled:opacity-40 text-white font-medium transition-colors"
             >
-              {r}x
+              ▶ 再生
             </button>
-          ))}
-        </div>
-      </div>
-
-      {/* Script text with karaoke highlighting */}
-      {script ? (
-        <div className="text-sm leading-relaxed text-gray-700 dark:text-gray-300 max-h-40 overflow-y-auto pr-1">
-          {sentences.map((s, i) =>
-            i === activeSentenceIndex ? (
-              <span
-                key={i}
-                ref={activeRef}
-                className="bg-yellow-300 dark:bg-yellow-500/50 text-gray-900 dark:text-white rounded px-0.5 transition-colors"
-              >
-                {s.text}
-              </span>
-            ) : (
-              <span key={i}>{s.text}</span>
-            )
           )}
+          {state === 'playing' && (
+            <button
+              onClick={pause}
+              className="flex items-center gap-1 px-3 py-1 rounded-md text-sm bg-amber-500 hover:bg-amber-600 text-white font-medium transition-colors"
+            >
+              ⏸ 一時停止
+            </button>
+          )}
+          {state === 'paused' && (
+            <button
+              onClick={resume}
+              className="flex items-center gap-1 px-3 py-1 rounded-md text-sm bg-amber-500 hover:bg-amber-600 text-white font-medium transition-colors"
+            >
+              ▶ 再開
+            </button>
+          )}
+          {state !== 'idle' && (
+            <button
+              onClick={stop}
+              className="flex items-center gap-1 px-3 py-1 rounded-md text-sm border border-amber-300 dark:border-amber-700 hover:bg-amber-50 dark:hover:bg-amber-900/40 text-amber-800 dark:text-amber-300 font-medium transition-colors"
+            >
+              ⏹ 停止
+            </button>
+          )}
+
+          <div className="flex items-center gap-1 ml-2">
+            <span className="text-xs text-amber-700 dark:text-amber-400 mr-1">速度:</span>
+            {RATES.map(r => (
+              <button
+                key={r}
+                onClick={() => setRate(r)}
+                className={`px-2 py-0.5 rounded text-xs transition-colors ${
+                  rate === r
+                    ? 'bg-amber-500 text-white font-bold'
+                    : 'border border-amber-300 dark:border-amber-700 text-amber-700 dark:text-amber-400 hover:bg-amber-50 dark:hover:bg-amber-900/40'
+                }`}
+              >
+                {r}x
+              </button>
+            ))}
+          </div>
+
+          <button
+            onClick={() => { stop(); onClose() }}
+            className="ml-auto text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 text-lg leading-none px-1 transition-colors"
+            title="閉じる"
+            aria-label="スクリプトパネルを閉じる"
+          >
+            ✕
+          </button>
         </div>
-      ) : (
-        <p className="text-sm text-amber-700 dark:text-amber-400">
-          このステップにはスクリプトがありません。
-        </p>
-      )}
+
+        {/* Script text with karaoke highlighting */}
+        {script ? (
+          <div
+            ref={containerRef}
+            className="text-sm leading-relaxed text-gray-700 dark:text-gray-300 max-h-20 overflow-y-auto pr-1"
+          >
+            {sentences.map((s, i) =>
+              i === activeSentenceIndex ? (
+                <span
+                  key={i}
+                  ref={activeRef}
+                  className="bg-yellow-300 dark:bg-yellow-500/50 text-gray-900 dark:text-white rounded px-0.5 transition-colors"
+                >
+                  {s.text}
+                </span>
+              ) : (
+                <span key={i}>{s.text}</span>
+              )
+            )}
+          </div>
+        ) : (
+          <p className="text-sm text-amber-600 dark:text-amber-400">
+            このステップにはスクリプトがありません。
+          </p>
+        )}
+      </div>
     </div>
   )
 }

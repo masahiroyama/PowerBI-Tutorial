@@ -3,6 +3,7 @@ import { Outlet, useParams } from 'react-router-dom'
 import { Header } from './Header'
 import { ProgressBar } from './ProgressBar'
 import { Sidebar } from './Sidebar'
+import { ScriptPanel } from './ScriptPanel'
 import { useDarkMode } from '../hooks/useDarkMode'
 import { useProgress } from '../hooks/useProgress'
 import { steps } from '../data/steps'
@@ -24,12 +25,16 @@ export function Layout() {
         progressPercent={progressPercent}
       />
 
-      <div className="flex pt-22">
+      <div className={`flex pt-22 ${showScript ? 'pb-44' : ''}`}>
         <Sidebar currentStepId={currentStepId} isCompleted={isCompleted} />
         <main className="flex-1 min-w-0 bg-white dark:bg-gray-950">
-          <Outlet context={{ isCompleted, toggleComplete, showScript, toggleScript }} />
+          <Outlet context={{ isCompleted, toggleComplete }} />
         </main>
       </div>
+
+      {showScript && (
+        <ScriptPanel stepId={currentStepId} onClose={toggleScript} />
+      )}
     </div>
   )
 }
