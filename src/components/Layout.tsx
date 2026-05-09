@@ -8,11 +8,10 @@ import { GlossaryPanel } from './GlossaryPanel'
 import { useDarkMode } from '../hooks/useDarkMode'
 import { useProgress } from '../hooks/useProgress'
 import { useTimer } from '../hooks/useTimer'
-import { steps } from '../data/steps'
 
 export function Layout() {
   const { dark, toggle } = useDarkMode()
-  const { isCompleted, toggleComplete, completedCount, progressPercent } = useProgress(steps.length)
+  const { isCompleted, toggleComplete, completedCount, progressPercent } = useProgress()
   const { elapsed, isRunning: isTimerRunning, start: startTimer, reset: resetTimer } = useTimer()
   const { id } = useParams<{ id: string }>()
   const currentStepId = id !== undefined ? parseInt(id, 10) : 0

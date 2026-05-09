@@ -6,6 +6,7 @@ export type Step = {
   id: number
   title: string
   estimatedMinutes: number | null
+  category: 'tutorial' | 'appendix'
   content: React.ReactNode
 }
 
@@ -17,6 +18,7 @@ export const steps: Step[] = [
     id: 0,
     title: 'チュートリアルについて',
     estimatedMinutes: null,
+    category: 'tutorial',
     content: (
       <div className="space-y-6">
         <p className="text-lg text-gray-600 dark:text-gray-400">
@@ -333,6 +335,7 @@ export const steps: Step[] = [
     id: 1,
     title: 'データ解析とは？',
     estimatedMinutes: 5,
+    category: 'tutorial',
     content: (
       <div className="space-y-4">
         <Section title="1.1 データ解析の定義">
@@ -566,6 +569,7 @@ export const steps: Step[] = [
     id: 2,
     title: 'Power BI とは？',
     estimatedMinutes: 2,
+    category: 'tutorial',
     content: (
       <div className="space-y-4">
         <p className="text-gray-700 dark:text-gray-300">
@@ -594,6 +598,7 @@ export const steps: Step[] = [
     id: 3,
     title: 'Excel のテーブル機能を使おう',
     estimatedMinutes: 5,
+    category: 'tutorial',
     content: (
       <div className="space-y-4">
         <p className="text-gray-700 dark:text-gray-300">
@@ -763,6 +768,7 @@ export const steps: Step[] = [
     id: 4,
     title: '基本的なワークフロー',
     estimatedMinutes: 1,
+    category: 'tutorial',
     content: (
       <div className="space-y-4">
         <p className="text-gray-700 dark:text-gray-300">
@@ -814,6 +820,7 @@ export const steps: Step[] = [
     id: 5,
     title: 'ステップ1：データの取得',
     estimatedMinutes: 3,
+    category: 'tutorial',
     content: (
       <div className="space-y-4">
         <Section title="5.1 Power BI Desktop を起動">
@@ -954,6 +961,7 @@ export const steps: Step[] = [
     id: 6,
     title: 'ステップ2：データの整形（ピボット解除）',
     estimatedMinutes: 15,
+    category: 'tutorial',
     content: (
       <div className="space-y-4">
         <Section title="6.1 データ構造について">
@@ -1167,6 +1175,7 @@ export const steps: Step[] = [
     id: 7,
     title: 'ステップ3：データモデリング',
     estimatedMinutes: 5,
+    category: 'tutorial',
     content: (
       <div className="space-y-4">
         <Section title="7.1 単一テーブルの確認">
@@ -1206,6 +1215,7 @@ export const steps: Step[] = [
     id: 8,
     title: 'ステップ4：視覚化 - レポートの作成',
     estimatedMinutes: 20,
+    category: 'tutorial',
     content: (
       <div className="space-y-4">
         <Section title="8.0 完成イメージ">
@@ -1471,6 +1481,7 @@ export const steps: Step[] = [
     id: 9,
     title: 'まとめ',
     estimatedMinutes: null,
+    category: 'tutorial',
     content: (
       <div className="space-y-6">
         <p className="text-gray-700 dark:text-gray-300">
@@ -1510,6 +1521,7 @@ export const steps: Step[] = [
     id: 10,
     title: '追加で学習したい人向け',
     estimatedMinutes: null,
+    category: 'appendix',
     content: (
       <div className="space-y-6">
         <div className="p-4 rounded-lg bg-blue-50 dark:bg-blue-900/20 border border-blue-300 dark:border-blue-700">
@@ -1620,6 +1632,7 @@ export const steps: Step[] = [
     id: 11,
     title: 'よくある質問（FAQ）',
     estimatedMinutes: null,
+    category: 'appendix',
     content: (
       <div className="space-y-3">
         {[
@@ -1655,6 +1668,7 @@ export const steps: Step[] = [
     id: 12,
     title: '次のステップ',
     estimatedMinutes: null,
+    category: 'appendix',
     content: (
       <div className="space-y-4">
         <p className="text-gray-700 dark:text-gray-300">

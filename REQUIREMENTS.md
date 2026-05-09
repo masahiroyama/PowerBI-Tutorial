@@ -34,7 +34,8 @@ Power BI Desktop の入門チュートリアルを提供する Web アプリ。
 type Step = {
   id: number             // 0始まりの連番
   title: string          // サイドバー・ページタイトルに表示
-  estimatedMinutes: number | null  // null = 任意/参考セクション（進捗計算から除外）
+  estimatedMinutes: number | null  // null = 時間計測なし（進捗計算から除外）
+  category: 'tutorial' | 'appendix'  // tutorial = 学習本体（0〜9）、appendix = 補足（10〜12）
   content: React.ReactNode         // JSX コンテンツ
 }
 ```
@@ -59,10 +60,10 @@ type Step = {
 - クリックで完了/未完了をトグル
 - 完了状態は `localStorage` に永続化（キー: `pbi_completed_steps`、値: 完了 id の JSON 配列）
 - プログレスバーに以下を表示:
-  - 全体の達成率（黄色バー）
-  - 現在のステップ番号 / 全ステップ数
-  - 完了数 / 全ステップ数
-  - 残り推定時間（`estimatedMinutes` が null でないステップの合計のうち、未通過分）
+  - 全体の達成率（黄色バー）: `tutorial` ステップの完了数 / `tutorial` ステップ総数
+  - 現在のステップ番号 / 全ステップ数（ナビゲーション用、appendix を含む）
+  - 完了数 / `tutorial` ステップ総数（10）
+  - 残り推定時間（`tutorial` かつ `estimatedMinutes` が null でないステップの合計のうち、未通過分）
 
 ### 4.3 ダークモード
 
@@ -115,6 +116,7 @@ type Step = {
   - 開始時刻を `localStorage` に保存し、ページリロード後も継続
 - 計測中は経過時間をリアルタイム表示（MM:SS / H:MM:SS 形式、1秒更新）
 - 「リセット」ボタンで計測停止・初期状態に戻す
+- 計測・ペース計算の対象は `category === 'tutorial'` のステップ（0〜9）のみ
 - 現在ステップまでの推定累積時間 vs. 実際の経過時間を比較しペースを3段階で表示:
   - `⚠ 遅れ`（赤）: 経過時間が推定の 115% 超
   - `✓ 順調`（緑）: 経過時間が推定の 85〜115%

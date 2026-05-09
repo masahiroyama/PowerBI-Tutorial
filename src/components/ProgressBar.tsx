@@ -10,7 +10,9 @@ type Props = {
   onResetTimer: () => void
 }
 
-const TIMED_STEPS = steps.filter(s => s.estimatedMinutes !== null)
+const TUTORIAL_STEPS = steps.filter(s => s.category === 'tutorial')
+const TUTORIAL_TOTAL = TUTORIAL_STEPS.length
+const TIMED_STEPS = TUTORIAL_STEPS.filter(s => s.estimatedMinutes !== null)
 const TOTAL_MINUTES = TIMED_STEPS.reduce((sum, s) => sum + (s.estimatedMinutes ?? 0), 0)
 
 function formatTime(seconds: number): string {
@@ -24,7 +26,7 @@ function formatTime(seconds: number): string {
 type Pace = 'ahead' | 'ontrack' | 'behind'
 
 function calcPace(elapsed: number, currentStepId: number): Pace | null {
-  const cumulativeMinutes = steps
+  const cumulativeMinutes = TUTORIAL_STEPS
     .filter(s => s.id < currentStepId && s.estimatedMinutes !== null)
     .reduce((sum, s) => sum + (s.estimatedMinutes ?? 0), 0)
   if (cumulativeMinutes === 0) return null
@@ -41,8 +43,7 @@ const PACE_CONFIG: Record<Pace, { label: string; className: string }> = {
 }
 
 export function ProgressBar({ currentStepId, completedCount, progressPercent, elapsed, isTimerRunning, onStartTimer, onResetTimer }: Props) {
-  const completedMinutes = steps
-    .filter(s => s.estimatedMinutes !== null)
+  const completedMinutes = TIMED_STEPS
     .reduce((sum, s) => (s.id < currentStepId ? sum + (s.estimatedMinutes ?? 0) : sum), 0)
   const remainingMinutes = Math.max(0, TOTAL_MINUTES - completedMinutes)
 
@@ -59,7 +60,7 @@ export function ProgressBar({ currentStepId, completedCount, progressPercent, el
         </div>
         <span className="text-sm text-gray-500 dark:text-gray-400 whitespace-nowrap">
           ステップ {currentStepId + 1} / {steps.length}
-          {' · '}完了 {completedCount} / {steps.length}
+          {' · '}完了 {completedCount} / {TUTORIAL_TOTAL}
           {remainingMinutes > 0 && ` · 残り約${remainingMinutes}分`}
         </span>
       </div>

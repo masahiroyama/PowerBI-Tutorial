@@ -1,6 +1,11 @@
 import { useState, useCallback } from 'react'
+import { steps } from '../data/steps'
 
 const STORAGE_KEY = 'pbi_completed_steps'
+
+const TUTORIAL_IDS = new Set(
+  steps.filter(s => s.category === 'tutorial').map(s => s.id)
+)
 
 function loadCompleted(): Set<number> {
   try {
@@ -16,7 +21,7 @@ function saveCompleted(set: Set<number>) {
   localStorage.setItem(STORAGE_KEY, JSON.stringify([...set]))
 }
 
-export function useProgress(totalSteps: number) {
+export function useProgress() {
   const [completed, setCompleted] = useState<Set<number>>(loadCompleted)
 
   const toggleComplete = useCallback((stepId: number) => {
@@ -37,8 +42,8 @@ export function useProgress(totalSteps: number) {
     [completed],
   )
 
-  const completedCount = completed.size
-  const progressPercent = Math.round((completedCount / totalSteps) * 100)
+  const completedCount = [...completed].filter(id => TUTORIAL_IDS.has(id)).size
+  const progressPercent = Math.round((completedCount / TUTORIAL_IDS.size) * 100)
 
   return { isCompleted, toggleComplete, completedCount, progressPercent }
 }
