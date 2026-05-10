@@ -52,7 +52,7 @@ export function Layout() {
       />
 
       <div className={`flex pt-28 ${showScript ? 'pb-44' : ''} ${showGlossary && glossaryOverlaps ? 'pr-80' : ''}`}>
-        <Sidebar currentStepId={currentStepId} isCompleted={isCompleted} onResetProgress={resetProgress} />
+        <Sidebar currentStepId={currentStepId} isCompleted={isCompleted} onResetProgress={resetProgress} showScript={showScript} />
         <main className="flex-1 min-w-0 bg-white dark:bg-gray-950">
           <Outlet context={{ isCompleted, toggleComplete }} />
         </main>

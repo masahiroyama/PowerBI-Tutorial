@@ -6,9 +6,10 @@ type Props = {
   currentStepId: number
   isCompleted: (id: number) => boolean
   onResetProgress: () => void
+  showScript: boolean
 }
 
-export function Sidebar({ currentStepId, isCompleted, onResetProgress }: Props) {
+export function Sidebar({ currentStepId, isCompleted, onResetProgress, showScript }: Props) {
   const [confirming, setConfirming] = useState(false)
 
   const handleReset = () => {
@@ -17,7 +18,7 @@ export function Sidebar({ currentStepId, isCompleted, onResetProgress }: Props) 
   }
 
   return (
-    <nav className="w-56 shrink-0 sticky top-28 h-[calc(100vh-112px)] overflow-y-auto border-r border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 print:hidden flex flex-col">
+    <nav className={`w-56 shrink-0 sticky top-28 overflow-y-auto border-r border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 print:hidden flex flex-col ${showScript ? 'h-[calc(100vh-288px)]' : 'h-[calc(100vh-112px)]'}`}>
       <ul className="py-3 flex-1">
         {steps.map(step => {
           const isCurrent = step.id === currentStepId
