@@ -19,32 +19,65 @@ export function Sidebar({ currentStepId, isCompleted, onResetProgress, showScrip
 
   return (
     <nav className={`w-56 shrink-0 sticky top-28 overflow-y-auto border-r border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 print:hidden flex flex-col ${showScript ? 'h-[calc(100vh-288px)]' : 'h-[calc(100vh-112px)]'}`}>
-      <ul className="py-3 flex-1">
-        {steps.map(step => {
-          const isCurrent = step.id === currentStepId
-          const done = isCompleted(step.id)
-          return (
-            <li key={step.id}>
-              <Link
-                to={`/step/${step.id}`}
-                className={[
-                  'flex items-center gap-2 px-4 py-2 text-sm transition-colors',
-                  isCurrent
-                    ? 'bg-yellow-50 dark:bg-yellow-900/20 text-yellow-700 dark:text-yellow-400 font-semibold border-r-2 border-yellow-400'
-                    : 'text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800',
-                ].join(' ')}
-              >
-                <span className="text-base w-4 text-center shrink-0">
-                  {done ? '✅' : isCurrent ? '▶' : '□'}
-                </span>
-                <span className="truncate">
-                  {step.id}. {step.title}
-                </span>
-              </Link>
-            </li>
-          )
-        })}
-      </ul>
+      <div className="py-3 flex-1">
+        <p className="px-4 pb-1 text-xs font-semibold tracking-wide text-gray-400 dark:text-gray-500 uppercase">チュートリアル</p>
+        <ul>
+          {steps.filter(s => s.category === 'tutorial').map(step => {
+            const isCurrent = step.id === currentStepId
+            const done = isCompleted(step.id)
+            return (
+              <li key={step.id}>
+                <Link
+                  to={`/step/${step.id}`}
+                  className={[
+                    'flex items-center gap-2 px-4 py-2 text-sm transition-colors',
+                    isCurrent
+                      ? 'bg-yellow-50 dark:bg-yellow-900/20 text-yellow-700 dark:text-yellow-400 font-semibold border-r-2 border-yellow-400'
+                      : 'text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800',
+                  ].join(' ')}
+                >
+                  <span className="text-base w-4 text-center shrink-0">
+                    {done ? '✅' : isCurrent ? '▶' : '□'}
+                  </span>
+                  <span className="truncate">
+                    {step.id}. {step.title}
+                  </span>
+                </Link>
+              </li>
+            )
+          })}
+        </ul>
+
+        <div className="mx-4 my-2 border-t border-gray-200 dark:border-gray-700" />
+
+        <p className="px-4 pb-1 text-xs font-semibold tracking-wide text-purple-400 dark:text-purple-500 uppercase">Appendix</p>
+        <ul>
+          {steps.filter(s => s.category === 'appendix').map(step => {
+            const isCurrent = step.id === currentStepId
+            const done = isCompleted(step.id)
+            return (
+              <li key={step.id}>
+                <Link
+                  to={`/step/${step.id}`}
+                  className={[
+                    'flex items-center gap-2 px-4 py-2 text-sm transition-colors',
+                    isCurrent
+                      ? 'bg-purple-50 dark:bg-purple-900/20 text-purple-700 dark:text-purple-400 font-semibold border-r-2 border-purple-400'
+                      : 'text-gray-500 dark:text-gray-500 hover:bg-gray-50 dark:hover:bg-gray-800',
+                  ].join(' ')}
+                >
+                  <span className="text-base w-4 text-center shrink-0">
+                    {done ? '✅' : isCurrent ? '▶' : '□'}
+                  </span>
+                  <span className="truncate">
+                    {step.title}
+                  </span>
+                </Link>
+              </li>
+            )
+          })}
+        </ul>
+      </div>
 
       <div className="px-4 py-3 border-t border-gray-100 dark:border-gray-800">
         {confirming ? (
