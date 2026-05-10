@@ -42,7 +42,7 @@ export function useProgress() {
     [completed],
   )
 
-  const completedCount = [...completed].filter(id => TUTORIAL_IDS.has(id)).size
+  const completedCount = [...completed].filter(id => TUTORIAL_IDS.has(id)).length
   const progressPercent = Math.round((completedCount / TUTORIAL_IDS.size) * 100)
 
   return { isCompleted, toggleComplete, completedCount, progressPercent }

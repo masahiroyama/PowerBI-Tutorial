@@ -61,10 +61,10 @@ export function ProgressBar({ currentStepId, completedCount, progressPercent, el
         </div>
         <span className="text-sm text-gray-500 dark:text-gray-400 whitespace-nowrap">
           {tutorialIndex >= 0
-            ? `ステップ ${tutorialIndex + 1} / ${TUTORIAL_TOTAL}`
-            : '補足'
+            ? `📍 ${tutorialIndex + 1}/${TUTORIAL_TOTAL}ステップ`
+            : '📍 補足'
           }
-          {' · '}完了 {completedCount} / {TUTORIAL_TOTAL}
+          {' · '}✅ {completedCount}完了
           {remainingMinutes > 0 && ` · 残り約${remainingMinutes}分`}
         </span>
       </div>
