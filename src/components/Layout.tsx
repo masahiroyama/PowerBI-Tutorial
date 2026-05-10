@@ -11,7 +11,7 @@ import { useTimer } from '../hooks/useTimer'
 
 export function Layout() {
   const { dark, toggle } = useDarkMode()
-  const { isCompleted, toggleComplete, completedCount, progressPercent } = useProgress()
+  const { isCompleted, toggleComplete, resetProgress, completedCount, progressPercent } = useProgress()
   const { elapsed, isRunning: isTimerRunning, start: startTimer, reset: resetTimer } = useTimer()
   const { id } = useParams<{ id: string }>()
   const currentStepId = id !== undefined ? parseInt(id, 10) : 0
@@ -52,7 +52,7 @@ export function Layout() {
       />
 
       <div className={`flex pt-28 ${showScript ? 'pb-44' : ''} ${showGlossary && glossaryOverlaps ? 'pr-80' : ''}`}>
-        <Sidebar currentStepId={currentStepId} isCompleted={isCompleted} />
+        <Sidebar currentStepId={currentStepId} isCompleted={isCompleted} onResetProgress={resetProgress} />
         <main className="flex-1 min-w-0 bg-white dark:bg-gray-950">
           <Outlet context={{ isCompleted, toggleComplete }} />
         </main>

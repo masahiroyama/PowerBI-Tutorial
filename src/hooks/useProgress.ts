@@ -42,8 +42,13 @@ export function useProgress() {
     [completed],
   )
 
+  const resetProgress = useCallback(() => {
+    setCompleted(new Set())
+    localStorage.removeItem(STORAGE_KEY)
+  }, [])
+
   const completedCount = [...completed].filter(id => TUTORIAL_IDS.has(id)).length
   const progressPercent = Math.round((completedCount / TUTORIAL_IDS.size) * 100)
 
-  return { isCompleted, toggleComplete, completedCount, progressPercent }
+  return { isCompleted, toggleComplete, resetProgress, completedCount, progressPercent }
 }
