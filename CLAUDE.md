@@ -99,6 +99,7 @@ src/
     CodeBlock.tsx   # コードブロック表示
     CompleteButton.tsx
     GlossaryPanel.tsx # 用語集スライドインパネル
+    GlossaryTerm.tsx  # インライン用語ツールチップ（ホバーで定義表示）
     Header.tsx
     Layout.tsx
     ProgressBar.tsx
