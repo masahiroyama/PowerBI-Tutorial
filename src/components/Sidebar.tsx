@@ -67,7 +67,7 @@ export function Sidebar({ currentStepId, isCompleted, onResetProgress }: Props) 
         ) : (
           <button
             onClick={() => setConfirming(true)}
-            className="text-xs text-gray-300 dark:text-gray-600 hover:text-gray-400 dark:hover:text-gray-500 transition-colors"
+            className="text-xs text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
           >
             進捗をリセット
           </button>
