@@ -135,6 +135,21 @@ type Step = {
   - ペースはステップ 0（累積推定 0 分）では表示しない
 - `src/hooks/useTimer.ts` カスタムフック、`ProgressBar` コンポーネントで実装
 
+### 4.8b インライン用語ツールチップの自動ハイライト
+
+- `src/utils/wrapGlossaryTerms.tsx` に `wrapGlossaryTerms(node: React.ReactNode): React.ReactNode` ユーティリティを実装
+- `StepPage.tsx` で `step.content` を `wrapGlossaryTerms()` に通してからレンダリング
+- `steps.tsx` 内の手動 `<GlossaryTerm>` マークアップは不要（削除済み）
+- 除外対象（誤検知・二重ラップ防止）:
+  - `<code>`, `<CodeBlock>` 内テキスト
+  - すでに `<GlossaryTerm>` でラップされているノード
+- 用語マッチングルール:
+  - `glossary.ts` の全エントリを対象とする
+  - `term` フィールドの完全一致、および括弧前の略称（例: `DAX` → `DAX（Data Analysis Expressions）`）も検出
+  - 長い用語を優先（正規表現の選択肢を長さ降順にソート）
+  - 大文字小文字は区別する（日本語用語のため）
+- パフォーマンス: 用語リストのソートはモジュールトップレベルで1回だけ実行
+
 ### 4.9 再利用可能コンポーネント
 
 #### Accordion
@@ -285,42 +300,6 @@ type Step = {
 - 不正解時は該当セクションへのリンクを表示
 - 回答状態は保存しない（何度でも回答可）
 
-### 9.8 インライン用語ツールチップの自動ハイライト
-
-**背景**: 現在の `<GlossaryTerm>` コンポーネントは `steps.tsx` に手動でマークアップを追加する必要がある。
-用語が追加・変更されるたびに `steps.tsx` を修正しなければならず、漏れが生じやすい。
-自動化により、用語集に単語を追加するだけでコンテンツ中のすべての出現箇所に即時反映できる。
-
-**方針**: JSX ツリーを走査して用語を自動検出し、`<GlossaryTerm>` で置き換える高階コンポーネントを実装する。
-
-**実装アプローチ**:
-
-- `wrapGlossaryTerms(node: React.ReactNode): React.ReactNode` ユーティリティ関数を実装する
-  - `React.Children.map` を使って React ツリーを再帰的に走査する
-  - テキストノード（`string` 型の children）に対してのみ用語検出を行う
-  - 用語の出現箇所を正規表現で検出し、前後のテキストと `<GlossaryTerm>` に分割して返す
-  - 非テキストノード（JSX 要素）は再帰的に処理する
-- `StepPage.tsx` で `step.content` を `wrapGlossaryTerms()` に通してからレンダリングする
-- `steps.tsx` 内の手動マークアップ（既存の `<GlossaryTerm>` タグ）は自動化移行後に削除する
-
-**除外対象**（誤検知・二重ラップの防止）:
-
-- `<code>`, `<CodeBlock>` 内のテキスト（コード例の中の用語語は対象外）
-- すでに `<GlossaryTerm>` でラップされているノード（二重ラップ防止）
-- `<strong>`, `<th>`, `<td>` 等の要素の children は通常どおり処理してよい
-
-**用語マッチングルール**:
-
-- `glossary.ts` の全エントリを走査対象とする
-- `term` フィールドの完全一致、および括弧前の略称（例: `DAX` → `DAX（Data Analysis Expressions）`）も検出する
-- 長い用語を優先してマッチ（例: `Power Query` が `Power` より先にマッチするよう降順ソート）
-- 大文字小文字は区別する（日本語用語のため）
-
-**注意点**:
-
-- `React.Children.map` は `React.ReactNode` の型の多様性（`null`, `boolean`, `number`, `string`, 配列, `ReactElement`）を適切に処理する必要がある
-- ツリー走査は `steps.tsx` 起因のものに限定し、`Header` や `Sidebar` 等レイアウトコンポーネントには適用しない
-- パフォーマンス: 用語リストのソートはコンポーネント外（モジュールトップレベル）で1回だけ実行する
 
 ### 9.7 完了履歴タイムライン
 

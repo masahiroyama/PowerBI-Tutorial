@@ -112,6 +112,8 @@ src/
     useProgress.ts
     useSpeech.ts    # Web Speech API ラッパー
     useTimer.ts     # 実測タイマー（経過時間・ペース計算）
+  utils/
+    wrapGlossaryTerms.tsx # React ツリーを走査して用語を自動 GlossaryTerm ラップ
 CONTENTS.md         # コンテンツの骨子（Markdown）
 ```
 

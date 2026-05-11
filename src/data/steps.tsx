@@ -1,7 +1,6 @@
 ﻿import { Accordion } from '../components/Accordion'
 import { Section } from '../components/Section'
 import { CodeBlock } from '../components/CodeBlock'
-import { GlossaryTerm } from '../components/GlossaryTerm'
 
 export type Step = {
   id: number
@@ -543,7 +542,7 @@ export const steps: Step[] = [
 
         <Section title="1.4 なぜ整然データが重要か？">
           <ul className="space-y-2 text-sm">
-            <li>✅ Power BI、Tableau などの BI ツールは<GlossaryTerm term="整然データ">整然データ</GlossaryTerm>を想定して設計されている</li>
+            <li>✅ Power BI、Tableau などの BI ツールは整然データを想定して設計されている</li>
             <li>✅ SQL や Python などのプログラミング言語との相性が良い</li>
             <li>✅ 機械学習モデルの学習に必要</li>
             <li>✅ データの保守・更新が簡単</li>
@@ -554,8 +553,8 @@ export const steps: Step[] = [
         <Section title="1.5 このチュートリアルでの実践">
           <p className="text-sm">
             このチュートリアルで使用するサンプルデータは、意図的に
-            <strong><GlossaryTerm term="雑然データ">雑然データ</GlossaryTerm>（ピボット形式）</strong>として提供しています。
-            <GlossaryTerm term="Power Query">Power Query</GlossaryTerm> で<GlossaryTerm term="ピボット解除">ピボット解除</GlossaryTerm>を行い、<strong>整然データに変換するプロセス</strong>
+            <strong>雑然データ（ピボット形式）</strong>として提供しています。
+            Power Query でピボット解除を行い、<strong>整然データに変換するプロセス</strong>
             を学ぶことで、実務的なデータ整形スキルを習得できます。
           </p>
         </Section>
@@ -968,7 +967,7 @@ export const steps: Step[] = [
         <Section title="6.1 データ構造について">
           <p className="text-sm mb-4">
             準備したサンプルデータ（テーブル名：<code className="bg-gray-100 dark:bg-gray-800 px-1 rounded">ProjectTasks</code>）は
-            ピボット形式（<GlossaryTerm term="雑然データ">雑然データ</GlossaryTerm>）です。Power BI での分析には不適切なため、<GlossaryTerm term="整然データ">整然データ</GlossaryTerm>に変換します。
+            ピボット形式（雑然データ）です。Power BI での分析には不適切なため、整然データに変換します。
           </p>
           <div className="flex flex-col md:flex-row items-center gap-3">
             <div className="flex-1 w-full rounded-lg border-2 border-red-200 dark:border-red-700 overflow-hidden">
@@ -1189,7 +1188,7 @@ export const steps: Step[] = [
             <div className="p-3 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg">
               <p className="font-semibold mb-1">このチュートリアルでは不要な理由</p>
               <ul className="space-y-1">
-                <li>・単一テーブルのため、<GlossaryTerm term="リレーションシップ">リレーションシップ</GlossaryTerm>（関連付け）は必要ない</li>
+                <li>・単一テーブルのため、リレーションシップ（関連付け）は必要ない</li>
                 <li>・複数テーブルの関連付けは、より高度なトピックなので基礎習得後に学ぶ</li>
               </ul>
             </div>
@@ -1220,7 +1219,7 @@ export const steps: Step[] = [
     content: (
       <div className="space-y-4">
         <Section title="8.0 完成イメージ">
-          <p className="text-sm mb-3">このセクションで作成するレポートのレイアウトです。<GlossaryTerm term="スライサー">スライサー</GlossaryTerm>を操作するとグラフとテーブルが連動します。</p>
+          <p className="text-sm mb-3">このセクションで作成するレポートのレイアウトです。スライサーを操作するとグラフとテーブルが連動します。</p>
           <div className="border-2 border-gray-300 dark:border-gray-600 rounded-lg p-3 bg-gray-50 dark:bg-gray-800 space-y-2">
             <div className="border border-blue-300 dark:border-blue-600 rounded p-2 bg-white dark:bg-gray-700">
               <p className="text-xs font-bold text-blue-600 dark:text-blue-300 mb-1.5">🔽 スライサー（タスク）</p>
@@ -1453,8 +1452,8 @@ export const steps: Step[] = [
           <div className="space-y-3 text-sm">
             <ol className="space-y-2 list-decimal list-inside">
               <li>キャンバスの上部の空きスペースをクリック</li>
-              <li><GlossaryTerm term="視覚化ペイン">視覚化ペイン</GlossaryTerm>から <strong>「スライサー」（🔽）</strong> アイコンをクリック</li>
-              <li><GlossaryTerm term="フィールドペイン">フィールドペイン</GlossaryTerm>から「タスク」をドラッグ</li>
+              <li>視覚化ペインから <strong>「スライサー」（🔽）</strong> アイコンをクリック</li>
+              <li>フィールドペインから「タスク」をドラッグ</li>
               <li>スライサーの項目をクリックして、グラフとテーブルが絞り込まれることを確認</li>
             </ol>
             <div className="border border-gray-400 dark:border-gray-500 rounded overflow-hidden text-xs bg-white dark:bg-gray-900 max-w-xs">
@@ -1600,8 +1599,8 @@ export const steps: Step[] = [
             <div>
               <p className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">活用場面の例：</p>
               <ul className="text-sm space-y-1 text-gray-600 dark:text-gray-400">
-                <li>・<GlossaryTerm term="Power Query">Power Query</GlossaryTerm> でデータ変換の手順がわからないとき</li>
-                <li>・<GlossaryTerm term="DAX">DAX</GlossaryTerm> の計算式の書き方がわからないとき</li>
+                <li>・Power Query でデータ変換の手順がわからないとき</li>
+                <li>・DAX の計算式の書き方がわからないとき</li>
                 <li>・グラフの書式設定でどのオプションを使えばいいかわからないとき</li>
                 <li>・エラーメッセージの意味がわからないとき</li>
               </ul>

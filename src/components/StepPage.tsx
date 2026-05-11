@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { steps } from '../data/steps'
 import { StepNav } from './StepNav'
 import { CompleteButton } from './CompleteButton'
+import { wrapGlossaryTerms } from '../utils/wrapGlossaryTerms'
 
 type Props = {
   stepId: number
@@ -65,7 +66,7 @@ export function StepPage({ stepId, isCompleted, onToggleComplete }: Props) {
         </div>
       </div>
 
-      <div className="prose-sm">{step.content}</div>
+      <div className="prose-sm">{wrapGlossaryTerms(step.content)}</div>
 
       {step.category === 'tutorial' && (
         <CompleteButton
