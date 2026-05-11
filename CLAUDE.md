@@ -100,6 +100,7 @@ src/
     CompleteButton.tsx
     GlossaryPanel.tsx # 用語集スライドインパネル
     GlossaryTerm.tsx  # インライン用語ツールチップ（ホバーで定義表示）
+    CompletionTimeline.tsx # 完了履歴タイムライン スライドインパネル
     Header.tsx
     Layout.tsx
     ProgressBar.tsx

@@ -5,9 +5,11 @@ type Props = {
   onToggleScript: () => void
   showGlossary: boolean
   onToggleGlossary: () => void
+  showTimeline: boolean
+  onToggleTimeline: () => void
 }
 
-export function Header({ dark, onToggleDark, showScript, onToggleScript, showGlossary, onToggleGlossary }: Props) {
+export function Header({ dark, onToggleDark, showScript, onToggleScript, showGlossary, onToggleGlossary, showTimeline, onToggleTimeline }: Props) {
   const handlePrint = () => window.print()
 
   return (
@@ -19,6 +21,17 @@ export function Header({ dark, onToggleDark, showScript, onToggleScript, showGlo
           </span>
         </div>
         <div className="flex items-center gap-2">
+          <button
+            onClick={onToggleTimeline}
+            className={`px-3 py-1.5 rounded-md text-sm border transition-colors ${
+              showTimeline
+                ? 'bg-emerald-100 dark:bg-emerald-900/40 border-emerald-300 dark:border-emerald-700 text-emerald-800 dark:text-emerald-300'
+                : 'border-gray-200 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-600 dark:text-gray-300'
+            }`}
+            title={showTimeline ? '完了履歴を非表示' : '完了履歴を表示'}
+          >
+            📋 履歴
+          </button>
           <button
             onClick={onToggleGlossary}
             className={`px-3 py-1.5 rounded-md text-sm border transition-colors ${
