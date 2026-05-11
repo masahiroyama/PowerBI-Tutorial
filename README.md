@@ -1,73 +1,47 @@
-# React + TypeScript + Vite
+# Power BI 入門チュートリアル
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Microsoft Power BI Desktop を使って、データの取り込みからレポート作成・共有までを段階的に学べるインタラクティブなチュートリアルアプリです。
 
-Currently, two official plugins are available:
+## 公開 URL
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+**https://mayamaura.github.io/PowerBI-Tutorial/**
 
-## React Compiler
+GitHub Pages でホスティングしています。
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 概要
 
-## Expanding the ESLint configuration
+Power BI を初めて使う方を対象に、以下の内容を約1時間で学習できます。
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- データ解析の基礎（整然データとは何か）
+- Excel のテーブル機能の活用
+- Power BI でのデータ取得・整形（ピボット解除）
+- グラフ・スライサーを使ったレポート作成
+- Power BI Service での発行と共有
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 主な機能
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- ステップごとの進捗管理（完了ボタン・プログレスバー）
+- 講師向けスクリプト表示・読み上げ（Web Speech API）
+- 経過時間タイマーとペース表示
+- 用語集スライドインパネル・インラインツールチップ
+- ダークモード対応
+- サンプルデータ（`sample-data.xlsx`）のダウンロード機能
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## 技術スタック
+
+- **React + Vite + TypeScript**
+- **Tailwind CSS**
+
+## ローカル開発
+
+```bash
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## ビルド・デプロイ
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm run build   # dist/ にビルド
+npm run deploy  # GitHub Pages へデプロイ（gh-pages）
 ```
