@@ -89,7 +89,7 @@ const wb = new ExcelJS.Workbook()
 const ws = wb.addWorksheet('ProjectTasks')
 
 ws.addTable({
-  name: 'ProjectTasks',
+  name: 'ProjectTasksTable',
   ref: 'A1',
   headerRow: true,
   totalsRow: false,

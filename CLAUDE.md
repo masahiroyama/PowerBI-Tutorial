@@ -82,6 +82,14 @@ React アプリ（`src/data/steps.tsx`）では、HTML/JSX/Tailwind の自由度
 
 ---
 
+## サンプルデータの管理
+
+- `public/sample-data.xlsx` は **`scripts/generate-sample.mjs`** で自動生成される。
+- Excel ファイルを直接編集しても、スクリプトを再実行すると上書きされて変更が失われる。
+- シート構成・テーブル定義・データ内容を変更する場合は、**必ずスクリプト側を修正**してから `node scripts/generate-sample.mjs` で再生成すること。
+
+---
+
 ## ファイル構成
 
 > **更新ルール**: ファイルの追加・削除・移動を行った場合は、必ずこのセクションも同時に更新する。
