@@ -544,10 +544,28 @@ export const steps: Step[] = [
           <ul className="space-y-2 text-sm">
             <li>✅ Power BI、Tableau などの BI ツールは整然データを想定して設計されている</li>
             <li>✅ SQL や Python などのプログラミング言語との相性が良い</li>
-            <li>✅ 機械学習モデルの学習に必要</li>
+            <li>✅ AI・機械学習との相性が良い</li>
             <li>✅ データの保守・更新が簡単</li>
             <li>✅ 複数のデータセットの統合が容易</li>
           </ul>
+          <div className="mt-4 p-4 rounded-lg bg-purple-50 dark:bg-purple-900/20 border-l-4 border-purple-400">
+            <p className="text-sm font-semibold text-purple-800 dark:text-purple-300 mb-2">🤖 AI との関係</p>
+            <p className="text-sm text-purple-700 dark:text-purple-300 mb-3">
+              整然データ、もしくは簡単に整然データに変換できる形にしておくと、AI がデータの構造を推測する手間が減り、<strong>より的確な分析結果が得られやすくなります。</strong>
+            </p>
+            <p className="text-xs font-semibold text-purple-700 dark:text-purple-300 mb-2">AI が特に扱いにくいデータの例：</p>
+            <div className="space-y-2">
+              <div className="bg-white dark:bg-gray-800 rounded p-2 text-xs">
+                <span className="font-semibold text-red-600 dark:text-red-400">① セルに複数の情報が混在</span>
+                <div className="mt-1 font-mono bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">15（先月比+3）</div>
+                <div className="text-gray-600 dark:text-gray-400 mt-1">数値と注記が混在していると、AI はどちらが集計対象か判断しにくくなります</div>
+              </div>
+              <div className="bg-white dark:bg-gray-800 rounded p-2 text-xs">
+                <span className="font-semibold text-red-600 dark:text-red-400">② 結合セル</span>
+                <div className="text-gray-600 dark:text-gray-400 mt-1">複数の行・列にまたがるセル結合は、テキストに変換すると構造が崩れ、どのデータがどの項目に属するか曖昧になります</div>
+              </div>
+            </div>
+          </div>
         </Section>
 
         <Section title="1.5 このチュートリアルでの実践">
