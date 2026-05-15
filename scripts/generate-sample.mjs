@@ -88,9 +88,12 @@ projects.forEach(({ name, type, startYear, startMonth }) => {
 const wb = new ExcelJS.Workbook()
 const ws = wb.addWorksheet('ProjectTasks')
 
+ws.getCell('A1').value = 'プロジェクト工数計画'
+ws.getCell('A1').font = { size: 16, bold: true }
+
 ws.addTable({
   name: 'ProjectTasksTable',
-  ref: 'A1',
+  ref: 'A3',
   headerRow: true,
   totalsRow: false,
   style: {
