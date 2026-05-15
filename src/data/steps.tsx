@@ -119,152 +119,9 @@ export const steps: Step[] = [
                 <span className="font-semibold">ℹ️ データ構成：</span> プロジェクト 3種 × タスク 10種 = 計 30行、日付列は 2022/01/01〜2024/12/01 の36ヶ月分（合計 38列）
               </div>
 
-              <p className="mt-3 font-medium">テーブルに変換する手順（図解）：</p>
-              <div className="mt-2 space-y-3">
-
-                {/* A: データ選択 */}
-                <div className="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
-                  <div className="bg-gray-50 dark:bg-gray-800 px-3 py-2 flex items-center gap-2 border-b border-gray-200 dark:border-gray-700">
-                    <span className="bg-blue-600 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center shrink-0">1</span>
-                    <span className="text-sm font-medium">A1〜AL31 を選択する（データ全体をドラッグ）</span>
-                  </div>
-                  <div className="p-3">
-                    <div className="border border-gray-400 dark:border-gray-500 rounded overflow-hidden text-xs font-mono bg-white dark:bg-gray-900 max-w-lg">
-                      <div className="flex bg-gray-200 dark:bg-gray-700 border-b border-gray-400">
-                        <div className="w-5 border-r border-gray-400 text-center py-0.5 text-gray-500 shrink-0"></div>
-                        {[['A','w-20'],['B','w-16'],['C','w-16'],['D','w-16'],['…','w-8'],['AL','w-16']].map(([col, w]) => (
-                          <div key={col} className={`${w} border-r border-gray-400 text-center py-0.5 font-bold bg-blue-200 dark:bg-blue-900/60 text-blue-800 dark:text-blue-300 shrink-0`}>{col}</div>
-                        ))}
-                      </div>
-                      {[
-                        ['プロジェクト', 'タスク', '2022/01/01', '2022/02/01', '…', '2024/12/01'],
-                        ['プロジェクトA', '要件定義', '14', '8', '…', '11'],
-                        ['プロジェクトA', '設計', '7', '19', '…', '6'],
-                        ['…', '…', '…', '…', '…', '…'],
-                        ['プロジェクトC', '次期計画', '9', '16', '…', '12'],
-                      ].map((row, rowIdx) => (
-                        <div key={rowIdx} className="flex border-b border-gray-300 dark:border-gray-600">
-                          <div className="w-5 border-r border-gray-400 text-center py-0.5 bg-blue-200 dark:bg-blue-900/60 text-blue-700 dark:text-blue-300 font-bold shrink-0">{rowIdx + 1}</div>
-                          {row.map((cell, colIdx) => (
-                            <div key={colIdx} className={`border-r border-blue-300 dark:border-blue-600 px-1 py-0.5 bg-blue-100 dark:bg-blue-900/30 text-blue-900 dark:text-blue-200 truncate shrink-0 ${colIdx === 0 ? 'w-20' : colIdx === 4 ? 'w-8' : 'w-16'}`}>{cell}</div>
-                          ))}
-                        </div>
-                      ))}
-                    </div>
-                    <p className="text-xs text-blue-600 dark:text-blue-400 mt-1">A1 をクリック → Ctrl+Shift+End で最終セル（AL31）まで一括選択</p>
-                  </div>
-                </div>
-
-                {/* B: 挿入→テーブル */}
-                <div className="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
-                  <div className="bg-gray-50 dark:bg-gray-800 px-3 py-2 flex items-center gap-2 border-b border-gray-200 dark:border-gray-700">
-                    <span className="bg-blue-600 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center shrink-0">2</span>
-                    <span className="text-sm font-medium">「挿入」タブ → 「テーブル」をクリック</span>
-                  </div>
-                  <div className="p-3">
-                    <div className="border border-gray-400 dark:border-gray-500 rounded overflow-hidden text-xs bg-white dark:bg-gray-900">
-                      <div className="flex bg-gray-100 dark:bg-gray-700 border-b border-gray-300 dark:border-gray-600 overflow-x-auto">
-                        {['ファイル','ホーム','挿入','ページレイアウト','数式','データ'].map(tab => (
-                          <div key={tab} className={`px-3 py-1.5 whitespace-nowrap ${tab === '挿入' ? 'bg-green-700 text-white font-bold' : 'text-gray-500 dark:text-gray-400'}`}>{tab}</div>
-                        ))}
-                      </div>
-                      <div className="p-2 flex gap-2 items-start">
-                        <div className="flex flex-col items-center p-2 rounded border-2 border-yellow-400 bg-yellow-50 dark:bg-yellow-900/20">
-                          <span className="text-xl">📋</span>
-                          <span className="font-bold text-yellow-700 dark:text-yellow-300 text-xs mt-0.5">テーブル</span>
-                        </div>
-                        <div className="flex flex-col items-center p-2 text-gray-300 dark:text-gray-600">
-                          <span className="text-xl">📊</span>
-                          <span className="text-xs">グラフ</span>
-                        </div>
-                        <div className="flex flex-col items-center p-2 text-gray-300 dark:text-gray-600">
-                          <span className="text-xl">🖼️</span>
-                          <span className="text-xs">図</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* C: ダイアログ */}
-                <div className="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
-                  <div className="bg-gray-50 dark:bg-gray-800 px-3 py-2 flex items-center gap-2 border-b border-gray-200 dark:border-gray-700">
-                    <span className="bg-blue-600 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center shrink-0">3</span>
-                    <span className="text-sm font-medium">ダイアログを確認して「OK」をクリック</span>
-                  </div>
-                  <div className="p-3">
-                    <div className="border-2 border-gray-400 dark:border-gray-500 rounded-lg overflow-hidden shadow-md max-w-xs text-sm bg-white dark:bg-gray-800">
-                      <div className="bg-gray-200 dark:bg-gray-700 px-3 py-2 font-bold text-gray-700 dark:text-gray-200">テーブルの作成</div>
-                      <div className="p-4 space-y-3">
-                        <div>
-                          <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">テーブルに変換するデータ範囲：</p>
-                          <div className="border border-gray-300 dark:border-gray-600 rounded px-2 py-1 font-mono bg-gray-50 dark:bg-gray-700">=$A$1:$AL$31</div>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <div className="w-4 h-4 border-2 border-blue-500 bg-blue-100 dark:bg-blue-900/40 rounded-sm flex items-center justify-center shrink-0">
-                            <span className="text-blue-600 dark:text-blue-300 text-xs font-bold">✓</span>
-                          </div>
-                          <span className="text-sm">先頭行をテーブルの見出しとして使用する</span>
-                        </div>
-                        <p className="text-xs text-green-600 dark:text-green-400">↑ チェックが入っていることを確認してから OK をクリック</p>
-                        <div className="flex justify-end gap-2 pt-1 border-t border-gray-200 dark:border-gray-600">
-                          <button className="px-4 py-1.5 bg-blue-600 text-white text-sm rounded font-medium">OK</button>
-                          <button className="px-4 py-1.5 border border-gray-300 dark:border-gray-600 text-sm rounded text-gray-600 dark:text-gray-400">キャンセル</button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* D: テーブルデザインタブ */}
-                <div className="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
-                  <div className="bg-gray-50 dark:bg-gray-800 px-3 py-2 flex items-center gap-2 border-b border-gray-200 dark:border-gray-700">
-                    <span className="bg-blue-600 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center shrink-0">4</span>
-                    <span className="text-sm font-medium">「テーブルデザイン」タブでテーブル名を変更</span>
-                  </div>
-                  <div className="p-3">
-                    <div className="border border-gray-400 dark:border-gray-500 rounded overflow-hidden text-xs bg-white dark:bg-gray-900">
-                      <div className="flex bg-gray-100 dark:bg-gray-700 border-b border-gray-300 dark:border-gray-600 overflow-x-auto">
-                        {['ファイル','ホーム','挿入','ページレイアウト'].map(tab => (
-                          <div key={tab} className="px-2 py-1.5 text-gray-400 dark:text-gray-500 whitespace-nowrap shrink-0">{tab}</div>
-                        ))}
-                        <div className="px-3 py-1.5 bg-teal-600 text-white font-bold whitespace-nowrap shrink-0">テーブルデザイン ← 新しく表示</div>
-                      </div>
-                      <div className="p-3 flex flex-wrap items-start gap-4">
-                        <div className="border-2 border-yellow-400 bg-yellow-50 dark:bg-yellow-900/20 rounded-lg p-3">
-                          <p className="text-xs text-yellow-700 dark:text-yellow-400 font-bold mb-1">👆 ここを変更！</p>
-                          <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">テーブル名：</p>
-                          <div className="bg-white dark:bg-gray-800 border-2 border-blue-400 rounded px-2 py-1 font-mono">ProjectTasks</div>
-                          <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">（初期値：テーブル1）</p>
-                        </div>
-                        <div className="text-gray-300 dark:text-gray-600 p-1 text-xs space-y-1">
-                          <p>縞模様（行）</p>
-                          <p>縞模様（列）</p>
-                          <p>集計行</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="mt-2 p-2 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-300 dark:border-yellow-700 rounded text-xs">
-                      <span className="font-bold text-yellow-700 dark:text-yellow-400">⚠️ ポイント：</span>
-                      <span className="text-gray-700 dark:text-gray-300"> 「テーブルデザイン」タブはテーブル内のセルをクリックしているときだけ表示されます。テーブル外をクリックすると消えます。</span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* E: 保存 */}
-                <div className="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
-                  <div className="bg-gray-50 dark:bg-gray-800 px-3 py-2 flex items-center gap-2 border-b border-gray-200 dark:border-gray-700">
-                    <span className="bg-blue-600 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center shrink-0">5</span>
-                    <span className="text-sm font-medium">ファイルを保存（Ctrl+S）</span>
-                  </div>
-                  <div className="p-3 text-sm space-y-1 text-gray-600 dark:text-gray-400">
-                    <p>・ファイル名：<code className="bg-gray-100 dark:bg-gray-800 px-1 rounded">project_tasks.xlsx</code></p>
-                    <p>・保存場所：デスクトップ（推奨）</p>
-                    <p>・ファイルの種類：Excel ブック（.xlsx）</p>
-                  </div>
-                </div>
-
-              </div>
+              <p className="mt-3 text-sm text-gray-600 dark:text-gray-400">
+                テーブルへの変換と保存の詳しい手順は、次のセクション3「Excel のテーブル機能を使おう」で図解付きで学びます。
+              </p>
             </div>
 
             <div>
@@ -690,7 +547,7 @@ export const steps: Step[] = [
                   </div>
                 ))}
               </div>
-              <p className="text-xs text-blue-600 dark:text-blue-400 mt-1">A1〜データ最終行・最終列まで青く選択された状態にする</p>
+              <p className="text-xs text-blue-600 dark:text-blue-400 mt-1">A1〜データ最終行・最終列まで青く選択された状態にする（ショートカット：A1 をクリック → Ctrl+Shift+End）</p>
             </div>
 
             {/* 手順2: 挿入→テーブル */}
@@ -713,9 +570,30 @@ export const steps: Step[] = [
               </div>
             </div>
 
-            {/* 手順3: テーブルデザインタブ */}
+            {/* 手順3: ダイアログ確認 */}
             <div>
-              <p className="font-semibold mb-2">③ 「テーブルデザイン」タブでテーブル名を設定</p>
+              <p className="font-semibold mb-2">③ ダイアログを確認して「OK」をクリック</p>
+              <div className="border-2 border-gray-400 dark:border-gray-500 rounded-lg overflow-hidden shadow-md max-w-xs text-sm bg-white dark:bg-gray-800">
+                <div className="bg-gray-200 dark:bg-gray-700 px-3 py-2 font-bold text-gray-700 dark:text-gray-200">テーブルの作成</div>
+                <div className="p-4 space-y-3 text-xs">
+                  <div className="flex items-center gap-2">
+                    <div className="w-4 h-4 border-2 border-blue-500 bg-blue-100 dark:bg-blue-900/40 rounded-sm flex items-center justify-center shrink-0">
+                      <span className="text-blue-600 dark:text-blue-300 font-bold">✓</span>
+                    </div>
+                    <span>先頭行をテーブルの見出しとして使用する</span>
+                  </div>
+                  <p className="text-green-600 dark:text-green-400">↑ チェックが入っていることを確認してから OK をクリック</p>
+                  <div className="flex justify-end gap-2 pt-1 border-t border-gray-200 dark:border-gray-600">
+                    <button className="px-4 py-1.5 bg-blue-600 text-white rounded font-medium">OK</button>
+                    <button className="px-4 py-1.5 border border-gray-300 dark:border-gray-600 rounded text-gray-600 dark:text-gray-400">キャンセル</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* 手順4: テーブルデザインタブ */}
+            <div>
+              <p className="font-semibold mb-2">④ 「テーブルデザイン」タブでテーブル名を設定</p>
               <div className="border border-gray-400 dark:border-gray-500 rounded overflow-hidden text-xs bg-white dark:bg-gray-900">
                 <div className="flex bg-gray-100 dark:bg-gray-700 border-b border-gray-300 dark:border-gray-600 overflow-x-auto">
                   {['ファイル','ホーム','挿入','データ'].map(tab => (
@@ -774,6 +652,30 @@ export const steps: Step[] = [
               </ul>
             </div>
           </div>
+        </Section>
+
+        <Section title="3.6 サンプルデータをテーブルに変換する">
+          <p className="text-sm mb-4">
+            ダウンロードした <code className="bg-gray-100 dark:bg-gray-800 px-1 rounded">sample-data.xlsx</code> を開き、Power BI で使用するためにテーブルに変換して保存します。
+          </p>
+          <div className="space-y-3 text-sm">
+            {[
+              { n: 1, title: 'データ範囲（A1〜AL31）を選択', desc: 'A1 をクリック → Ctrl+Shift+End で一括選択' },
+              { n: 2, title: '「挿入」タブ → 「テーブル」をクリック', desc: null },
+              { n: 3, title: 'ダイアログを確認して OK', desc: '「先頭行をテーブルの見出しとして使用する」にチェック・範囲が =$A$1:$AL$31 であることを確認' },
+              { n: 4, title: '「テーブルデザイン」タブでテーブル名を変更', desc: 'リボン左端の入力欄を ProjectTasks に書き換えて Enter' },
+              { n: 5, title: 'ファイルを保存（Ctrl+S）', desc: 'ファイル名：project_tasks.xlsx　保存場所：デスクトップ推奨' },
+            ].map(({ n, title, desc }) => (
+              <div key={n} className="flex gap-3 items-start p-3 border border-gray-200 dark:border-gray-700 rounded-lg">
+                <span className="bg-blue-600 text-white text-xs font-bold rounded-full w-6 h-6 flex items-center justify-center shrink-0 mt-0.5">{n}</span>
+                <div>
+                  <p className="font-medium">{title}</p>
+                  {desc && <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">{desc}</p>}
+                </div>
+              </div>
+            ))}
+          </div>
+          <p className="text-sm text-green-700 dark:text-green-400 mt-4">以上で、Power BI への取り込み準備が完了です。</p>
         </Section>
       </div>
     ),
