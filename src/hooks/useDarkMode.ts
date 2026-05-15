@@ -5,7 +5,7 @@ const STORAGE_KEY = 'pbi_dark_mode'
 function getInitialDark(): boolean {
   const stored = localStorage.getItem(STORAGE_KEY)
   if (stored !== null) return stored === 'true'
-  return window.matchMedia('(prefers-color-scheme: dark)').matches
+  return false
 }
 
 export function useDarkMode() {
