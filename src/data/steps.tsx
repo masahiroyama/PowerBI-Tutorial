@@ -514,6 +514,16 @@ export const steps: Step[] = [
                 <div>
                   <p className="text-xs text-gray-500 mb-1">テーブルの式</p>
                   <CodeBlock language="Excel" code="=SUM(Sales[Amount])" />
+                  <div className="mt-2 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-700 rounded p-2 text-xs space-y-1">
+                    <div className="flex items-center gap-2">
+                      <span className="font-mono font-bold text-blue-700 dark:text-blue-300">Sales</span>
+                      <span className="text-gray-600 dark:text-gray-400">→ テーブル名（Excelでテーブルに付けた名前）</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span className="font-mono font-bold text-blue-700 dark:text-blue-300">[Amount]</span>
+                      <span className="text-gray-600 dark:text-gray-400">→ 列名（テーブル内の見出し行の名前）</span>
+                    </div>
+                  </div>
                 </div>
               </div>
               <p className="mt-2 text-green-700 dark:text-green-400">→ 新しい行を追加すると自動的に計算対象に含まれる</p>
