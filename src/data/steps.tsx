@@ -324,7 +324,7 @@ export const steps: Step[] = [
             <ul className="text-xs px-3 pb-3 space-y-1.5 text-red-700 dark:text-red-400">
               <li><span className="font-semibold text-orange-600 dark:text-orange-400">① セルの結合：</span>「営業部」が3行にまたがるため、各行に部署情報が入らず、フィルタや集計ができない</li>
               <li><span className="font-semibold text-orange-600 dark:text-orange-400">② 「↑」による省略：</span>目で見れば意味が伝わるが、プログラムは前の行の値を引き継がないため「↑」という文字列として読み込まれる</li>
-              <li><span className="font-semibold text-orange-600 dark:text-orange-400">③ セル内の複数情報：</span>「120（先月比+8）」のように数値と注記が混在すると、ツール（Power BI・Python など）は数値を取り出す前処理が必要になり、書き方が少し変わるだけで前処理が壊れる。AI（Copilot・ChatGPT など）はある程度読み取れるが、大量データでは見落としや誤解釈が積み上がるリスクがある</li>
+              <li><span className="font-semibold text-orange-600 dark:text-orange-400">③ セル内の複数情報：</span>「120（先月比+8）」のように数値と注記が混在すると、Power BI などのツールは数値と注記を別々に読み取ることができず、集計やグラフ化でエラーが起きやすい。AI（Copilot・ChatGPT など）はある程度読み取れるが、大量データでは見落としや誤解釈が積み上がるリスクがある</li>
             </ul>
           </div>
 
@@ -374,7 +374,7 @@ export const steps: Step[] = [
               <div>
                 <p className="font-semibold text-gray-600 dark:text-gray-400 mb-1">問題になるケース</p>
                 <ul className="space-y-1 text-gray-700 dark:text-gray-300 text-xs">
-                  <li>❌ Power BI・Python・AI などで分析したい</li>
+                  <li>❌ Power BI・AI などで分析したい</li>
                   <li>❌ データを集計・フィルタ・グラフ化したい</li>
                 </ul>
               </div>
@@ -428,8 +428,7 @@ export const steps: Step[] = [
         <Section title="1.3 なぜ整然データが重要か？">
           <ul className="space-y-2 text-sm">
             <li>✅ Power BI、Tableau などの BI ツールは整然データを想定して設計されている</li>
-            <li>✅ SQL や Python などのプログラミング言語との相性が良い</li>
-            <li>✅ AI・機械学習との相性が良い</li>
+            <li>✅ AI との相性が良い</li>
             <li>✅ データの保守・更新が簡単</li>
             <li>✅ 複数のデータセットの統合が容易</li>
           </ul>
@@ -720,7 +719,7 @@ export const steps: Step[] = [
             purple: 'bg-purple-500',
           }
           const workflowSteps = [
-            { num: 1, label: 'データの取得 (Get Data)', desc: '様々なソースからデータを読み込む。Excel、SQL Server、Web API など多彩なソースに対応。', color: 'yellow', icon: '📥' },
+            { num: 1, label: 'データの取得 (Get Data)', desc: '様々なソースからデータを読み込む。Excel やデータベースなど多彩なソースに対応。', color: 'yellow', icon: '📥' },
             { num: 2, label: 'データの整形 (Power Query)', desc: 'データの汚れを落とし、使いやすく加工する。ピボット解除もここで行います。', color: 'orange', icon: '⚙️' },
             { num: 3, label: 'データモデリング', desc: 'テーブル同士の関連付けを行う。複数のデータソースを使う場合に重要。', color: 'blue', icon: '🔗' },
             { num: 4, label: '視覚化 (Report)', desc: 'グラフやチャートを配置してレポートを作成する。', color: 'green', icon: '📊' },
@@ -819,7 +818,7 @@ export const steps: Step[] = [
                     <span className="font-bold text-yellow-700 dark:text-yellow-300">Excel ブック</span>
                     <span className="ml-auto text-yellow-600 dark:text-yellow-400">← 選択！</span>
                   </div>
-                  <div className="flex items-center gap-2 p-1.5 rounded text-gray-400 cursor-pointer"><span className="text-lg">🗄️</span><span>SQL Server</span></div>
+                  <div className="flex items-center gap-2 p-1.5 rounded text-gray-400 cursor-pointer"><span className="text-lg">🗄️</span><span>データベース</span></div>
                   <div className="flex items-center gap-2 p-1.5 rounded text-gray-400 cursor-pointer"><span className="text-lg">☁️</span><span>SharePoint</span></div>
                   <div className="flex items-center gap-2 p-1.5 rounded text-gray-400 cursor-pointer"><span className="text-lg">🌐</span><span>Web</span></div>
                   <div className="text-gray-400 text-center py-1">…他多数</div>
@@ -1708,7 +1707,7 @@ export const steps: Step[] = [
             {
               title: '複数データソースの統合',
               icon: '🔗',
-              desc: 'Excel、SQL Server、Web API など複数のソースからデータを取得。テーブル間の関連付けを学ぶ。',
+              desc: 'Excel やデータベースなど複数のソースからデータを取得。テーブル間の関連付けを学ぶ。',
             },
             {
               title: 'ダッシュボード設計',
