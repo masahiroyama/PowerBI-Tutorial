@@ -190,47 +190,12 @@ export const steps: Step[] = [
   // ─────────────────────────────────────────────
   {
     id: 1,
-    title: 'データ解析とは？',
+    title: 'データ解析の基礎',
     estimatedMinutes: 5,
     category: 'tutorial',
     content: (
       <div className="space-y-4">
-        <Section title="1.1 データ解析の定義">
-          <p className="mb-4">
-            データ解析とは、大量のデータから意味のある情報やパターンを抽出し、
-            ビジネスの意思決定を支援するプロセスです。
-          </p>
-          <div className="flex flex-col items-center gap-0">
-            <div className="w-full p-4 rounded-lg bg-red-50 dark:bg-red-900/20 border-2 border-red-200 dark:border-red-800 text-center">
-              <p className="font-bold text-red-800 dark:text-red-300">📊 生データ（雑然データ）</p>
-              <p className="text-xs text-red-600 dark:text-red-400 mt-1">月が列に並んだピボット形式・そのままでは分析しにくい</p>
-            </div>
-            <div className="flex flex-col items-center py-1">
-              <div className="w-0.5 h-4 bg-gray-300 dark:bg-gray-600" />
-              <span className="text-lg leading-none text-gray-400">▼</span>
-              <p className="text-xs font-medium text-gray-500 dark:text-gray-400 my-0.5">データ整形・加工（Power Query）</p>
-              <span className="text-lg leading-none text-gray-400">▼</span>
-              <div className="w-0.5 h-4 bg-gray-300 dark:bg-gray-600" />
-            </div>
-            <div className="w-full p-4 rounded-lg bg-blue-50 dark:bg-blue-900/20 border-2 border-blue-200 dark:border-blue-800 text-center">
-              <p className="font-bold text-blue-800 dark:text-blue-300">🗂️ 整理されたデータ（整然データ）</p>
-              <p className="text-xs text-blue-600 dark:text-blue-400 mt-1">1行 = 1観測値のロング形式・BI ツールが処理しやすい</p>
-            </div>
-            <div className="flex flex-col items-center py-1">
-              <div className="w-0.5 h-4 bg-gray-300 dark:bg-gray-600" />
-              <span className="text-lg leading-none text-gray-400">▼</span>
-              <p className="text-xs font-medium text-gray-500 dark:text-gray-400 my-0.5">分析・可視化</p>
-              <span className="text-lg leading-none text-gray-400">▼</span>
-              <div className="w-0.5 h-4 bg-gray-300 dark:bg-gray-600" />
-            </div>
-            <div className="w-full p-4 rounded-lg bg-green-50 dark:bg-green-900/20 border-2 border-green-200 dark:border-green-800 text-center">
-              <p className="font-bold text-green-800 dark:text-green-300">💡 洞察・ビジネス上の価値</p>
-              <p className="text-xs text-green-600 dark:text-green-400 mt-1">データドリブンな意思決定の実現</p>
-            </div>
-          </div>
-        </Section>
-
-        <Section title="1.2 解析しやすいデータ vs. 人が見やすいデータ">
+        <Section title="1.1 解析しやすいデータ vs. 人が見やすいデータ">
           <p className="mb-4">
             コンピュータがデータを分析しやすい形と人間が見やすい形は異なります。
           </p>
@@ -241,6 +206,7 @@ export const steps: Step[] = [
                 <p className="text-xs text-red-600 dark:text-red-400">人間には見やすいが、解析に不適切</p>
               </div>
               <div className="p-3 overflow-x-auto">
+                <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 mb-1">タスク別 月次工数（時間）</p>
                 <table className="text-xs border-collapse w-full">
                   <thead>
                     <tr className="bg-red-50 dark:bg-red-900/20">
@@ -265,7 +231,6 @@ export const steps: Step[] = [
                 </table>
               </div>
               <ul className="text-xs px-3 pb-3 space-y-1 text-red-700 dark:text-red-400">
-                <li>・月が増えるたびに列を追加する必要がある</li>
                 <li>・BI ツールでの分析に前処理が必要</li>
                 <li>・全期間の集計に複数列を参照する必要がある</li>
               </ul>
@@ -277,6 +242,7 @@ export const steps: Step[] = [
                 <p className="text-xs text-green-600 dark:text-green-400">コンピュータが処理しやすい形</p>
               </div>
               <div className="p-3 overflow-x-auto">
+                <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 mb-1">タスク別 月次工数（時間）</p>
                 <table className="text-xs border-collapse w-full">
                   <thead>
                     <tr className="bg-green-50 dark:bg-green-900/20">
@@ -309,95 +275,157 @@ export const steps: Step[] = [
               </ul>
             </div>
           </div>
+
+          <div className="mt-4 rounded-lg border-2 border-red-300 dark:border-red-700 overflow-hidden">
+            <div className="bg-red-100 dark:bg-red-900/40 px-3 py-2">
+              <p className="font-bold text-red-800 dark:text-red-300">❌ 雑然データ（よくある別パターン）</p>
+              <p className="text-xs text-red-600 dark:text-red-400">「見やすく整えた」つもりが解析できないデータに</p>
+            </div>
+            <div className="p-3 overflow-x-auto">
+              <table className="text-xs border-collapse w-full">
+                <thead>
+                  <tr className="bg-red-50 dark:bg-red-900/20">
+                    {['部署', '担当者', '売上（万円）', 'ステータス'].map(h => (
+                      <th key={h} className="border border-red-200 dark:border-red-700 px-2 py-1 text-left">{h}</th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td rowSpan={3} className="border border-red-200 dark:border-red-700 px-2 py-1 bg-orange-100 dark:bg-orange-900/30 align-middle text-center font-semibold">
+                      営業部<br />
+                      <span className="text-orange-600 dark:text-orange-400 font-normal">① 結合</span>
+                    </td>
+                    <td className="border border-red-200 dark:border-red-700 px-2 py-1">田中</td>
+                    <td className="border border-red-200 dark:border-red-700 px-2 py-1 bg-orange-100 dark:bg-orange-900/30">
+                      120（先月比+8）<span className="text-orange-600 dark:text-orange-400"> ③</span>
+                    </td>
+                    <td className="border border-red-200 dark:border-red-700 px-2 py-1">進行中</td>
+                  </tr>
+                  <tr>
+                    <td className="border border-red-200 dark:border-red-700 px-2 py-1">鈴木</td>
+                    <td className="border border-red-200 dark:border-red-700 px-2 py-1 bg-orange-100 dark:bg-orange-900/30">
+                      85（先月比−5）<span className="text-orange-600 dark:text-orange-400"> ③</span>
+                    </td>
+                    <td className="border border-red-200 dark:border-red-700 px-2 py-1 bg-orange-100 dark:bg-orange-900/30">
+                      ↑ <span className="text-orange-600 dark:text-orange-400">②</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className="border border-red-200 dark:border-red-700 px-2 py-1">山田</td>
+                    <td className="border border-red-200 dark:border-red-700 px-2 py-1 bg-orange-100 dark:bg-orange-900/30">
+                      200（先月比+15）<span className="text-orange-600 dark:text-orange-400"> ③</span>
+                    </td>
+                    <td className="border border-red-200 dark:border-red-700 px-2 py-1">完了</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <ul className="text-xs px-3 pb-3 space-y-1.5 text-red-700 dark:text-red-400">
+              <li><span className="font-semibold text-orange-600 dark:text-orange-400">① セルの結合：</span>「営業部」が3行にまたがるため、各行に部署情報が入らず、フィルタや集計ができない</li>
+              <li><span className="font-semibold text-orange-600 dark:text-orange-400">② 「↑」による省略：</span>目で見れば意味が伝わるが、プログラムは前の行の値を引き継がないため「↑」という文字列として読み込まれる</li>
+              <li><span className="font-semibold text-orange-600 dark:text-orange-400">③ セル内の複数情報：</span>「120（先月比+8）」のように数値と注記が混在すると、ツール（Power BI・Python など）は数値を取り出す前処理が必要になり、書き方が少し変わるだけで前処理が壊れる。AI（Copilot・ChatGPT など）はある程度読み取れるが、大量データでは見落としや誤解釈が積み上がるリスクがある</li>
+            </ul>
+          </div>
+
+          <Accordion title="✅ 整然データに直すとどうなる？（クリックして確認）">
+            <p className="text-xs text-gray-500 dark:text-gray-400 mb-3">①②③ をすべて解消した整然データ版です。</p>
+            <div className="overflow-x-auto">
+              <table className="text-xs border-collapse w-full">
+                <thead>
+                  <tr className="bg-green-50 dark:bg-green-900/20">
+                    {['部署', '担当者', '売上（万円）', '前月比（万円）', 'ステータス'].map(h => (
+                      <th key={h} className="border border-green-200 dark:border-green-700 px-2 py-1 text-left">{h}</th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {[
+                    ['営業部', '田中', 120, '+8', '進行中'],
+                    ['営業部', '鈴木', 85, '−5', '進行中'],
+                    ['営業部', '山田', 200, '+15', '完了'],
+                  ].map((row, i) => (
+                    <tr key={i} className="even:bg-gray-50 dark:even:bg-gray-800/40">
+                      {row.map((c, j) => (
+                        <td key={j} className="border border-green-200 dark:border-green-700 px-2 py-1">{c}</td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <ul className="mt-3 text-xs space-y-1 text-gray-600 dark:text-gray-400">
+              <li>✅ <span className="font-semibold">① 結合を解除</span>：各行に「営業部」を明示し、フィルタ・集計が可能になった</li>
+              <li>✅ <span className="font-semibold">② 「↑」を実値に置換</span>：鈴木行のステータスを「進行中」と明示した</li>
+              <li>✅ <span className="font-semibold">③ 列を分離</span>：「120（先月比+8）」を「売上」と「前月比」の2列に分け、各セルが1値になった</li>
+            </ul>
+          </Accordion>
+
+          <div className="mt-4 p-4 rounded-lg bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-400">
+            <p className="text-sm font-semibold text-blue-800 dark:text-blue-300 mb-2">💡 雑然データが「問題になるとき・ならないとき」</p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
+              <div>
+                <p className="font-semibold text-gray-600 dark:text-gray-400 mb-1">問題にならないケース</p>
+                <ul className="space-y-1 text-gray-700 dark:text-gray-300 text-xs">
+                  <li>✅ 人に見せるだけで、解析ツールには通さない</li>
+                  <li>✅ 印刷・配布・プレゼン用の固定レポート</li>
+                </ul>
+              </div>
+              <div>
+                <p className="font-semibold text-gray-600 dark:text-gray-400 mb-1">問題になるケース</p>
+                <ul className="space-y-1 text-gray-700 dark:text-gray-300 text-xs">
+                  <li>❌ Power BI・Python・AI などで分析したい</li>
+                  <li>❌ データを集計・フィルタ・グラフ化したい</li>
+                </ul>
+              </div>
+            </div>
+            <p className="mt-3 text-xs text-blue-700 dark:text-blue-300">
+              <span className="font-semibold">実務上のポイント：</span>
+              「今は配布するだけ」でも、将来的に分析したくなる可能性があるなら、
+              <span className="font-semibold">「整然データに変換しやすい状態」</span>を保っておくことが重要です。
+              具体的には、セル結合しない・↑省略しない・1セル1値、の3点を守るだけで、後から Power BI や AI に通せる状態になります。
+            </p>
+          </div>
         </Section>
 
-        <Section title="1.3 整然データ（Tidy Data）の3つの原則">
-          <p className="mb-4 text-sm text-gray-500 dark:text-gray-400">データ科学者 Hadley Wickham が提唱した概念です。</p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-            <div className="p-3 rounded-lg bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-700">
-              <p className="text-2xl text-center mb-2">📋</p>
-              <p className="font-bold text-center text-blue-800 dark:text-blue-300 mb-3 text-sm">原則1：各行 = 1観測値</p>
-              <table className="text-xs border-collapse w-full mb-2">
-                <thead>
-                  <tr className="bg-blue-100 dark:bg-blue-800/60">
-                    <th className="border border-blue-200 dark:border-blue-700 px-1 py-0.5 text-left">タスク</th>
-                    <th className="border border-blue-200 dark:border-blue-700 px-1 py-0.5 text-left">月</th>
-                    <th className="border border-blue-200 dark:border-blue-700 px-1 py-0.5 text-left">工数</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr className="bg-yellow-50 dark:bg-yellow-900/20">
-                    <td className="border border-blue-200 dark:border-blue-700 px-1 py-0.5">営業</td>
-                    <td className="border border-blue-200 dark:border-blue-700 px-1 py-0.5">1月</td>
-                    <td className="border border-blue-200 dark:border-blue-700 px-1 py-0.5">10</td>
-                  </tr>
-                  <tr>
-                    <td className="border border-blue-200 dark:border-blue-700 px-1 py-0.5">営業</td>
-                    <td className="border border-blue-200 dark:border-blue-700 px-1 py-0.5">2月</td>
-                    <td className="border border-blue-200 dark:border-blue-700 px-1 py-0.5">12</td>
-                  </tr>
-                </tbody>
-              </table>
-              <p className="text-xs text-blue-600 dark:text-blue-400">↑ 黄色行 = 「営業×1月」という1事実</p>
+        <Section title="1.2 データ解析とは？">
+          <p className="mb-4">
+            データ解析とは、大量のデータから意味のある情報やパターンを抽出し、
+            ビジネスの意思決定を支援するプロセスです。
+            「人が見やすい形（雑然データ）」を「コンピュータが処理しやすい形（整然データ）」に
+            変換することが、その第一歩となります。
+          </p>
+          <div className="flex flex-col items-center gap-0">
+            <div className="w-full p-4 rounded-lg bg-red-50 dark:bg-red-900/20 border-2 border-red-200 dark:border-red-800 text-center">
+              <p className="font-bold text-red-800 dark:text-red-300">📊 生データ（雑然データ）</p>
+              <p className="text-xs text-red-600 dark:text-red-400 mt-1">月が列に並んだピボット形式・そのままでは分析しにくい</p>
             </div>
-
-            <div className="p-3 rounded-lg bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-700">
-              <p className="text-2xl text-center mb-2">🏷️</p>
-              <p className="font-bold text-center text-purple-800 dark:text-purple-300 mb-3 text-sm">原則2：各列 = 1変数</p>
-              <table className="text-xs border-collapse w-full mb-2">
-                <thead>
-                  <tr className="bg-purple-100 dark:bg-purple-800/60">
-                    <th className="border border-purple-200 dark:border-purple-700 px-1 py-0.5 text-left bg-yellow-100 dark:bg-yellow-900/40">タスク</th>
-                    <th className="border border-purple-200 dark:border-purple-700 px-1 py-0.5 text-left bg-yellow-100 dark:bg-yellow-900/40">月</th>
-                    <th className="border border-purple-200 dark:border-purple-700 px-1 py-0.5 text-left bg-yellow-100 dark:bg-yellow-900/40">工数</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td className="border border-purple-200 dark:border-purple-700 px-1 py-0.5">営業</td>
-                    <td className="border border-purple-200 dark:border-purple-700 px-1 py-0.5">1月</td>
-                    <td className="border border-purple-200 dark:border-purple-700 px-1 py-0.5">10</td>
-                  </tr>
-                  <tr>
-                    <td className="border border-purple-200 dark:border-purple-700 px-1 py-0.5">営業</td>
-                    <td className="border border-purple-200 dark:border-purple-700 px-1 py-0.5">2月</td>
-                    <td className="border border-purple-200 dark:border-purple-700 px-1 py-0.5">12</td>
-                  </tr>
-                </tbody>
-              </table>
-              <p className="text-xs text-purple-600 dark:text-purple-400">↑ 黄色列 = それぞれ1属性のみ</p>
+            <div className="flex flex-col items-center py-1">
+              <div className="w-0.5 h-4 bg-gray-300 dark:bg-gray-600" />
+              <span className="text-lg leading-none text-gray-400">▼</span>
+              <p className="text-xs font-medium text-gray-500 dark:text-gray-400 my-0.5">データ整形・加工（Power Query）</p>
+              <span className="text-lg leading-none text-gray-400">▼</span>
+              <div className="w-0.5 h-4 bg-gray-300 dark:bg-gray-600" />
             </div>
-
-            <div className="p-3 rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-700">
-              <p className="text-2xl text-center mb-2">🔢</p>
-              <p className="font-bold text-center text-green-800 dark:text-green-300 mb-3 text-sm">原則3：各セル = 1値</p>
-              <table className="text-xs border-collapse w-full mb-2">
-                <thead>
-                  <tr className="bg-green-100 dark:bg-green-800/60">
-                    <th className="border border-green-200 dark:border-green-700 px-1 py-0.5 text-left">タスク</th>
-                    <th className="border border-green-200 dark:border-green-700 px-1 py-0.5 text-left">月</th>
-                    <th className="border border-green-200 dark:border-green-700 px-1 py-0.5 text-left">工数</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td className="border border-green-200 dark:border-green-700 px-1 py-0.5">営業</td>
-                    <td className="border border-green-200 dark:border-green-700 px-1 py-0.5">1月</td>
-                    <td className="border border-green-200 dark:border-green-700 px-1 py-0.5 bg-yellow-50 dark:bg-yellow-900/20 font-bold">10</td>
-                  </tr>
-                  <tr>
-                    <td className="border border-green-200 dark:border-green-700 px-1 py-0.5">営業</td>
-                    <td className="border border-green-200 dark:border-green-700 px-1 py-0.5">2月</td>
-                    <td className="border border-green-200 dark:border-green-700 px-1 py-0.5 bg-yellow-50 dark:bg-yellow-900/20 font-bold">12</td>
-                  </tr>
-                </tbody>
-              </table>
-              <p className="text-xs text-green-600 dark:text-green-400">↑ 黄色セル = 単一の数値のみ</p>
+            <div className="w-full p-4 rounded-lg bg-blue-50 dark:bg-blue-900/20 border-2 border-blue-200 dark:border-blue-800 text-center">
+              <p className="font-bold text-blue-800 dark:text-blue-300">🗂️ 整理されたデータ（整然データ）</p>
+              <p className="text-xs text-blue-600 dark:text-blue-400 mt-1">1行 = 1観測値のロング形式・BI ツールが処理しやすい</p>
+            </div>
+            <div className="flex flex-col items-center py-1">
+              <div className="w-0.5 h-4 bg-gray-300 dark:bg-gray-600" />
+              <span className="text-lg leading-none text-gray-400">▼</span>
+              <p className="text-xs font-medium text-gray-500 dark:text-gray-400 my-0.5">分析・可視化</p>
+              <span className="text-lg leading-none text-gray-400">▼</span>
+              <div className="w-0.5 h-4 bg-gray-300 dark:bg-gray-600" />
+            </div>
+            <div className="w-full p-4 rounded-lg bg-green-50 dark:bg-green-900/20 border-2 border-green-200 dark:border-green-800 text-center">
+              <p className="font-bold text-green-800 dark:text-green-300">💡 洞察・ビジネス上の価値</p>
+              <p className="text-xs text-green-600 dark:text-green-400 mt-1">データドリブンな意思決定の実現</p>
             </div>
           </div>
         </Section>
 
-        <Section title="1.4 なぜ整然データが重要か？">
+        <Section title="1.3 なぜ整然データが重要か？">
           <ul className="space-y-2 text-sm">
             <li>✅ Power BI、Tableau などの BI ツールは整然データを想定して設計されている</li>
             <li>✅ SQL や Python などのプログラミング言語との相性が良い</li>
@@ -410,22 +438,10 @@ export const steps: Step[] = [
             <p className="text-sm text-purple-700 dark:text-purple-300 mb-3">
               整然データ、もしくは簡単に整然データに変換できる形にしておくと、AI がデータの構造を推測する手間が減り、<strong>より的確な分析結果が得られやすくなります。</strong>
             </p>
-            <p className="text-xs font-semibold text-purple-700 dark:text-purple-300 mb-2">AI が特に扱いにくいデータの例：</p>
-            <div className="space-y-2">
-              <div className="bg-white dark:bg-gray-800 rounded p-2 text-xs">
-                <span className="font-semibold text-red-600 dark:text-red-400">① セルに複数の情報が混在</span>
-                <div className="mt-1 font-mono bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">15（先月比+3）</div>
-                <div className="text-gray-600 dark:text-gray-400 mt-1">数値と注記が混在していると、AI はどちらが集計対象か判断しにくくなります</div>
-              </div>
-              <div className="bg-white dark:bg-gray-800 rounded p-2 text-xs">
-                <span className="font-semibold text-red-600 dark:text-red-400">② 結合セル</span>
-                <div className="text-gray-600 dark:text-gray-400 mt-1">複数の行・列にまたがるセル結合は、テキストに変換すると構造が崩れ、どのデータがどの項目に属するか曖昧になります</div>
-              </div>
-            </div>
           </div>
         </Section>
 
-        <Section title="1.5 このチュートリアルでの実践">
+        <Section title="1.4 このチュートリアルでの実践">
           <p className="text-sm">
             このチュートリアルで使用するサンプルデータは、意図的に
             <strong>雑然データ（ピボット形式）</strong>として提供しています。
@@ -1448,6 +1464,93 @@ export const steps: Step[] = [
           <p className="text-sm text-blue-800 dark:text-blue-300">
             メインのチュートリアルはセクション8で完了しています。以下は、さらに学習したい方向けのオプションコンテンツです。
           </p>
+        </div>
+
+        <div>
+          <h3 className="font-semibold text-gray-800 dark:text-gray-100 mb-3">📚 整然データの3つの原則（Tidy Data）</h3>
+          <p className="text-sm text-gray-500 dark:text-gray-400 mb-3">データ科学者 Hadley Wickham が提唱した概念です。実務では直感的に理解できれば十分ですが、より深く理解したい方はこちらを参照してください。</p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-6">
+            <div className="p-3 rounded-lg bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-700">
+              <p className="text-2xl text-center mb-2">📋</p>
+              <p className="font-bold text-center text-blue-800 dark:text-blue-300 mb-3 text-sm">原則1：各行 = 1観測値</p>
+              <table className="text-xs border-collapse w-full mb-2">
+                <thead>
+                  <tr className="bg-blue-100 dark:bg-blue-800/60">
+                    <th className="border border-blue-200 dark:border-blue-700 px-1 py-0.5 text-left">タスク</th>
+                    <th className="border border-blue-200 dark:border-blue-700 px-1 py-0.5 text-left">月</th>
+                    <th className="border border-blue-200 dark:border-blue-700 px-1 py-0.5 text-left">工数</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr className="bg-yellow-50 dark:bg-yellow-900/20">
+                    <td className="border border-blue-200 dark:border-blue-700 px-1 py-0.5">営業</td>
+                    <td className="border border-blue-200 dark:border-blue-700 px-1 py-0.5">1月</td>
+                    <td className="border border-blue-200 dark:border-blue-700 px-1 py-0.5">10</td>
+                  </tr>
+                  <tr>
+                    <td className="border border-blue-200 dark:border-blue-700 px-1 py-0.5">営業</td>
+                    <td className="border border-blue-200 dark:border-blue-700 px-1 py-0.5">2月</td>
+                    <td className="border border-blue-200 dark:border-blue-700 px-1 py-0.5">12</td>
+                  </tr>
+                </tbody>
+              </table>
+              <p className="text-xs text-blue-600 dark:text-blue-400">↑ 黄色行 = 「営業×1月」という1事実</p>
+            </div>
+
+            <div className="p-3 rounded-lg bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-700">
+              <p className="text-2xl text-center mb-2">🏷️</p>
+              <p className="font-bold text-center text-purple-800 dark:text-purple-300 mb-3 text-sm">原則2：各列 = 1変数</p>
+              <table className="text-xs border-collapse w-full mb-2">
+                <thead>
+                  <tr className="bg-purple-100 dark:bg-purple-800/60">
+                    <th className="border border-purple-200 dark:border-purple-700 px-1 py-0.5 text-left bg-yellow-100 dark:bg-yellow-900/40">タスク</th>
+                    <th className="border border-purple-200 dark:border-purple-700 px-1 py-0.5 text-left bg-yellow-100 dark:bg-yellow-900/40">月</th>
+                    <th className="border border-purple-200 dark:border-purple-700 px-1 py-0.5 text-left bg-yellow-100 dark:bg-yellow-900/40">工数</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td className="border border-purple-200 dark:border-purple-700 px-1 py-0.5">営業</td>
+                    <td className="border border-purple-200 dark:border-purple-700 px-1 py-0.5">1月</td>
+                    <td className="border border-purple-200 dark:border-purple-700 px-1 py-0.5">10</td>
+                  </tr>
+                  <tr>
+                    <td className="border border-purple-200 dark:border-purple-700 px-1 py-0.5">営業</td>
+                    <td className="border border-purple-200 dark:border-purple-700 px-1 py-0.5">2月</td>
+                    <td className="border border-purple-200 dark:border-purple-700 px-1 py-0.5">12</td>
+                  </tr>
+                </tbody>
+              </table>
+              <p className="text-xs text-purple-600 dark:text-purple-400">↑ 黄色列 = それぞれ1属性のみ</p>
+            </div>
+
+            <div className="p-3 rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-700">
+              <p className="text-2xl text-center mb-2">🔢</p>
+              <p className="font-bold text-center text-green-800 dark:text-green-300 mb-3 text-sm">原則3：各セル = 1値</p>
+              <table className="text-xs border-collapse w-full mb-2">
+                <thead>
+                  <tr className="bg-green-100 dark:bg-green-800/60">
+                    <th className="border border-green-200 dark:border-green-700 px-1 py-0.5 text-left">タスク</th>
+                    <th className="border border-green-200 dark:border-green-700 px-1 py-0.5 text-left">月</th>
+                    <th className="border border-green-200 dark:border-green-700 px-1 py-0.5 text-left">工数</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td className="border border-green-200 dark:border-green-700 px-1 py-0.5">営業</td>
+                    <td className="border border-green-200 dark:border-green-700 px-1 py-0.5">1月</td>
+                    <td className="border border-green-200 dark:border-green-700 px-1 py-0.5 bg-yellow-50 dark:bg-yellow-900/20 font-bold">10</td>
+                  </tr>
+                  <tr>
+                    <td className="border border-green-200 dark:border-green-700 px-1 py-0.5">営業</td>
+                    <td className="border border-green-200 dark:border-green-700 px-1 py-0.5">2月</td>
+                    <td className="border border-green-200 dark:border-green-700 px-1 py-0.5 bg-yellow-50 dark:bg-yellow-900/20 font-bold">12</td>
+                  </tr>
+                </tbody>
+              </table>
+              <p className="text-xs text-green-600 dark:text-green-400">↑ 黄色セル = 単一の数値のみ</p>
+            </div>
+          </div>
         </div>
 
         <div>
