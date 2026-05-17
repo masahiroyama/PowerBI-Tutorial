@@ -912,7 +912,8 @@ export const steps: Step[] = [
         <Section title="6.1 データ構造について">
           <p className="text-sm mb-4">
             準備したサンプルデータ（テーブル名：<code className="bg-gray-100 dark:bg-gray-800 px-1 rounded">ProjectTasks</code>）は
-            ピボット形式（雑然データ）です。Power BI での分析には不適切なため、整然データに変換します。
+            <strong>ピボット形式</strong>（月などの項目が列として横に並ぶ形式。雑然データとも呼ぶ）です。
+            Power BI での分析には不適切なため、整然データに変換します。
           </p>
           <div className="flex flex-col md:flex-row items-center gap-3">
             <div className="flex-1 w-full rounded-lg border-2 border-red-200 dark:border-red-700 overflow-hidden">
