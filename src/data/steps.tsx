@@ -247,9 +247,11 @@ export const steps: Step[] = [
                   </tbody>
                 </table>
               </div>
-              <ul className="text-xs px-3 pb-3 space-y-1 text-red-700 dark:text-red-400">
-                <li>・BI ツールでの分析に前処理が必要</li>
-                <li>・全期間の集計に複数列を参照する必要がある</li>
+              <ul className="text-xs px-3 pb-3 space-y-1.5 text-red-700 dark:text-red-400">
+                <li><span className="font-semibold">① 月が「列名」になっている：</span>本来はデータの一変数なのに、列ヘッダーに埋め込まれている</li>
+                <li><span className="font-semibold">② 1行に複数の観測値が混在：</span>「営業報告×1月」「×2月」…の5件が1行に詰まっている</li>
+                <li><span className="font-semibold">③ 月が増えると列が増える：</span>データ範囲の変化が表の構造変化を引き起こす</li>
+                <li><span className="font-semibold">④ 集計・フィルタが煩雑：</span>全期間合計には全列を個別に参照する必要がある</li>
               </ul>
             </div>
 
@@ -291,6 +293,103 @@ export const steps: Step[] = [
                 <li>・新しい月の追加が行を増やすだけ</li>
               </ul>
             </div>
+          </div>
+
+          {/* SVG: ピボット形式の4つの特徴を視覚的に説明 */}
+          <div className="mt-4 p-3 rounded-lg bg-red-50 dark:bg-red-900/10 border border-red-200 dark:border-red-800">
+            <p className="text-xs font-semibold text-red-700 dark:text-red-400 mb-2">🔍 ピボット形式（雑然データ）の構造と特徴</p>
+            <svg viewBox="0 0 635 235" width="100%" xmlns="http://www.w3.org/2000/svg" style={{fontFamily: 'sans-serif'}}>
+              <defs>
+                <marker id="sv-a1" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="#d97706"/></marker>
+                <marker id="sv-a2" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="#dc2626"/></marker>
+                <marker id="sv-a3" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="#6b7280"/></marker>
+                <marker id="sv-a4" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="#7c3aed"/></marker>
+              </defs>
+
+              {/* ① callout: months as column names */}
+              <rect x="93" y="4" width="215" height="22" fill="#fef3c7" stroke="#f59e0b" strokeWidth="1.5" rx="3"/>
+              <text x="200" y="19" textAnchor="middle" fontSize="10" fill="#92400e" fontWeight="bold">① 月がデータでなく「列名」になっている</text>
+              <line x1="200" y1="26" x2="200" y2="38" stroke="#d97706" strokeWidth="1.5" markerEnd="url(#sv-a1)"/>
+
+              {/* Table header (y=40-64) */}
+              <rect x="22" y="40" width="80" height="24" fill="#fca5a5" stroke="#ef4444" strokeWidth="1"/>
+              <text x="62" y="56" textAnchor="middle" fontSize="10" fontWeight="bold" fill="#7f1d1d">タスク</text>
+              <rect x="102" y="40" width="54" height="24" fill="#fca5a5" stroke="#ef4444" strokeWidth="1"/>
+              <text x="129" y="56" textAnchor="middle" fontSize="10" fontWeight="bold" fill="#7f1d1d">1月</text>
+              <rect x="156" y="40" width="54" height="24" fill="#fca5a5" stroke="#ef4444" strokeWidth="1"/>
+              <text x="183" y="56" textAnchor="middle" fontSize="10" fontWeight="bold" fill="#7f1d1d">2月</text>
+              <rect x="210" y="40" width="54" height="24" fill="#fca5a5" stroke="#ef4444" strokeWidth="1"/>
+              <text x="237" y="56" textAnchor="middle" fontSize="10" fontWeight="bold" fill="#7f1d1d">3月</text>
+              <rect x="264" y="40" width="54" height="24" fill="#fca5a5" stroke="#ef4444" strokeWidth="1"/>
+              <text x="291" y="56" textAnchor="middle" fontSize="10" fontWeight="bold" fill="#7f1d1d">4月</text>
+              <rect x="318" y="40" width="54" height="24" fill="#fca5a5" stroke="#ef4444" strokeWidth="1"/>
+              <text x="345" y="56" textAnchor="middle" fontSize="10" fontWeight="bold" fill="#7f1d1d">5月</text>
+
+              {/* Row 1 (y=64-88): 営業報告 — highlighted */}
+              <rect x="22" y="64" width="80" height="24" fill="#fff7f7" stroke="#ef4444" strokeWidth="1"/>
+              <text x="62" y="80" textAnchor="middle" fontSize="9" fill="#374151">営業報告</text>
+              {['10','12','11','13','14'].map((v,i) => (
+                <g key={i}>
+                  <rect x={102+i*54} y="64" width="54" height="24" fill="#fef9c3" stroke="#ef4444" strokeWidth="1"/>
+                  <text x={129+i*54} y="80" textAnchor="middle" fontSize="10" fill="#374151">{v}</text>
+                </g>
+              ))}
+
+              {/* Row 2 (y=88-112): データ分析 */}
+              <rect x="22" y="88" width="80" height="24" fill="#fff7f7" stroke="#ef4444" strokeWidth="1"/>
+              <text x="62" y="104" textAnchor="middle" fontSize="9" fill="#374151">データ分析</text>
+              {['8','8','9','7','8'].map((v,i) => (
+                <g key={i}>
+                  <rect x={102+i*54} y="88" width="54" height="24" fill="#fff7f7" stroke="#ef4444" strokeWidth="1"/>
+                  <text x={129+i*54} y="104" textAnchor="middle" fontSize="10" fill="#374151">{v}</text>
+                </g>
+              ))}
+
+              {/* Row 3 (y=112-136): マーケ */}
+              <rect x="22" y="112" width="80" height="24" fill="#fff7f7" stroke="#ef4444" strokeWidth="1"/>
+              <text x="62" y="128" textAnchor="middle" fontSize="9" fill="#374151">マーケ…</text>
+              {['15','14','16','15','17'].map((v,i) => (
+                <g key={i}>
+                  <rect x={102+i*54} y="112" width="54" height="24" fill="#fff7f7" stroke="#ef4444" strokeWidth="1"/>
+                  <text x={129+i*54} y="128" textAnchor="middle" fontSize="10" fill="#374151">{v}</text>
+                </g>
+              ))}
+
+              {/* Ghost column (6月?) — dashed */}
+              <rect x="372" y="40" width="54" height="96" fill="none" stroke="#9ca3af" strokeWidth="1.5" strokeDasharray="4,3" rx="2"/>
+              <text x="399" y="57" textAnchor="middle" fontSize="10" fill="#9ca3af">6月?</text>
+              <text x="399" y="81" textAnchor="middle" fontSize="9" fill="#d1d5db">…</text>
+              <text x="399" y="105" textAnchor="middle" fontSize="9" fill="#d1d5db">…</text>
+              <text x="399" y="129" textAnchor="middle" fontSize="9" fill="#d1d5db">…</text>
+
+              {/* ② bracket on row 1 */}
+              <line x1="374" y1="66" x2="382" y2="66" stroke="#dc2626" strokeWidth="1.5"/>
+              <line x1="374" y1="88" x2="382" y2="88" stroke="#dc2626" strokeWidth="1.5"/>
+              <line x1="382" y1="66" x2="382" y2="88" stroke="#dc2626" strokeWidth="1.5"/>
+              <path d="M382,77 L428,77 L432,77" stroke="#dc2626" strokeWidth="1.5" fill="none" markerEnd="url(#sv-a2)"/>
+              <rect x="433" y="62" width="186" height="34" fill="#fef2f2" stroke="#dc2626" strokeWidth="1.5" rx="3"/>
+              <text x="526" y="77" textAnchor="middle" fontSize="10" fill="#991b1b" fontWeight="bold">② 1行に5ヶ月分の値が混在</text>
+              <text x="526" y="90" textAnchor="middle" fontSize="9.5" fill="#991b1b">（1行 ≠ 1つの観測値）</text>
+
+              {/* ③ arrow from ghost col down */}
+              <line x1="399" y1="138" x2="399" y2="150" stroke="#9ca3af" strokeWidth="1.5" strokeDasharray="3,2" markerEnd="url(#sv-a3)"/>
+              <rect x="358" y="152" width="249" height="22" fill="#f9fafb" stroke="#9ca3af" strokeWidth="1.5" rx="3"/>
+              <text x="482" y="167" textAnchor="middle" fontSize="10" fill="#4b5563">③ 月が増えるたびに列の追加が必要になる</text>
+
+              {/* ④ horizontal span under row data */}
+              <line x1="102" y1="140" x2="372" y2="140" stroke="#7c3aed" strokeWidth="1.5"/>
+              <line x1="102" y1="135" x2="102" y2="145" stroke="#7c3aed" strokeWidth="1.5"/>
+              <line x1="372" y1="135" x2="372" y2="145" stroke="#7c3aed" strokeWidth="1.5"/>
+              <line x1="237" y1="140" x2="237" y2="150" stroke="#7c3aed" strokeWidth="1.5" markerEnd="url(#sv-a4)"/>
+              <rect x="22" y="152" width="280" height="22" fill="#ede9fe" stroke="#7c3aed" strokeWidth="1.5" rx="3"/>
+              <text x="162" y="167" textAnchor="middle" fontSize="10" fill="#4c1d95">④ 集計には全列（全月）を参照する必要がある</text>
+
+              {/* Summary box */}
+              <rect x="22" y="182" width="600" height="46" fill="#fff7ed" stroke="#f97316" strokeWidth="1" rx="4"/>
+              <text x="32" y="197" fontSize="10" fontWeight="bold" fill="#c2410c">このサンプルデータは？</text>
+              <text x="32" y="212" fontSize="9.5" fill="#7c2d12">プロジェクト5×タスク6＝30行、月列36ヶ月 → 合計38列のピボット形式。§5でピボット解除して整然データに変換します。</text>
+              <text x="32" y="224" fontSize="9.5" fill="#7c2d12">Power BI はピボット解除後のデータを使ってグラフ・集計を行います。</text>
+            </svg>
           </div>
 
           <div className="mt-4 rounded-lg border-2 border-red-300 dark:border-red-700 overflow-hidden">
