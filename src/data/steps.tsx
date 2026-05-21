@@ -102,9 +102,9 @@ export const steps: Step[] = [
                       ['プロジェクトA', '要件定義', 14, 8, 3, '…', 11],
                       ['プロジェクトA', '設計', 7, 19, 15, '…', 6],
                       ['プロジェクトA', '開発', 17, 5, 12, '…', 9],
-                      ['プロジェクトB', '市場調査', 11, 13, 7, '…', 14],
+                      ['プロジェクトB', '課題設定', 11, 13, 7, '…', 14],
                       ['…', '…', '…', '…', '…', '…', '…'],
-                      ['プロジェクトC', '次期計画', 9, 16, 4, '…', 12],
+                      ['プロジェクトC', '設計', 9, 16, 4, '…', 12],
                     ].map((row, i) => (
                       <tr key={i} className={i % 2 === 1 ? 'bg-gray-50 dark:bg-gray-800/50' : ''}>
                         {row.map((cell, j) => (
@@ -116,7 +116,7 @@ export const steps: Step[] = [
                 </table>
               </div>
               <div className="mb-3 p-2 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-700 rounded text-xs text-blue-700 dark:text-blue-300">
-                <span className="font-semibold">ℹ️ データ構成：</span> プロジェクト 3種 × タスク 10種 = 計 30行、日付列は 2022/01/01〜2024/12/01 の36ヶ月分（合計 38列）
+                <span className="font-semibold">ℹ️ データ構成：</span> プロジェクト 5種 × タスク 6種 = 計 30行、日付列は 2022/01/01〜2024/12/01 の36ヶ月分（合計 38列）
               </div>
 
               <p className="mt-3 text-sm text-gray-600 dark:text-gray-400">
@@ -838,7 +838,7 @@ export const steps: Step[] = [
 
             {/* ③ ナビゲーター */}
             <div>
-              <p className="font-semibold mb-2">③ ナビゲーターで「ProjectTasks」にチェックを入れて「読み込む」</p>
+              <p className="font-semibold mb-2">③ ナビゲーター（ファイル内のテーブル一覧）で「ProjectTasks」にチェックを入れて「データの変換」</p>
               <div className="border-2 border-gray-400 dark:border-gray-500 rounded-lg overflow-hidden shadow-md text-xs bg-white dark:bg-gray-800">
                 <div className="bg-gray-200 dark:bg-gray-700 px-3 py-2 font-bold text-gray-700 dark:text-gray-200 text-sm">ナビゲーター</div>
                 <div className="flex">
@@ -867,14 +867,14 @@ export const steps: Step[] = [
                     <table className="text-xs border-collapse w-full">
                       <thead>
                         <tr className="bg-blue-50 dark:bg-blue-900/30">
-                          {['タスク','1月','2月','3月'].map(h => (
+                          {['プロジェクト','タスク','2022/01/01','2022/02/01'].map(h => (
                             <th key={h} className="border border-gray-300 dark:border-gray-600 px-1 py-0.5 text-left">{h}</th>
                           ))}
                           <th className="border border-gray-300 dark:border-gray-600 px-1 py-0.5">…</th>
                         </tr>
                       </thead>
                       <tbody>
-                        {[['営業報告','10','12','11'],['データ分析','8','8','9'],['…','…','…','…']].map((row, i) => (
+                        {[['プロジェクトA','要件定義','14','8'],['プロジェクトA','設計','7','19'],['…','…','…','…']].map((row, i) => (
                           <tr key={i}>{row.map((c,j) => <td key={j} className="border border-gray-300 dark:border-gray-600 px-1 py-0.5 text-gray-600 dark:text-gray-300">{c}</td>)}
                           <td className="border border-gray-300 dark:border-gray-600 px-1 py-0.5 text-gray-400">…</td></tr>
                         ))}
@@ -883,15 +883,15 @@ export const steps: Step[] = [
                   </div>
                 </div>
                 <div className="flex justify-end gap-2 p-2 border-t border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-800">
-                  <button className="px-3 py-1 text-xs border border-gray-300 dark:border-gray-600 rounded text-gray-500 dark:text-gray-400">データ変換</button>
-                  <button className="px-3 py-1 text-xs bg-blue-600 text-white rounded font-bold">読み込む</button>
+                  <button className="px-3 py-1 text-xs bg-blue-600 text-white rounded font-bold">データの変換</button>
+                  <button className="px-3 py-1 text-xs border border-gray-300 dark:border-gray-600 rounded text-gray-500 dark:text-gray-400">読み込む</button>
                   <button className="px-3 py-1 text-xs border border-gray-300 dark:border-gray-600 rounded text-gray-500 dark:text-gray-400">キャンセル</button>
                 </div>
               </div>
             </div>
 
             <div className="p-3 bg-green-50 dark:bg-green-900/20 border border-green-300 dark:border-green-700 rounded text-sm">
-              ✅ 「読み込む」をクリックすると、タスク別の月ごとの工数データが Power BI に読み込まれます。
+              ✅ 「データの変換」をクリックすると Power Query エディタが開き、データの加工ができる状態になります。
             </div>
           </div>
         </Section>
@@ -919,25 +919,25 @@ export const steps: Step[] = [
             <div className="flex-1 w-full rounded-lg border-2 border-red-200 dark:border-red-700 overflow-hidden">
               <div className="bg-red-50 dark:bg-red-900/20 px-3 py-1.5">
                 <p className="text-xs font-bold text-red-700 dark:text-red-300">変換前（ワイド形式）</p>
-                <p className="text-xs text-red-500 dark:text-red-400">月が列に並んでいる</p>
+                <p className="text-xs text-red-500 dark:text-red-400">日付が列に並んでいる</p>
               </div>
               <div className="p-2 overflow-x-auto">
                 <table className="text-xs border-collapse w-full">
                   <thead>
                     <tr className="bg-red-50 dark:bg-red-900/20">
-                      {['タスク', '1月', '2月', '3月', '4月', '5月'].map(h => (
-                        <th key={h} className="border border-red-200 dark:border-red-700 px-2 py-1 text-left">{h}</th>
+                      {['プロジェクト', 'タスク', '2022/01/01', '2022/02/01', '…'].map(h => (
+                        <th key={h} className="border border-red-200 dark:border-red-700 px-2 py-1 text-left whitespace-nowrap">{h}</th>
                       ))}
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
-                      {['営業報告', 10, 12, 11, 13, 14].map((c, i) => (
-                        <td key={i} className="border border-red-200 dark:border-red-700 px-2 py-1">{c}</td>
+                      {['プロジェクトA', '要件定義', 14, 8, '…'].map((c, i) => (
+                        <td key={i} className="border border-red-200 dark:border-red-700 px-2 py-1 whitespace-nowrap">{c}</td>
                       ))}
                     </tr>
                     <tr>
-                      <td className="border border-red-200 dark:border-red-700 px-2 py-1 text-gray-400" colSpan={6}>…</td>
+                      <td className="border border-red-200 dark:border-red-700 px-2 py-1 text-gray-400" colSpan={5}>…</td>
                     </tr>
                   </tbody>
                 </table>
@@ -953,27 +953,26 @@ export const steps: Step[] = [
             <div className="flex-1 w-full rounded-lg border-2 border-green-200 dark:border-green-700 overflow-hidden">
               <div className="bg-green-50 dark:bg-green-900/20 px-3 py-1.5">
                 <p className="text-xs font-bold text-green-700 dark:text-green-300">変換後（ロング形式）</p>
-                <p className="text-xs text-green-500 dark:text-green-400">月が行として展開される</p>
+                <p className="text-xs text-green-500 dark:text-green-400">日付が行として展開される</p>
               </div>
               <div className="p-2 overflow-x-auto">
                 <table className="text-xs border-collapse w-full">
                   <thead>
                     <tr className="bg-green-50 dark:bg-green-900/20">
-                      {['タスク', '月', '工数'].map(h => (
-                        <th key={h} className="border border-green-200 dark:border-green-700 px-2 py-1 text-left">{h}</th>
+                      {['プロジェクト', 'タスク', '月', '工数'].map(h => (
+                        <th key={h} className="border border-green-200 dark:border-green-700 px-2 py-1 text-left whitespace-nowrap">{h}</th>
                       ))}
                     </tr>
                   </thead>
                   <tbody>
                     {[
-                      ['営業報告', '1月', 10],
-                      ['営業報告', '2月', 12],
-                      ['営業報告', '3月', 11],
-                      ['…', '…', '…'],
+                      ['プロジェクトA', '要件定義', '2022/01/01', 14],
+                      ['プロジェクトA', '要件定義', '2022/02/01', 8],
+                      ['…', '…', '…', '…'],
                     ].map((row, i) => (
                       <tr key={i}>
                         {row.map((c, j) => (
-                          <td key={j} className="border border-green-200 dark:border-green-700 px-2 py-1">{c}</td>
+                          <td key={j} className="border border-green-200 dark:border-green-700 px-2 py-1 whitespace-nowrap">{c}</td>
                         ))}
                       </tr>
                     ))}
@@ -1010,14 +1009,14 @@ export const steps: Step[] = [
                     <table className="text-xs border-collapse">
                       <thead>
                         <tr className="bg-gray-100 dark:bg-gray-700">
-                          {['タスク','1月','2月','3月','4月','5月'].map(h => (
-                            <th key={h} className="border border-gray-300 dark:border-gray-600 px-2 py-1 text-left font-semibold">{h}</th>
+                          {['プロジェクト','タスク','2022/01/01','2022/02/01','…'].map(h => (
+                            <th key={h} className="border border-gray-300 dark:border-gray-600 px-2 py-1 text-left font-semibold whitespace-nowrap">{h}</th>
                           ))}
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>{['営業報告','10','12','11','13','14'].map((c,i) => <td key={i} className="border border-gray-300 dark:border-gray-600 px-2 py-0.5">{c}</td>)}</tr>
-                        <tr className="bg-gray-50 dark:bg-gray-800">{['…','…','…','…','…','…'].map((c,i) => <td key={i} className="border border-gray-300 dark:border-gray-600 px-2 py-0.5 text-gray-400">{c}</td>)}</tr>
+                        <tr>{['プロジェクトA','要件定義','14','8','…'].map((c,i) => <td key={i} className="border border-gray-300 dark:border-gray-600 px-2 py-0.5 whitespace-nowrap">{c}</td>)}</tr>
+                        <tr className="bg-gray-50 dark:bg-gray-800">{['…','…','…','…','…'].map((c,i) => <td key={i} className="border border-gray-300 dark:border-gray-600 px-2 py-0.5 text-gray-400">{c}</td>)}</tr>
                       </tbody>
                     </table>
                   </div>
@@ -1042,44 +1041,45 @@ export const steps: Step[] = [
             <div className="p-3 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg">
               <p className="font-semibold text-green-800 dark:text-green-300 mb-3">✅ 推奨手順：「他の列のピボット解除」を使う方法</p>
 
-              {/* 手順1: 右クリック */}
+              {/* 手順1: Ctrl+クリックで2列選択 → 右クリック */}
               <div className="mb-3">
-                <p className="font-medium mb-2">① 「タスク」列のヘッダーを右クリック</p>
+                <p className="font-medium mb-2">① 「プロジェクト」列をクリック、続けて <strong>Ctrl+クリック</strong> で「タスク」列も選択（2列同時選択）</p>
+                <p className="font-medium mb-2">② いずれかの列ヘッダーを右クリック → 「他の列のピボット解除」</p>
                 <div className="border border-gray-300 dark:border-gray-600 rounded overflow-hidden text-xs bg-white dark:bg-gray-900 max-w-md">
                   <table className="w-full border-collapse">
                     <thead>
                       <tr>
+                        <th className="border border-gray-300 dark:border-gray-600 px-2 py-1.5 text-left bg-blue-100 dark:bg-blue-900/40 text-blue-800 dark:text-blue-200 font-bold cursor-pointer">
+                          プロジェクト <span className="text-blue-500">✓</span>
+                        </th>
                         <th className="border border-gray-300 dark:border-gray-600 px-2 py-1.5 text-left bg-blue-100 dark:bg-blue-900/40 text-blue-800 dark:text-blue-200 font-bold cursor-pointer relative">
-                          タスク
-                          <span className="ml-1 text-blue-500">↓</span>
-                          <span className="absolute -right-1 top-0 bg-white dark:bg-gray-800 border border-gray-400 dark:border-gray-500 rounded shadow-lg p-1 text-left z-10 whitespace-nowrap" style={{minWidth:'10rem'}}>
+                          タスク <span className="text-blue-500">✓</span>
+                          <span className="absolute left-0 top-full bg-white dark:bg-gray-800 border border-gray-400 dark:border-gray-500 rounded shadow-lg p-1 text-left z-10 whitespace-nowrap" style={{minWidth:'10rem'}}>
                             <div className="py-0.5 px-2 text-gray-500">フィルター</div>
                             <div className="py-0.5 px-2 text-gray-500">列の削除</div>
-                            <div className="py-0.5 px-2 text-gray-500">列の複製</div>
                             <div className="py-0.5 px-2 font-bold text-green-700 dark:text-green-400 bg-green-50 dark:bg-green-900/30">他の列のピボット解除 ←</div>
-                            <div className="py-0.5 px-2 text-gray-500">列のピボット解除</div>
                           </span>
                         </th>
-                        {['1月','2月','3月','4月','5月'].map(h => (
-                          <th key={h} className="border border-gray-300 dark:border-gray-600 px-2 py-1.5 text-left bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300">{h}</th>
+                        {['2022/01/01','2022/02/01','…'].map(h => (
+                          <th key={h} className="border border-gray-300 dark:border-gray-600 px-2 py-1.5 text-left bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 whitespace-nowrap">{h}</th>
                         ))}
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>{['営業報告','10','12','11','13','14'].map((c,i) => <td key={i} className="border border-gray-300 dark:border-gray-600 px-2 py-0.5">{c}</td>)}</tr>
+                      <tr>{['プロジェクトA','要件定義','14','8','…'].map((c,i) => <td key={i} className="border border-gray-300 dark:border-gray-600 px-2 py-0.5 whitespace-nowrap">{c}</td>)}</tr>
                     </tbody>
                   </table>
                 </div>
               </div>
 
-              <p className="text-green-700 dark:text-green-400 text-xs">将来6月・7月などの列が追加されても自動的に処理されるため実務向きです。</p>
+              <p className="text-green-700 dark:text-green-400 text-xs">将来さらに月の列が追加されても自動的に処理されるため実務向きです。</p>
             </div>
 
             {/* 別の方法 */}
             <div className="p-3 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg">
               <p className="font-semibold text-gray-600 dark:text-gray-400 mb-2">別の方法：列を手動で選択する方法</p>
               <ol className="space-y-1 list-decimal list-inside ml-2 text-gray-600 dark:text-gray-400">
-                <li>「1月」の列ヘッダーをクリック → Shift を押しながら「5月」をクリック（月の列をすべて選択）</li>
+                <li>「2022/01/01」列ヘッダーをクリック → Shift を押しながら「2024/12/01」をクリック（全日付列をすべて選択）</li>
                 <li><strong className="text-gray-700 dark:text-gray-300">「変換」</strong> タブ → <strong className="text-gray-700 dark:text-gray-300">「列のピボット解除」</strong> をクリック</li>
               </ol>
             </div>
@@ -1090,7 +1090,7 @@ export const steps: Step[] = [
           <div className="space-y-3 text-sm">
             <div>
               <p className="font-semibold mb-2">列のリネーム</p>
-              <p>ピボット解除後に「属性」と「値」という列が自動生成されます：</p>
+              <p>ピボット解除後に「属性」と「値」という列が自動生成されます。これは、ピボット解除によって「元の列名（2022/01/01 など）」が「属性」列に、「元のセルの数値」が「値」列に格納されるためです：</p>
               <ul className="mt-1 space-y-1 ml-4">
                 <li>・「属性」を右クリック → <strong>「名前変更」</strong> → 「月」</li>
                 <li>・「値」を右クリック → <strong>「名前変更」</strong> → 「工数」</li>
@@ -1098,14 +1098,17 @@ export const steps: Step[] = [
             </div>
             <div>
               <p className="font-semibold mb-2">データ型の確認</p>
-              <p>「工数」列を選択し、データ型を <strong>「整数」</strong> に設定してから <strong>「完了」</strong> をクリック</p>
+              <ul className="space-y-1">
+                <li>・「月」列を選択し、データ型を <strong>「日付」</strong> に設定（日付型にすることで、Power BI の時系列グラフで日付順に正しく並びます）</li>
+                <li>・「工数」列を選択し、データ型を <strong>「整数」</strong> に設定（工数は小数にならないため整数型を指定します）</li>
+              </ul>
+              <p className="mt-2">設定が終わったら <strong>「閉じて適用」</strong> をクリック</p>
             </div>
             <div>
               <p className="font-semibold mb-2">最終的なデータ構造</p>
-              <CodeBlock code={`タスク | 月  | 工数
-営業報告 | 1月 | 10
-営業報告 | 2月 | 12
-営業報告 | 3月 | 11
+              <CodeBlock code={`プロジェクト | タスク      | 月          | 工数
+プロジェクトA | 要件定義    | 2022/01/01 | 14
+プロジェクトA | 要件定義    | 2022/02/01 | 8
 ...`} />
             </div>
           </div>
@@ -1170,7 +1173,7 @@ export const steps: Step[] = [
             <div className="border border-blue-300 dark:border-blue-600 rounded p-2 bg-white dark:bg-gray-700">
               <p className="text-xs font-bold text-blue-600 dark:text-blue-300 mb-1.5">🔽 スライサー（タスク）</p>
               <div className="flex flex-wrap gap-1.5">
-                {['営業報告', 'データ分析', 'マーケティング', 'プロジェクト管理', 'システム開発'].map(t => (
+                {['要件定義', '設計', '開発', 'テスト', 'リリース', '課題設定', 'データ分析', '…'].map(t => (
                   <span key={t} className="text-xs px-2 py-0.5 bg-blue-100 dark:bg-blue-900/40 rounded border border-blue-200 dark:border-blue-700 text-blue-700 dark:text-blue-300">
                     {t}
                   </span>
@@ -1671,7 +1674,7 @@ export const steps: Step[] = [
         {[
           {
             q: 'Power Query でエラーが出てピボット解除できない',
-            a: 'データ型を確認してください。「月」が数値になっていないか確認し、必要に応じてテキスト型に設定してください。',
+            a: 'データ型を確認してください。「月」列が数値になっていないか確認し、必要に応じて日付型に設定してください。',
           },
           {
             q: '月の順序が1月から5月ではなく、ランダムになっている',

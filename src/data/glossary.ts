@@ -13,7 +13,7 @@ export const glossary: GlossaryEntry[] = [
     definition: 'Microsoft が提供する無料のデスクトップアプリ。データの取得・整形・モデリング・レポート作成を行う。作成したレポートは .pbix 形式で保存される。',
   },
   {
-    term: 'Power BI サービス',
+    term: 'Power BI Service',
     definition: 'Power BI Desktop で作成したレポートをオンラインで共有・閲覧するための Microsoft のクラウドサービス。組織内での協業に使用する。',
   },
   {
@@ -22,7 +22,7 @@ export const glossary: GlossaryEntry[] = [
   },
   {
     term: '整然データ（Tidy Data）',
-    definition: 'データ科学者 Hadley Wickham が提唱したデータ形式。「各行が1つの観測値」「各列が1つの変数」「各セルが1つの値」の3原則を満たす。BI ツールや機械学習と相性が良い。',
+    definition: '「各行が1つの観測値」「各列が1つの変数」「各セルが1つの値」の3原則を満たすデータ形式。実務では「1行＝1観測値」と覚えれば十分。BI ツールや機械学習と相性が良い。データ科学者 Hadley Wickham が提唱した概念。',
   },
   {
     term: '雑然データ',
@@ -42,7 +42,7 @@ export const glossary: GlossaryEntry[] = [
   },
   {
     term: 'データモデリング',
-    definition: '複数のテーブル間にリレーションシップを定義し、分析しやすい構造を作ること。1対多の関係が基本で、スタースキーマが代表的な設計パターン。',
+    definition: '複数のテーブル間にリレーションシップを定義し、分析しやすい構造を作ること。1対多の関係が基本。スタースキーマ（中央に売上テーブル、周囲に顧客・商品テーブルが放射状に並ぶ設計）が代表的なパターン。',
   },
   {
     term: 'リレーションシップ',
