@@ -247,12 +247,6 @@ export const steps: Step[] = [
                   </tbody>
                 </table>
               </div>
-              <ul className="text-xs px-3 pb-3 space-y-1.5 text-red-700 dark:text-red-400">
-                <li><span className="font-semibold">① 月が「列名」になっている：</span>本来はデータの一変数なのに、列ヘッダーに埋め込まれている</li>
-                <li><span className="font-semibold">② 1行に複数の観測値が混在：</span>「営業報告×1月」「×2月」…の5件が1行に詰まっている</li>
-                <li><span className="font-semibold">③ 月が増えると列が増える：</span>データ範囲の変化が表の構造変化を引き起こす</li>
-                <li><span className="font-semibold">④ 集計・フィルタが煩雑：</span>全期間合計には全列を個別に参照する必要がある</li>
-              </ul>
             </div>
 
             <div className="rounded-lg border-2 border-green-300 dark:border-green-700 overflow-hidden">
@@ -296,8 +290,12 @@ export const steps: Step[] = [
           </div>
 
           {/* SVG: ピボット形式の4つの特徴を視覚的に説明 */}
-          <div className="mt-4 p-3 rounded-lg bg-red-50 dark:bg-red-900/10 border border-red-200 dark:border-red-800">
-            <p className="text-xs font-semibold text-red-700 dark:text-red-400 mb-2">🔍 ピボット形式（雑然データ）の構造と特徴</p>
+          <div className="mt-4 rounded-lg border-2 border-red-300 dark:border-red-700 overflow-hidden">
+            <div className="bg-red-100 dark:bg-red-900/40 px-3 py-2">
+              <p className="font-bold text-red-800 dark:text-red-300">🔍 ピボット形式（雑然データ）の特徴</p>
+              <p className="text-xs text-red-600 dark:text-red-400">なぜ解析ツールで扱いにくいのか</p>
+            </div>
+            <div className="p-3">
             <svg viewBox="0 0 635 235" width="100%" xmlns="http://www.w3.org/2000/svg" style={{fontFamily: 'sans-serif'}}>
               <defs>
                 <marker id="sv-a1" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="#d97706"/></marker>
@@ -390,6 +388,7 @@ export const steps: Step[] = [
               <text x="32" y="212" fontSize="9.5" fill="#7c2d12">プロジェクト5×タスク6＝30行、月列36ヶ月 → 合計38列のピボット形式。§5でピボット解除して整然データに変換します。</text>
               <text x="32" y="224" fontSize="9.5" fill="#7c2d12">Power BI はピボット解除後のデータを使ってグラフ・集計を行います。</text>
             </svg>
+            </div>
           </div>
 
           <div className="mt-4 rounded-lg border-2 border-red-300 dark:border-red-700 overflow-hidden">
