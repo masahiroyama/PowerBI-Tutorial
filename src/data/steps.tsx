@@ -762,6 +762,31 @@ export const steps: Step[] = [
             </div>
 
           </div>
+
+          <div className="mt-6 border-t border-gray-200 dark:border-gray-700 pt-4">
+            <p className="text-sm font-semibold mb-3">サンプルデータへの適用</p>
+            <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
+              ダウンロードした <code className="bg-gray-100 dark:bg-gray-800 px-1 rounded">sample-data.xlsx</code> を開き、以下の手順でテーブルに変換して保存します。
+            </p>
+            <div className="space-y-3 text-sm">
+              {[
+                { n: 1, title: 'データ範囲（A1〜AL31）を選択', desc: 'A1 をクリック → Ctrl+Shift+End で一括選択' },
+                { n: 2, title: '「挿入」タブ → 「テーブル」をクリック', desc: null },
+                { n: 3, title: 'ダイアログを確認して OK', desc: '「先頭行をテーブルの見出しとして使用する」にチェック・範囲が =$A$1:$AL$31 であることを確認' },
+                { n: 4, title: '「テーブルデザイン」タブでテーブル名を変更', desc: 'リボン左端の入力欄を ProjectTasks に書き換えて Enter' },
+                { n: 5, title: 'ファイルを保存（Ctrl+S）', desc: 'ファイル名：project_tasks.xlsx　保存場所：デスクトップ推奨' },
+              ].map(({ n, title, desc }) => (
+                <div key={n} className="flex gap-3 items-start p-3 border border-gray-200 dark:border-gray-700 rounded-lg">
+                  <span className="bg-blue-600 text-white text-xs font-bold rounded-full w-6 h-6 flex items-center justify-center shrink-0 mt-0.5">{n}</span>
+                  <div>
+                    <p className="font-medium">{title}</p>
+                    {desc && <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">{desc}</p>}
+                  </div>
+                </div>
+              ))}
+            </div>
+            <p className="text-sm text-green-700 dark:text-green-400 mt-4">以上で、Power BI への取り込み準備が完了です。</p>
+          </div>
         </Section>
 
         <Section title="3.4 テーブルでのデータ追加">
@@ -794,29 +819,6 @@ export const steps: Step[] = [
           </div>
         </Section>
 
-        <Section title="3.6 サンプルデータをテーブルに変換する">
-          <p className="text-sm mb-4">
-            ダウンロードした <code className="bg-gray-100 dark:bg-gray-800 px-1 rounded">sample-data.xlsx</code> を開き、Power BI で使用するためにテーブルに変換して保存します。
-          </p>
-          <div className="space-y-3 text-sm">
-            {[
-              { n: 1, title: 'データ範囲（A1〜AL31）を選択', desc: 'A1 をクリック → Ctrl+Shift+End で一括選択' },
-              { n: 2, title: '「挿入」タブ → 「テーブル」をクリック', desc: null },
-              { n: 3, title: 'ダイアログを確認して OK', desc: '「先頭行をテーブルの見出しとして使用する」にチェック・範囲が =$A$1:$AL$31 であることを確認' },
-              { n: 4, title: '「テーブルデザイン」タブでテーブル名を変更', desc: 'リボン左端の入力欄を ProjectTasks に書き換えて Enter' },
-              { n: 5, title: 'ファイルを保存（Ctrl+S）', desc: 'ファイル名：project_tasks.xlsx　保存場所：デスクトップ推奨' },
-            ].map(({ n, title, desc }) => (
-              <div key={n} className="flex gap-3 items-start p-3 border border-gray-200 dark:border-gray-700 rounded-lg">
-                <span className="bg-blue-600 text-white text-xs font-bold rounded-full w-6 h-6 flex items-center justify-center shrink-0 mt-0.5">{n}</span>
-                <div>
-                  <p className="font-medium">{title}</p>
-                  {desc && <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">{desc}</p>}
-                </div>
-              </div>
-            ))}
-          </div>
-          <p className="text-sm text-green-700 dark:text-green-400 mt-4">以上で、Power BI への取り込み準備が完了です。</p>
-        </Section>
       </div>
     ),
   },
