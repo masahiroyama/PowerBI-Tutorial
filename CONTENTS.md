@@ -25,9 +25,21 @@
 **以下が完了していることを確認してからチュートリアルを始めてください：**
 
 #### 1️⃣ Power BI Desktop のインストール
-- [ ] [Microsoft 公式サイト](https://powerbi.microsoft.com/desktop/)から Power BI Desktop をダウンロード
-- [ ] インストールを完了
-- [ ] Power BI Desktop を起動して、起動できることを確認
+
+以下のどちらかの方法でインストールしてください：
+
+**方法 A：Microsoft 公式サイトから（推奨）**
+- [ ] [Microsoft 公式サイト](https://powerbi.microsoft.com/desktop/)にアクセス
+- [ ] 「無料でダウンロード」からインストーラーをダウンロード
+- [ ] ダウンロードした `.exe` を実行してインストール
+
+**方法 B：Microsoft Store から**
+- [ ] スタートメニューで「Microsoft Store」を開く
+- [ ] 「Power BI Desktop」を検索してインストール
+  - アップデートが Microsoft Store 経由で自動管理される
+  - 職場環境によっては Store の利用が制限されている場合があります
+
+- [ ] インストール後、Power BI Desktop を起動して、起動できることを確認
   - Microsoft 365 アカウントまたは職場のアカウントでログイン可能
   - ログインできなくても、ローカルでの練習は可能です
 

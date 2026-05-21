@@ -49,10 +49,27 @@ export const steps: Step[] = [
           <div className="space-y-4 text-sm">
             <div>
               <p className="font-semibold mb-2">1️⃣ Power BI Desktop のインストール</p>
-              <ul className="space-y-1 ml-4">
-                <li>□ <a href="https://powerbi.microsoft.com/desktop/" target="_blank" rel="noopener noreferrer" className="text-blue-500 underline">Microsoft 公式サイト</a>から Power BI Desktop をダウンロード</li>
-                <li>□ インストールを完了</li>
-                <li>□ Power BI Desktop を起動して、起動できることを確認</li>
+              <p className="ml-4 mb-2 text-gray-600 dark:text-gray-300">以下のどちらかの方法でインストールしてください：</p>
+              <div className="ml-4 space-y-3">
+                <div className="border border-blue-200 dark:border-blue-700 rounded p-3 bg-blue-50 dark:bg-blue-900/20">
+                  <p className="font-medium text-blue-700 dark:text-blue-300 mb-1">方法 A：Microsoft 公式サイトから（推奨）</p>
+                  <ul className="space-y-1">
+                    <li>□ <a href="https://powerbi.microsoft.com/desktop/" target="_blank" rel="noopener noreferrer" className="text-blue-500 underline">Microsoft 公式サイト</a>にアクセス</li>
+                    <li>□ 「無料でダウンロード」からインストーラーをダウンロード</li>
+                    <li>□ ダウンロードした <code className="bg-gray-100 dark:bg-gray-700 px-1 rounded">.exe</code> を実行してインストール</li>
+                  </ul>
+                </div>
+                <div className="border border-gray-200 dark:border-gray-600 rounded p-3 bg-gray-50 dark:bg-gray-800/40">
+                  <p className="font-medium text-gray-700 dark:text-gray-300 mb-1">方法 B：Microsoft Store から</p>
+                  <ul className="space-y-1">
+                    <li>□ スタートメニューで「Microsoft Store」を開く</li>
+                    <li>□ 「Power BI Desktop」を検索してインストール</li>
+                  </ul>
+                  <p className="mt-1 text-gray-500 dark:text-gray-400 text-xs">アップデートが Store 経由で自動管理されます。職場環境によっては Store の利用が制限されている場合があります。</p>
+                </div>
+              </div>
+              <ul className="space-y-1 ml-4 mt-3">
+                <li>□ インストール後、Power BI Desktop を起動して、起動できることを確認</li>
               </ul>
               <p className="ml-4 mt-1 text-gray-500 dark:text-gray-400">Microsoft 365 アカウントでログイン可能。ログインできなくてもローカルでの練習は可能です。</p>
             </div>
