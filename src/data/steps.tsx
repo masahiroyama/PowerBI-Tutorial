@@ -1012,6 +1012,99 @@ export const steps: Step[] = [
             </div>
           </div>
         </Section>
+
+        <Section title="5.3 ファイルが SharePoint Online にある場合">
+          <p className="text-sm mb-4">
+            Excel ファイルが SharePoint Online（SPO）のドキュメントライブラリにある場合は、
+            「Excel ブック」の代わりに <strong>「Web」コネクター</strong> を使い、ファイルの直接 URL を指定して読み込みます。
+          </p>
+
+          {/* ステップフロー */}
+          <div className="space-y-3 text-sm">
+
+            {/* ① URL 確認 */}
+            <div className="border border-gray-300 dark:border-gray-600 rounded-lg overflow-hidden">
+              <div className="bg-gray-100 dark:bg-gray-700 px-3 py-2 font-bold text-gray-700 dark:text-gray-200 text-xs flex items-center gap-2">
+                <span className="w-5 h-5 rounded-full bg-blue-600 text-white text-xs flex items-center justify-center font-bold shrink-0">1</span>
+                SPO 上のファイル URL を確認する
+              </div>
+              <div className="p-3 space-y-2 text-xs">
+                <p className="text-gray-600 dark:text-gray-400">ブラウザで SPO のドキュメントライブラリを開き、ファイルの直接 URL を取得します。</p>
+                <div className="p-2 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded font-mono text-blue-700 dark:text-blue-300 break-all">
+                  https://<span className="text-orange-600 dark:text-orange-400">[テナント名]</span>.sharepoint.com/sites/<span className="text-orange-600 dark:text-orange-400">[サイト名]</span>/Shared Documents/<span className="text-orange-600 dark:text-orange-400">[ファイル名]</span>.xlsx
+                </div>
+                <div className="p-2 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded">
+                  <p className="font-semibold text-yellow-800 dark:text-yellow-300 mb-1">💡 URL の確認手順</p>
+                  <ol className="list-decimal list-inside space-y-0.5 text-gray-700 dark:text-gray-300">
+                    <li>ドキュメントライブラリでファイルの「<strong>…</strong>」→「<strong>詳細</strong>」をクリック</li>
+                    <li>右側の詳細ウィンドウに表示される「<strong>パス</strong>」をコピー</li>
+                  </ol>
+                </div>
+              </div>
+            </div>
+
+            {/* ② Web コネクター */}
+            <div className="border border-gray-300 dark:border-gray-600 rounded-lg overflow-hidden">
+              <div className="bg-gray-100 dark:bg-gray-700 px-3 py-2 font-bold text-gray-700 dark:text-gray-200 text-xs flex items-center gap-2">
+                <span className="w-5 h-5 rounded-full bg-blue-600 text-white text-xs flex items-center justify-center font-bold shrink-0">2</span>
+                Power BI で「Web」コネクターを選択
+              </div>
+              <div className="p-3 text-xs">
+                <p className="mb-2 text-gray-700 dark:text-gray-300">「データを取得」をクリックし、データソース一覧から <strong>「Web」</strong> を選択します。</p>
+                <div className="border-2 border-gray-300 dark:border-gray-500 rounded-lg overflow-hidden shadow-sm max-w-xs">
+                  <div className="bg-gray-200 dark:bg-gray-700 px-3 py-1.5 font-bold text-gray-700 dark:text-gray-200 text-xs">データソースの選択</div>
+                  <div className="p-2 space-y-1 bg-white dark:bg-gray-800">
+                    <div className="flex items-center gap-2 p-1.5 rounded text-gray-400"><span>📗</span><span>Excel ブック</span></div>
+                    <div className="flex items-center gap-2 p-1.5 rounded text-gray-400"><span>🗄️</span><span>データベース</span></div>
+                    <div className="flex items-center gap-2 p-1.5 rounded text-gray-400"><span>☁️</span><span>SharePoint</span></div>
+                    <div className="flex items-center gap-2 p-1.5 rounded border-2 border-yellow-400 bg-yellow-50 dark:bg-yellow-900/20 cursor-pointer">
+                      <span>🌐</span>
+                      <span className="font-bold text-yellow-700 dark:text-yellow-300">Web</span>
+                      <span className="ml-auto text-yellow-600 dark:text-yellow-400">← 選択！</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* ③ URL 入力 */}
+            <div className="border border-gray-300 dark:border-gray-600 rounded-lg overflow-hidden">
+              <div className="bg-gray-100 dark:bg-gray-700 px-3 py-2 font-bold text-gray-700 dark:text-gray-200 text-xs flex items-center gap-2">
+                <span className="w-5 h-5 rounded-full bg-blue-600 text-white text-xs flex items-center justify-center font-bold shrink-0">3</span>
+                URL を入力して接続・認証
+              </div>
+              <div className="p-3 space-y-2 text-xs">
+                <div className="border border-gray-300 dark:border-gray-600 rounded p-2 bg-white dark:bg-gray-800 max-w-sm">
+                  <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">URL</p>
+                  <div className="flex items-center gap-1 border border-blue-400 rounded px-2 py-1 bg-blue-50 dark:bg-blue-900/20 font-mono text-xs text-blue-700 dark:text-blue-300 break-all">
+                    https://contoso.sharepoint.com/sites/MySite/Shared Documents/project_tasks.xlsx
+                  </div>
+                  <div className="flex justify-end mt-2 gap-1">
+                    <button className="px-2 py-0.5 text-xs bg-blue-600 text-white rounded">OK</button>
+                    <button className="px-2 py-0.5 text-xs border border-gray-300 dark:border-gray-600 rounded text-gray-500">キャンセル</button>
+                  </div>
+                </div>
+                <p className="text-gray-700 dark:text-gray-300">認証ダイアログが開いたら <strong>「組織アカウント」</strong> を選択し、Microsoft 365 アカウントでサインインして「接続」をクリックします。</p>
+              </div>
+            </div>
+
+            {/* ④ ナビゲーター */}
+            <div className="border border-gray-300 dark:border-gray-600 rounded-lg overflow-hidden">
+              <div className="bg-gray-100 dark:bg-gray-700 px-3 py-2 font-bold text-gray-700 dark:text-gray-200 text-xs flex items-center gap-2">
+                <span className="w-5 h-5 rounded-full bg-blue-600 text-white text-xs flex items-center justify-center font-bold shrink-0">4</span>
+                ナビゲーターで「ProjectTasks」を選択 → 「データの変換」
+              </div>
+              <div className="p-3 text-xs text-gray-600 dark:text-gray-400">
+                ローカルファイルの場合（5.2）と同じナビゲーター画面が開きます。<strong>ProjectTasks</strong> にチェックを入れて「データの変換」をクリックしてください。
+              </div>
+            </div>
+
+          </div>
+
+          <div className="mt-3 p-3 bg-orange-50 dark:bg-orange-900/20 border border-orange-300 dark:border-orange-700 rounded text-xs">
+            ⚠️ この方法は <strong>Microsoft 365 アカウント</strong> を持ち、対象の SPO サイトへのアクセス権がある場合にのみ使用できます。
+          </div>
+        </Section>
       </div>
     ),
   },
