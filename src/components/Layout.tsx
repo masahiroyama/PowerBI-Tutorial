@@ -66,9 +66,9 @@ export function Layout() {
         onResetTimer={resetTimer}
       />
 
-      <div className={`flex pt-29 ${showScript ? 'pb-44' : ''} ${(showGlossary || showTimeline) && glossaryOverlaps ? 'pr-80' : ''}`}>
+      <div className={`flex pt-29 ${showScript ? 'pb-44' : ''} ${(showGlossary || showTimeline) && glossaryOverlaps ? 'pr-80' : ''} ${fontSize === 'md' ? 'content-zoom-md' : fontSize === 'lg' ? 'content-zoom-lg' : ''}`}>
         <Sidebar currentStepId={currentStepId} isCompleted={isCompleted} onResetProgress={resetProgress} showScript={showScript} />
-        <main className={`flex-1 min-w-0 bg-white dark:bg-gray-950 ${fontSize === 'md' ? 'content-zoom-md' : fontSize === 'lg' ? 'content-zoom-lg' : ''}`}>
+        <main className="flex-1 min-w-0 bg-white dark:bg-gray-950">
           <Outlet context={{ isCompleted, toggleComplete }} />
         </main>
       </div>
