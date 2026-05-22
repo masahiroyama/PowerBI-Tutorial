@@ -8,6 +8,10 @@
   }
 }
 
+/* Font size scaling */
+html.font-size-md { font-size: 112.5%; }
+html.font-size-lg { font-size: 125%; }
+
 /* Accordion open/close animation */
 details > summary {
   list-style: none;

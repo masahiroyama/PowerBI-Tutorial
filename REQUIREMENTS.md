@@ -72,6 +72,18 @@ type Step = {
 - 設定は `localStorage` に永続化（キー: `pbi_dark_mode`）
 - `<html>` 要素の `dark` クラスを付け外しして Tailwind のダークモードを制御
 
+### 4.3b 文字サイズ変更
+
+- ヘッダーに「A / A / A」の3段階ボタングループを表示（小・中・大）
+- 「小」が現在のデフォルトサイズ（変更前と同じ見た目）
+- 選択中のサイズボタンを青くハイライト
+- `<html>` 要素にクラスを付け外しして全体のフォントサイズを制御
+  - 小：クラスなし（ブラウザデフォルト 16px 基準）
+  - 中：`font-size-md` クラス → `font-size: 112.5%`（18px 基準）
+  - 大：`font-size-lg` クラス → `font-size: 125%`（20px 基準）
+- 設定は `localStorage` に永続化（キー: `pbi_font_size`）
+- 実装: `src/hooks/useFontSize.ts`（`FontSize = 'sm' | 'md' | 'lg'`）
+
 ### 4.4 印刷 / PDF 保存
 
 - ヘッダーに印刷ボタン（🖨️）
@@ -259,6 +271,7 @@ type Step = {
 |------|----|------|
 | `pbi_completed_steps` | `number[]` (JSON) | 完了済みステップの id 配列 |
 | `pbi_dark_mode` | `"true"` / `"false"` | ダークモード設定 |
+| `pbi_font_size` | `"sm"` / `"md"` / `"lg"` | 文字サイズ設定 |
 | `pbi_timer_start` | `string` (Unix ms) | タイマー開始時刻（ミリ秒エポック） |
 | `pbi_completion_timestamps` | `{ [stepId]: string }` (JSON) | 各ステップの完了日時（ISO8601） |
 

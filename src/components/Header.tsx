@@ -1,6 +1,10 @@
+import type { FontSize } from '../hooks/useFontSize'
+
 type Props = {
   dark: boolean
   onToggleDark: () => void
+  fontSize: FontSize
+  onSetFontSize: (s: FontSize) => void
   showScript: boolean
   onToggleScript: () => void
   showGlossary: boolean
@@ -9,7 +13,13 @@ type Props = {
   onToggleTimeline: () => void
 }
 
-export function Header({ dark, onToggleDark, showScript, onToggleScript, showGlossary, onToggleGlossary, showTimeline, onToggleTimeline }: Props) {
+const FONT_SIZES: { value: FontSize; label: string; className: string }[] = [
+  { value: 'sm', label: 'A', className: 'text-xs' },
+  { value: 'md', label: 'A', className: 'text-sm' },
+  { value: 'lg', label: 'A', className: 'text-base' },
+]
+
+export function Header({ dark, onToggleDark, fontSize, onSetFontSize, showScript, onToggleScript, showGlossary, onToggleGlossary, showTimeline, onToggleTimeline }: Props) {
   const handlePrint = () => window.print()
 
   return (
@@ -21,6 +31,24 @@ export function Header({ dark, onToggleDark, showScript, onToggleScript, showGlo
           </span>
         </div>
         <div className="flex items-center gap-2">
+          <div className="flex items-center border border-gray-200 dark:border-gray-600 rounded-md overflow-hidden" title="文字サイズ">
+            {FONT_SIZES.map(({ value, label, className }, i) => (
+              <button
+                key={value}
+                onClick={() => onSetFontSize(value)}
+                className={`px-2.5 py-1.5 font-bold transition-colors ${className} ${
+                  i > 0 ? 'border-l border-gray-200 dark:border-gray-600' : ''
+                } ${
+                  fontSize === value
+                    ? 'bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300'
+                    : 'text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800'
+                }`}
+                title={`文字サイズ: ${value === 'sm' ? '小' : value === 'md' ? '中' : '大'}`}
+              >
+                {label}
+              </button>
+            ))}
+          </div>
           <button
             onClick={onToggleTimeline}
             className={`px-3 py-1.5 rounded-md text-sm border transition-colors ${

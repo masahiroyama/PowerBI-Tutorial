@@ -118,6 +118,7 @@ src/
     StepPage.tsx
   hooks/
     useDarkMode.ts
+    useFontSize.ts  # 文字サイズ 3段階（sm/md/lg）、localStorage 永続化
     useProgress.ts
     useSpeech.ts    # Web Speech API ラッパー
     useTimer.ts     # 実測タイマー（経過時間・ペース計算）

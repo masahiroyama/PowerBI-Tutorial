@@ -7,11 +7,13 @@ import { ScriptPanel } from './ScriptPanel'
 import { GlossaryPanel } from './GlossaryPanel'
 import { CompletionTimeline } from './CompletionTimeline'
 import { useDarkMode } from '../hooks/useDarkMode'
+import { useFontSize } from '../hooks/useFontSize'
 import { useProgress } from '../hooks/useProgress'
 import { useTimer } from '../hooks/useTimer'
 
 export function Layout() {
   const { dark, toggle } = useDarkMode()
+  const { fontSize, setFontSize } = useFontSize()
   const { isCompleted, toggleComplete, resetProgress, completedCount, progressPercent, timestamps } = useProgress()
   const { elapsed, isRunning: isTimerRunning, start: startTimer, reset: resetTimer } = useTimer()
   const { id } = useParams<{ id: string }>()
@@ -45,6 +47,8 @@ export function Layout() {
       <Header
         dark={dark}
         onToggleDark={toggle}
+        fontSize={fontSize}
+        onSetFontSize={setFontSize}
         showScript={showScript}
         onToggleScript={toggleScript}
         showGlossary={showGlossary}
