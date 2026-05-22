@@ -8,9 +8,9 @@
   }
 }
 
-/* Font size scaling */
-html.font-size-md { font-size: 112.5%; }
-html.font-size-lg { font-size: 125%; }
+/* Font size scaling — applied to main content only, header/progress bar unaffected */
+.content-zoom-md { zoom: 1.125; }
+.content-zoom-lg { zoom: 1.25; }
 
 /* Accordion open/close animation */
 details > summary {
