@@ -71,6 +71,7 @@ React アプリ（`src/data/steps.tsx`）では、HTML/JSX/Tailwind の自由度
 | 折りたたみ可能な補足情報（FAQ・トラブルシューティング等） | `<Accordion>` コンポーネント |
 | メインコンテンツのサブセクション見出し | `<Section>` コンポーネント |
 | チェックリスト | チェックボックス付きリスト |
+| 実際の UI 操作手順（Excel・Power BI 等） | 実スクリーンショット（`public/images/`）← 疑似JSX図解より優先 |
 
 ### 視覚化の具体指針
 
@@ -79,6 +80,39 @@ React アプリ（`src/data/steps.tsx`）では、HTML/JSX/Tailwind の自由度
 - **テーブル**: ヘッダーに背景色、行の交互色（`even:bg-gray-50`）を付けて可読性を上げる。
 - **アイコン**: 絵文字（⚠️ 📋 ✅ ❌ 🔄 など）を見出しや説明の冒頭に使い、視認性を向上させる。
 - **コールアウトボックス**: 重要な注意点は `bg-yellow-50 border-l-4 border-yellow-400` などのスタイルで目立たせる。
+
+---
+
+## 説明用画像の管理
+
+### 基本方針
+
+- 疑似的な JSX 図解（CSS で描いたフェイク UI など）は、**実際のスクリーンショットが得られ次第、画像に置き換える**。
+- 画像ファイルは **`public/images/`** に配置する（Vite の `public/` 以下はビルド時にそのまま出力される）。
+- ファイル名は `step{セクション番号}-{連番}-{内容}.png` の形式にする（例: `step3-2-insert-table.png`）。
+
+### `<img>` タグの書き方
+
+```jsx
+<div className="overflow-x-auto">
+  <img
+    src={`${import.meta.env.BASE_URL}images/ファイル名.png`}
+    alt="画像の説明"
+    className="rounded border border-gray-300 dark:border-gray-600"
+  />
+</div>
+```
+
+- **`import.meta.env.BASE_URL` を必ず使う**。`vite.config.ts` に `base: '/PowerBI-Tutorial/'` が設定されているため、`/images/...` の絶対パスでは本番環境で画像が表示されない。
+- **`overflow-x-auto` の `div` で包む**。画像を自然サイズで表示し、コンテナより幅が広い場合は横スクロールで対応する。
+- **`max-w-full` は付けない**。付けると画像が引き伸ばされる。
+- 文字サイズ変更（`zoom: 1.125 / 1.25`）は親コンテナに適用されるため、画像も自動でスケールする。
+
+### ユーザーにスクリーンショットを依頼する場合
+
+1. `public/images/` フォルダを案内し、推奨ファイル名をリストアップする。
+2. 撮影方法: `Win+Shift+S` で範囲指定キャプチャ → PNG で保存。
+3. ファイルが置かれたら `<img>` タグに置き換え、既存の疑似JSX図解コードを削除する。
 
 ---
 
