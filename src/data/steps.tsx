@@ -1466,6 +1466,47 @@ export const steps: Step[] = [
         </div>
 
         <div>
+          <h3 className="font-semibold text-gray-800 dark:text-gray-100 mb-3">🤖 AI を活用した学習</h3>
+          <div className="space-y-3">
+            <p className="text-sm text-gray-700 dark:text-gray-300">
+              Power BI の操作で詰まったとき、チャットベースのAI（Copilot、Claude、ChatGPT など）を活用すると的確なアドバイスをすぐに得られます。
+            </p>
+
+            <div className="p-4 rounded-lg bg-purple-50 dark:bg-purple-900/20 border border-purple-300 dark:border-purple-700">
+              <p className="font-semibold text-purple-800 dark:text-purple-300 mb-2">💡 コツ：スクリーンショット＋やりたいこと</p>
+              <p className="text-sm text-purple-700 dark:text-purple-300">
+                詰まった画面のスクリーンショットと「〇〇したい」という目的をセットでAIに伝えましょう。
+                画面の状況を把握したAIが、抽象的なアドバイスではなく<strong>具体的な操作手順</strong>を教えてくれます。
+              </p>
+            </div>
+
+            <div>
+              <p className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">活用場面の例：</p>
+              <ul className="text-sm space-y-1 text-gray-600 dark:text-gray-400">
+                <li>・Power Query でデータ変換の手順がわからないとき</li>
+                <li>・DAX の計算式の書き方がわからないとき</li>
+                <li>・グラフの書式設定でどのオプションを使えばいいかわからないとき</li>
+                <li>・エラーメッセージの意味がわからないとき</li>
+              </ul>
+            </div>
+
+            <div className="p-3 rounded-lg bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
+              <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">質問の例：</p>
+              <p className="text-sm text-gray-700 dark:text-gray-300 italic">
+                「このスクリーンショットは Power BI の Power Query エディタです。月の列を昇順に並べ替えたいのですが、どうすればいいですか？」
+              </p>
+            </div>
+
+            <Accordion title="Power BI 組み込みの Copilot（参考）">
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                Power BI 自体にもCopilot機能が組み込まれており、自然言語でレポートの作成や質問ができます。
+                ただし、利用には <strong>Microsoft Fabric または Power BI Premium ライセンス</strong> が必要です。
+              </p>
+            </Accordion>
+          </div>
+        </div>
+
+        <div>
           <h3 className="font-semibold text-gray-800 dark:text-gray-100 mb-3">📚 整然データの3つの原則（Tidy Data）</h3>
           <p className="text-sm text-gray-500 dark:text-gray-400 mb-3">データ科学者 Hadley Wickham が提唱した概念です。実務では直感的に理解できれば十分ですが、より深く理解したい方はこちらを参照してください。</p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-6">
@@ -1599,47 +1640,6 @@ export const steps: Step[] = [
                 <li>自部門に合わせたグラフを作成</li>
                 <li>同僚に共有</li>
               </ol>
-            </Accordion>
-          </div>
-        </div>
-
-        <div>
-          <h3 className="font-semibold text-gray-800 dark:text-gray-100 mb-3">🤖 AI を活用した学習</h3>
-          <div className="space-y-3">
-            <p className="text-sm text-gray-700 dark:text-gray-300">
-              Power BI の操作で詰まったとき、チャットベースのAI（Copilot、Claude、ChatGPT など）を活用すると的確なアドバイスをすぐに得られます。
-            </p>
-
-            <div className="p-4 rounded-lg bg-purple-50 dark:bg-purple-900/20 border border-purple-300 dark:border-purple-700">
-              <p className="font-semibold text-purple-800 dark:text-purple-300 mb-2">💡 コツ：スクリーンショット＋やりたいこと</p>
-              <p className="text-sm text-purple-700 dark:text-purple-300">
-                詰まった画面のスクリーンショットと「〇〇したい」という目的をセットでAIに伝えましょう。
-                画面の状況を把握したAIが、抽象的なアドバイスではなく<strong>具体的な操作手順</strong>を教えてくれます。
-              </p>
-            </div>
-
-            <div>
-              <p className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">活用場面の例：</p>
-              <ul className="text-sm space-y-1 text-gray-600 dark:text-gray-400">
-                <li>・Power Query でデータ変換の手順がわからないとき</li>
-                <li>・DAX の計算式の書き方がわからないとき</li>
-                <li>・グラフの書式設定でどのオプションを使えばいいかわからないとき</li>
-                <li>・エラーメッセージの意味がわからないとき</li>
-              </ul>
-            </div>
-
-            <div className="p-3 rounded-lg bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
-              <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">質問の例：</p>
-              <p className="text-sm text-gray-700 dark:text-gray-300 italic">
-                「このスクリーンショットは Power BI の Power Query エディタです。月の列を昇順に並べ替えたいのですが、どうすればいいですか？」
-              </p>
-            </div>
-
-            <Accordion title="Power BI 組み込みの Copilot（参考）">
-              <p className="text-sm text-gray-600 dark:text-gray-400">
-                Power BI 自体にもCopilot機能が組み込まれており、自然言語でレポートの作成や質問ができます。
-                ただし、利用には <strong>Microsoft Fabric または Power BI Premium ライセンス</strong> が必要です。
-              </p>
             </Accordion>
           </div>
         </div>
