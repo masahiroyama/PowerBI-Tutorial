@@ -869,7 +869,7 @@ export const steps: Step[] = [
                   <div className="flex-1 bg-green-50 dark:bg-green-900/10 border-r-2 border-green-300 dark:border-green-700 flex flex-col items-center justify-center gap-2 p-3">
                     <span className="font-bold text-green-700 dark:text-green-300">③ キャンバス</span>
                     <div className="flex gap-2 flex-wrap justify-center">
-                      <div className="border border-green-400 dark:border-green-600 rounded px-2 py-1 text-green-600 dark:text-green-400">📈 折れ線グラフ</div>
+                      <div className="border border-green-400 dark:border-green-600 rounded px-2 py-1 text-green-600 dark:text-green-400">📈 積み上げ面グラフ</div>
                       <div className="border border-green-400 dark:border-green-600 rounded px-2 py-1 text-green-600 dark:text-green-400">📋 テーブル</div>
                       <div className="border border-green-400 dark:border-green-600 rounded px-2 py-1 text-green-600 dark:text-green-400">🔽 スライサー</div>
                     </div>
@@ -909,7 +909,7 @@ export const steps: Step[] = [
                   </thead>
                   <tbody>
                     {[
-                      { num: '①', color: 'text-yellow-700 dark:text-yellow-300', name: '左側ナビゲーション', role: 'レポート・テーブル・モデルの 3 ビューを切り替え', usage: '§8.1 でレポートビューに切り替え' },
+                      { num: '①', color: 'text-yellow-700 dark:text-yellow-300', name: '左側ナビゲーション', role: 'レポート・テーブル・モデルビューなどを切り替え', usage: '§8.1 でレポートビューを確認' },
                       { num: '②', color: 'text-indigo-700 dark:text-indigo-300', name: 'リボン', role: 'データ取得・ビジュアル追加などの操作ボタン群（タブ形式）', usage: '§5.2 でホームタブの「データを取得」を使用' },
                       { num: '③', color: 'text-green-700 dark:text-green-300', name: 'キャンバス', role: 'グラフ・テーブルを配置するメインの作業エリア', usage: '§8.2〜8.5 でビジュアルを配置' },
                       { num: '④', color: 'text-pink-700 dark:text-pink-300', name: '視覚化ペイン', role: 'グラフの種類を選択し、書式（色・タイトル等）を設定するエリア', usage: '§8.2〜8.5 で使用' },
@@ -1226,6 +1226,15 @@ export const steps: Step[] = [
                   <ol className="space-y-1 list-decimal list-inside ml-2">
                     <li>「年月」列ヘッダー左端の <strong>データ型アイコン</strong>（「ABC」や「123」などが表示されている箇所）をクリック</li>
                     <li>ドロップダウンから <strong>「日付」</strong> を選択</li>
+                  </ol>
+                  <div className="overflow-x-auto mt-2">
+                    <img
+                      src={`${import.meta.env.BASE_URL}images/step6-4-1-datatype-dropdown.png`}
+                      alt="「年月」列のデータ型アイコンをクリックし「日付」を選択するドロップダウン"
+                      className="rounded border border-gray-300 dark:border-gray-600"
+                    />
+                  </div>
+                  <ol className="space-y-1 list-decimal list-inside ml-2 mt-2" start={3}>
                     <li>「列の型の変更」ダイアログが表示されたら <strong>「現在のものを置換」</strong> をクリック</li>
                   </ol>
                   <p className="text-xs text-blue-600 dark:text-blue-400 mt-2">日付型にすることで、Power BI の時系列グラフで日付順に正しく並びます</p>
@@ -1305,15 +1314,15 @@ export const steps: Step[] = [
           <div className="overflow-x-auto">
             <img
               src={`${import.meta.env.BASE_URL}images/step8-0-1-report-preview.png`}
-              alt="このセクションで作成するレポートの完成イメージ（スライサー・折れ線グラフ・テーブル）"
+              alt="このセクションで作成するレポートの完成イメージ（スライサー・積み上げ面グラフ・テーブル）"
               className="rounded border border-gray-300 dark:border-gray-600"
             />
           </div>
         </Section>
 
-        <Section title="8.1 レポートビューに切り替え">
+        <Section title="8.1 レポートビューの確認">
           <div className="space-y-3 text-sm">
-            <p>Power BI Desktop の左端にある3つのアイコンで画面を切り替えます。</p>
+            <p>Power BI Desktop の左端にはビューを切り替えるアイコンが並んでいます。グラフやビジュアルを配置するのは<strong>レポートビュー</strong>です。起動直後から表示されているので、切り替える必要はありません。</p>
             <div className="overflow-x-auto">
               <img
                 src={`${import.meta.env.BASE_URL}images/step8-1-1-report-view.png`}
@@ -1322,24 +1331,24 @@ export const steps: Step[] = [
               />
             </div>
             <div className="text-sm text-gray-600 dark:text-gray-400 space-y-1.5">
-              <p>📊 <strong>レポート</strong>：グラフやビジュアルを配置する画面（今回使用）</p>
-              <p>🗂️ <strong>データ</strong>：テーブルのデータ内容を確認する画面</p>
-              <p>🔗 <strong>モデル</strong>：テーブル間の関連付けを設定する画面</p>
+              <p>📊 <strong>レポートビュー</strong>：グラフやビジュアルを配置する画面 <span className="text-blue-600 dark:text-blue-400 font-medium">← このチュートリアルで使用</span></p>
+              <p>🗂️ <strong>テーブルビュー</strong>：テーブルのデータ内容を確認する画面</p>
+              <p>🔗 <strong>モデルビュー</strong>：テーブル間の関連付けを設定する画面</p>
             </div>
           </div>
         </Section>
 
-        <Section title="8.2 折れ線グラフの作成：タスク別の工数比較">
+        <Section title="8.2 積み上げ面グラフの作成：プロジェクト別の工数比較">
           <div className="space-y-4 text-sm">
 
             {/* 視覚化ペイン説明 */}
             <div>
-              <p className="font-semibold mb-2">① 「視覚化」ペインで「折れ線グラフ」を選択</p>
+              <p className="font-semibold mb-2">① 「視覚化」ペインで「積み上げ面グラフ」を選択</p>
               <p className="text-gray-600 dark:text-gray-400 mb-2 text-xs">Power BI 画面の右側に「視覚化」ペインがあります。グラフアイコンをクリックして種類を選びます。</p>
               <div className="overflow-x-auto">
                 <img
                   src={`${import.meta.env.BASE_URL}images/step8-2-1-viz-select.png`}
-                  alt="視覚化ペインで折れ線グラフのアイコンを選択"
+                  alt="視覚化ペインで積み上げ面グラフのアイコンを選択"
                   className="rounded border border-gray-300 dark:border-gray-600"
                 />
               </div>
@@ -1366,7 +1375,7 @@ export const steps: Step[] = [
             <ol className="space-y-2 list-decimal list-inside">
               <li>キャンバスの空きスペースをクリック（グラフ以外の場所）</li>
               <li>視覚化ペインから <strong>「テーブル」（📋）</strong> アイコンをクリック</li>
-              <li>フィールドペインから「タスク」「年月」「工数」をそれぞれドラッグ</li>
+              <li>フィールドペインから「プロジェクト」「タスク」「年月」「工数」をそれぞれドラッグ</li>
               <li>テーブルの端をドラッグしてサイズを調整</li>
             </ol>
             <div className="overflow-x-auto">
@@ -1418,7 +1427,7 @@ export const steps: Step[] = [
           {[
             'データの取得方法（Excel ファイルの読み込み）',
             'ピボット解除によるデータ整形（雑然データ → 整然データ）',
-            '視覚化によるデータ分析（折れ線グラフ、テーブル）',
+            '視覚化によるデータ分析（積み上げ面グラフ、テーブル）',
             'インタラクティブなレポート作成（スライサー）',
           ].map(item => (
             <div key={item} className="flex items-start gap-3 p-3 rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800">
