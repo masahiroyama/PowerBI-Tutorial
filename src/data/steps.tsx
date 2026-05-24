@@ -760,16 +760,16 @@ export const steps: Step[] = [
             purple: 'bg-purple-500',
           }
           const workflowSteps = [
-            { num: 1, label: 'データの取得 (Get Data)', desc: '様々なソースからデータを読み込む。Excel やデータベースなど多彩なソースに対応。', color: 'yellow', icon: '📥' },
-            { num: 2, label: 'データの整形 (Power Query)', desc: 'データの汚れを落とし、使いやすく加工する。ピボット解除もここで行います。', color: 'orange', icon: '⚙️' },
-            { num: 3, label: 'データモデリング', desc: 'テーブル同士の関連付けを行う。複数のデータソースを使う場合に重要。', color: 'blue', icon: '🔗' },
-            { num: 4, label: '視覚化 (Report)', desc: 'グラフやチャートを配置してレポートを作成する。', color: 'green', icon: '📊' },
-            { num: 5, label: '発行 (Publish)', desc: 'クラウドにアップロードして組織内で共有する。', color: 'purple', icon: '🚀' },
+            { num: 1, label: 'データの取得', desc: '様々なソースからデータを読み込む。Excel やデータベースなど多彩なソースに対応。', color: 'yellow', icon: '📥', outOfScope: false },
+            { num: 2, label: 'データの整形 (Power Query)', desc: 'データの汚れを落とし、使いやすく加工する。ピボット解除もここで行います。', color: 'orange', icon: '⚙️', outOfScope: false },
+            { num: 3, label: 'データモデリング', desc: 'テーブル同士の関連付けを行う。複数のデータソースを使う場合に重要。', color: 'blue', icon: '🔗', outOfScope: true },
+            { num: 4, label: '視覚化', desc: 'グラフやチャートを配置してレポートを作成する。', color: 'green', icon: '📊', outOfScope: false },
+            { num: 5, label: '発行', desc: 'クラウドにアップロードして組織内で共有する。', color: 'purple', icon: '🚀', outOfScope: true },
           ]
           return (
             <div className="space-y-3">
               {workflowSteps.map((step, i, arr) => (
-                <div key={step.num} className="flex items-start gap-3">
+                <div key={step.num} className={`flex items-start gap-3 ${step.outOfScope ? 'opacity-50' : ''}`}>
                   <div className="flex flex-col items-center">
                     <div className={`w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-sm ${colorMap[step.color]}`}>
                       {step.num}
@@ -777,11 +777,19 @@ export const steps: Step[] = [
                     {i < arr.length - 1 && <div className="w-0.5 h-6 bg-gray-200 dark:bg-gray-700 mt-1" />}
                   </div>
                   <div className="flex-1 pb-2 pt-1">
-                    <p className="font-semibold text-gray-800 dark:text-gray-100">{step.icon} {step.label}</p>
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <p className="font-semibold text-gray-800 dark:text-gray-100">{step.icon} {step.label}</p>
+                      {step.outOfScope && (
+                        <span className="text-xs px-1.5 py-0.5 rounded bg-gray-200 dark:bg-gray-700 text-gray-500 dark:text-gray-400 font-medium">本チュートリアル対象外</span>
+                      )}
+                    </div>
                     <p className="text-sm text-gray-600 dark:text-gray-400 mt-0.5">{step.desc}</p>
                   </div>
                 </div>
               ))}
+              <p className="text-xs text-gray-500 dark:text-gray-400 pt-2 border-t border-gray-200 dark:border-gray-700">
+                ※ <span className="font-medium">データモデリング</span>（複数テーブルのリレーション設定）と<span className="font-medium">発行</span>（Power BI Service へのアップロード）は、このチュートリアルでは扱いません。まずは1つのExcelファイルを取得・整形・可視化する流れを体験することに集中します。
+              </p>
             </div>
           )
         })()}
