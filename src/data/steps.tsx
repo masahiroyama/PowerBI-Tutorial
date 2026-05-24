@@ -1084,7 +1084,7 @@ export const steps: Step[] = [
       <div className="space-y-4">
         <Section title="6.1 データ構造について">
           <p className="text-sm mb-4">
-            準備したサンプルデータ（テーブル名：<code className="bg-gray-100 dark:bg-gray-800 px-1 rounded">ProjectTasks</code>）は
+            準備したサンプルデータ（テーブル名：<code className="bg-gray-100 dark:bg-gray-800 px-1 rounded">ProjectTaskTable</code>）は
             <strong>ピボット形式</strong>（月などの項目が列として横に並ぶ形式。雑然データとも呼ぶ）です。
             Power BI での分析には不適切なため、整然データに変換します。
           </p>
@@ -1158,7 +1158,7 @@ export const steps: Step[] = [
 
         <Section title="6.2 Power Query エディタを開く">
           <div className="space-y-3 text-sm">
-            <p>「読み込む」ではなく <strong>「データ変換」</strong> をクリックすると Power Query エディタが開きます。</p>
+            <p>5章の最後で、「読み込む」ではなく <strong>「データ変換」</strong> をクリックすると Power Query エディタが開きます。</p>
             <p className="text-gray-500 dark:text-gray-400">「読み込む」を押してしまった場合は、ホームタブの <strong>「データの変換」</strong> から開けます。</p>
             {/* Power Query エディタ レイアウト図 */}
             <div>
@@ -1208,27 +1208,38 @@ export const steps: Step[] = [
           </div>
         </Section>
 
-        <Section title="6.4 列のリネームとデータ型の確認">
+        <Section title="6.4 列のリネームとデータ型の変更">
           <div className="space-y-3 text-sm">
             <div>
               <p className="font-semibold mb-2">列のリネーム</p>
               <p>ピボット解除後に「属性」と「値」という列が自動生成されます。これは、ピボット解除によって「元の列名（2022/01/01 など）」が「属性」列に、「元のセルの数値」が「値」列に格納されるためです：</p>
               <ul className="mt-1 space-y-1 ml-4">
-                <li>・「属性」を右クリック → <strong>「名前変更」</strong> → 「月」</li>
+                <li>・「属性」を右クリック → <strong>「名前変更」</strong> → 「年月」</li>
                 <li>・「値」を右クリック → <strong>「名前変更」</strong> → 「工数」</li>
               </ul>
             </div>
             <div>
-              <p className="font-semibold mb-2">データ型の確認</p>
-              <ul className="space-y-1">
-                <li>・「月」列を選択し、データ型を <strong>「日付」</strong> に設定（日付型にすることで、Power BI の時系列グラフで日付順に正しく並びます）</li>
-                <li>・「工数」列を選択し、データ型を <strong>「整数」</strong> に設定（工数は小数にならないため整数型を指定します）</li>
-              </ul>
-              <p className="mt-2">設定が終わったら <strong>「閉じて適用」</strong> をクリック</p>
+              <p className="font-semibold mb-2">データ型の変更と確認</p>
+              <div className="space-y-3">
+                <div className="p-3 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-700 rounded-lg">
+                  <p className="font-medium mb-2">「年月」列 ― 日付型に変更</p>
+                  <ol className="space-y-1 list-decimal list-inside ml-2">
+                    <li>「年月」列ヘッダー左端の <strong>データ型アイコン</strong>（「ABC」や「123」などが表示されている箇所）をクリック</li>
+                    <li>ドロップダウンから <strong>「日付」</strong> を選択</li>
+                    <li>「列の型の変更」ダイアログが表示されたら <strong>「現在のものを置換」</strong> をクリック</li>
+                  </ol>
+                  <p className="text-xs text-blue-600 dark:text-blue-400 mt-2">日付型にすることで、Power BI の時系列グラフで日付順に正しく並びます</p>
+                </div>
+                <div className="p-3 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg">
+                  <p className="font-medium mb-1">「工数」列 ― 整数型であることを確認</p>
+                  <p>「工数」列のデータ型アイコンが <strong>「123」（整数）</strong> になっていることを確認してください。すでに整数型になっているので変更は不要です。</p>
+                </div>
+              </div>
+              <p className="mt-2">確認が終わったら <strong>「閉じて適用」</strong> をクリック</p>
             </div>
             <div>
               <p className="font-semibold mb-2">最終的なデータ構造</p>
-              <CodeBlock code={`プロジェクト | タスク      | 月          | 工数
+              <CodeBlock code={`プロジェクト | タスク      | 年月        | 工数
 プロジェクトA | 要件定義    | 2022/01/01 | 14
 プロジェクトA | 要件定義    | 2022/02/01 | 8
 ...`} />
@@ -1355,7 +1366,7 @@ export const steps: Step[] = [
             <ol className="space-y-2 list-decimal list-inside">
               <li>キャンバスの空きスペースをクリック（グラフ以外の場所）</li>
               <li>視覚化ペインから <strong>「テーブル」（📋）</strong> アイコンをクリック</li>
-              <li>フィールドペインから「タスク」「月」「工数」をそれぞれドラッグ</li>
+              <li>フィールドペインから「タスク」「年月」「工数」をそれぞれドラッグ</li>
               <li>テーブルの端をドラッグしてサイズを調整</li>
             </ol>
             <div className="overflow-x-auto">
@@ -1640,11 +1651,11 @@ export const steps: Step[] = [
         {[
           {
             q: 'Power Query でエラーが出てピボット解除できない',
-            a: 'データ型を確認してください。「月」列が数値になっていないか確認し、必要に応じて日付型に設定してください。',
+            a: 'データ型を確認してください。「年月」列が数値になっていないか確認し、必要に応じて日付型に設定してください。',
           },
           {
             q: '月の順序が1月から5月ではなく、ランダムになっている',
-            a: '「月」列をソートします。Power Query で「昇順」を選択し、カスタムソートで月の順序を指定できます。',
+            a: '「年月」列をソートします。Power Query で「昇順」を選択し、カスタムソートで月の順序を指定できます。',
           },
           {
             q: 'レポートが重くなってきた',
