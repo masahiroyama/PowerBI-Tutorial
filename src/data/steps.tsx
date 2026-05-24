@@ -710,6 +710,20 @@ export const steps: Step[] = [
               </div>
             </div>
 
+            {/* 手順5: ファイルを保存 */}
+            <div>
+              <p className="font-semibold mb-2">⑤ ファイルを <strong>project_tasks.xlsx</strong> という名前で保存</p>
+              <ol className="space-y-1 text-xs text-gray-700 dark:text-gray-300 ml-4 list-decimal">
+                <li><strong>Ctrl+Shift+S</strong>（または「ファイル」→「名前を付けて保存」）を押す</li>
+                <li>保存場所：デスクトップなど分かりやすい場所を選択</li>
+                <li>ファイル名に <code className="bg-gray-100 dark:bg-gray-800 px-1 rounded">project_tasks</code> と入力</li>
+                <li>ファイルの種類が <strong>「Excel ブック（*.xlsx）」</strong> になっていることを確認して「保存」</li>
+              </ol>
+              <div className="mt-2 p-2 bg-green-50 dark:bg-green-900/20 border border-green-300 dark:border-green-700 rounded text-xs">
+                ✅ これで §5 のデータ取得で使う Excel ファイルの準備が完了です。
+              </div>
+            </div>
+
           </div>
         </Section>
 
@@ -898,7 +912,7 @@ export const steps: Step[] = [
                       { num: '①', color: 'text-yellow-700 dark:text-yellow-300', name: '左側ナビゲーション', role: 'レポート・テーブル・モデルの 3 ビューを切り替え', usage: '§8.1 でレポートビューに切り替え' },
                       { num: '②', color: 'text-indigo-700 dark:text-indigo-300', name: 'リボン', role: 'データ取得・ビジュアル追加などの操作ボタン群（タブ形式）', usage: '§5.2 でホームタブの「データを取得」を使用' },
                       { num: '③', color: 'text-green-700 dark:text-green-300', name: 'キャンバス', role: 'グラフ・テーブルを配置するメインの作業エリア', usage: '§8.2〜8.5 でビジュアルを配置' },
-                      { num: '④', color: 'text-pink-700 dark:text-pink-300', name: '視覚化ペイン', role: 'グラフの種類を選択し、書式（色・タイトル等）を設定するエリア', usage: '§8.2〜8.5 でグラフ種類選択、§8.3 で書式設定' },
+                      { num: '④', color: 'text-pink-700 dark:text-pink-300', name: '視覚化ペイン', role: 'グラフの種類を選択し、書式（色・タイトル等）を設定するエリア', usage: '§8.2〜8.5 で使用' },
                       { num: '⑤', color: 'text-orange-700 dark:text-orange-300', name: 'フィールドペイン', role: '視覚化ペインの下部。X軸・Y軸・凡例などの枠にデータペインからフィールドをドラッグして割り当てる', usage: '§8.2〜8.5 で各フィールドをドラッグ' },
                       { num: '⑥', color: 'text-purple-700 dark:text-purple-300', name: 'データペイン', role: '読み込んだテーブルとフィールドの一覧。フィールドペインの各枠にドラッグする元になる', usage: '§8.2〜8.5 でフィールドをドラッグ' },
                     ].map(({ num, color, name, role, usage }) => (
@@ -944,9 +958,18 @@ export const steps: Step[] = [
               </div>
             </div>
 
-            {/* ③ ナビゲーター */}
+            {/* ③ ファイルを開く */}
             <div>
-              <p className="font-semibold mb-2">③ ナビゲーター（ファイル内のテーブル一覧）で「ProjectTasks」にチェックを入れて「データの変換」</p>
+              <p className="font-semibold mb-2">③ ファイル選択ダイアログで <strong>project_tasks.xlsx</strong> を開く</p>
+              <p className="text-xs text-gray-600 dark:text-gray-400 mb-2">デスクトップなど保存先に移動し、§3 で作成した <strong>project_tasks.xlsx</strong> を選択して「開く」をクリックします。</p>
+              <div className="p-2 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded text-xs">
+                💡 ファイルが SharePoint Online 上にある場合は <strong>§5.3</strong> を参照してください。
+              </div>
+            </div>
+
+            {/* ④ ナビゲーター */}
+            <div>
+              <p className="font-semibold mb-2">④ ナビゲーター（ファイル内のテーブル一覧）で「ProjectTasks」にチェックを入れて「データの変換」</p>
               <div className="overflow-x-auto">
                 <img
                   src={`${import.meta.env.BASE_URL}images/step5-2-3-navigator.png`}
@@ -1156,16 +1179,16 @@ export const steps: Step[] = [
 
             {/* 推奨手順 */}
             <div className="p-3 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg">
-              <p className="font-semibold text-green-800 dark:text-green-300 mb-3">✅ 推奨手順：「他の列のピボット解除」を使う方法</p>
+              <p className="font-semibold text-green-800 dark:text-green-300 mb-3">✅ 推奨手順：「その他の列のピボット解除」を使う方法</p>
 
               {/* 手順1: Ctrl+クリックで2列選択 → 右クリック */}
               <div className="mb-3">
                 <p className="font-medium mb-2">① 「プロジェクト」列をクリック、続けて <strong>Ctrl+クリック</strong> で「タスク」列も選択（2列同時選択）</p>
-                <p className="font-medium mb-2">② いずれかの列ヘッダーを右クリック → 「他の列のピボット解除」</p>
+                <p className="font-medium mb-2">② 「プロジェクト」または「タスク」の列ヘッダーを右クリック → 「他の列のピボット解除」</p>
                 <div className="overflow-x-auto">
                   <img
                     src={`${import.meta.env.BASE_URL}images/step6-3-1-other-columns.png`}
-                    alt="プロジェクト・タスク列を選択して右クリック →「他の列のピボット解除」を選択"
+                    alt="プロジェクト・タスク列を選択して右クリック →「その他の列のピボット解除」を選択"
                     className="rounded border border-gray-300 dark:border-gray-600"
                   />
                 </div>
@@ -1327,20 +1350,7 @@ export const steps: Step[] = [
           </div>
         </Section>
 
-        <Section title="8.3 グラフの書式設定">
-          <div className="space-y-3 text-sm">
-            <p>グラフをクリックした後、視覚化ペインの「書式」タブ（🎨 ブラシアイコン）をクリックします。</p>
-            <div className="overflow-x-auto">
-              <img
-                src={`${import.meta.env.BASE_URL}images/step8-3-1-format.png`}
-                alt="視覚化ペインの書式タブでタイトルと凡例の位置を設定"
-                className="rounded border border-gray-300 dark:border-gray-600"
-              />
-            </div>
-          </div>
-        </Section>
-
-        <Section title="8.4 テーブルの作成：詳細データの表示">
+        <Section title="8.3 テーブルの作成：詳細データの表示">
           <div className="space-y-3 text-sm">
             <ol className="space-y-2 list-decimal list-inside">
               <li>キャンバスの空きスペースをクリック（グラフ以外の場所）</li>
@@ -1350,7 +1360,7 @@ export const steps: Step[] = [
             </ol>
             <div className="overflow-x-auto">
               <img
-                src={`${import.meta.env.BASE_URL}images/step8-4-1-table-result.png`}
+                src={`${import.meta.env.BASE_URL}images/step8-3-1-table-result.png`}
                 alt="キャンバスに配置したテーブルの完成イメージ"
                 className="rounded border border-gray-300 dark:border-gray-600"
               />
@@ -1358,7 +1368,7 @@ export const steps: Step[] = [
           </div>
         </Section>
 
-        <Section title="8.5 スライサーの追加：インタラクティブなフィルタリング">
+        <Section title="8.4 スライサーの追加：インタラクティブなフィルタリング">
           <div className="space-y-3 text-sm">
             <ol className="space-y-2 list-decimal list-inside">
               <li>キャンバスの上部の空きスペースをクリック</li>
@@ -1368,7 +1378,7 @@ export const steps: Step[] = [
             </ol>
             <div className="overflow-x-auto">
               <img
-                src={`${import.meta.env.BASE_URL}images/step8-5-1-slicer-result.png`}
+                src={`${import.meta.env.BASE_URL}images/step8-4-1-slicer-result.png`}
                 alt="キャンバスに配置したスライサーの完成イメージ"
                 className="rounded border border-gray-300 dark:border-gray-600"
               />
