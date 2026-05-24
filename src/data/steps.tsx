@@ -612,7 +612,7 @@ export const steps: Step[] = [
 
         <Section title="3.1 テーブル機能とは">
           <p className="text-sm">
-            テーブル機能は、Excel のデータを<strong>構造化された形式</strong>に変換する機能です。
+            テーブル機能は、列に名前をつけ、データの範囲をひとまとまりとして Excel に認識させる機能です。
             通常のセル範囲とは異なり、多くの利点が得られます。
           </p>
         </Section>
@@ -641,7 +641,16 @@ export const steps: Step[] = [
                   </div>
                 </div>
               </div>
-              <p className="mt-2 text-green-700 dark:text-green-400">→ 新しい行を追加すると自動的に計算対象に含まれる</p>
+              <div className="mt-3 grid grid-cols-2 gap-3 text-xs">
+                <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-700 rounded p-2">
+                  <p className="font-semibold text-red-700 dark:text-red-300 mb-1">❌ 通常の参照：行を追加したら式も直す必要がある</p>
+                  <p className="text-gray-600 dark:text-gray-400">B101 に新しいデータを入力しても <span className="font-mono">B2:B100</span> のままなので、B101 は合計に含まれない。式を <span className="font-mono">B2:B101</span> に手動で修正する必要がある。</p>
+                </div>
+                <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-700 rounded p-2">
+                  <p className="font-semibold text-green-700 dark:text-green-300 mb-1">✅ テーブルの式：式を変えなくても自動で含まれる</p>
+                  <p className="text-gray-600 dark:text-gray-400">テーブルの末尾に行を追加すると、テーブルの範囲が自動的に広がる。<span className="font-mono">Sales[Amount]</span> はテーブル全体を指すので、式はそのままで新しいデータも合計に含まれる。</p>
+                </div>
+              </div>
             </div>
 
             <div>
@@ -649,15 +658,9 @@ export const steps: Step[] = [
               <ul className="space-y-1 ml-4">
                 <li>・ヘッダー行を自動認識</li>
                 <li>・表の終わりを自動判定</li>
-                <li>・データ構造の変更に対応しやすい</li>
-              </ul>
-            </div>
-
-            <div>
-              <p className="font-semibold mb-1">✅ データの一貫性が保たれる</p>
-              <ul className="space-y-1 ml-4">
-                <li>・列名が固定されるため、誤操作による列の削除を防止</li>
-                <li>・自動的に行のスタイルが統一される</li>
+                <li>・行を追加するとテーブルの範囲が自動拡張されるため、Power BI の次回更新時に新しいデータが自動で取り込まれる</li>
+                <li>・列を追加しても Power BI の「更新」だけで自動的に取り込まれる</li>
+                <li>・テーブルをシート内で移動しても、テーブル名で接続しているため Power BI の設定を変更しなくてよい</li>
               </ul>
             </div>
           </div>
@@ -789,16 +792,7 @@ export const steps: Step[] = [
           </div>
         </Section>
 
-        <Section title="3.4 テーブルでのデータ追加">
-          <p className="text-sm mb-2">テーブルの最後の行の下に新しいデータを入力すると、自動的にテーブルが拡張されます。</p>
-          <ul className="text-sm space-y-1">
-            <li>✅ スタイルが自動適用される</li>
-            <li>✅ テーブル内の式が自動的に新しい行に拡張される</li>
-            <li>✅ Power BI が最新のデータを認識する</li>
-          </ul>
-        </Section>
-
-        <Section title="3.5 テーブルはいつ使うべき？">
+        <Section title="3.4 テーブルはいつ使うべき？">
           <div className="grid grid-cols-2 gap-4 text-sm">
             <div>
               <p className="font-semibold text-green-700 dark:text-green-400 mb-2">使うべき場合 ✅</p>
