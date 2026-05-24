@@ -666,97 +666,43 @@ export const steps: Step[] = [
           </div>
         </Section>
 
-        <Section title="3.3 テーブルの作成方法（図解）">
+        <Section title="3.3 テーブルの作成方法（実践）">
+          <p className="text-sm text-gray-700 dark:text-gray-300 mb-4">
+            ダウンロードした <code className="bg-gray-100 dark:bg-gray-800 px-1 rounded">sample-data.xlsx</code> を開き、以下の手順でテーブルに変換して保存してみてください。
+          </p>
           <div className="space-y-4 text-sm">
 
             {/* 手順1: データ選択 */}
             <div>
               <p className="font-semibold mb-2">① 見出し行を含めてデータ範囲全体を選択</p>
-              <div className="border border-gray-400 dark:border-gray-500 rounded overflow-hidden text-xs font-mono bg-white dark:bg-gray-900 max-w-xs">
-                <div className="flex bg-gray-200 dark:bg-gray-700 border-b border-gray-400">
-                  <div className="w-5 border-r border-gray-400 text-center py-0.5 text-gray-400"></div>
-                  {[['A','w-20'],['B','w-9'],['C','w-9']].map(([col,w]) => (
-                    <div key={col} className={`${w} border-r border-gray-400 text-center py-0.5 font-bold bg-blue-200 dark:bg-blue-900/60 text-blue-800 dark:text-blue-200`}>{col}</div>
-                  ))}
-                  <div className="text-gray-400 px-2 py-0.5">…</div>
-                </div>
-                {[['タスク','1月','2月'],['営業報告','10','12'],['データ分析','8','8'],['…','…','…']].map((row, i) => (
-                  <div key={i} className="flex border-b border-gray-300 dark:border-gray-600">
-                    <div className="w-5 border-r border-gray-400 text-center py-0.5 bg-blue-200 dark:bg-blue-900/60 text-blue-700 dark:text-blue-300 font-bold">{i+1}</div>
-                    {row.map((cell, j) => (
-                      <div key={j} className={`border-r border-blue-300 dark:border-blue-600 px-1 py-0.5 bg-blue-100 dark:bg-blue-900/30 text-blue-900 dark:text-blue-200 ${j===0?'w-20':'w-9'}`}>{cell}</div>
-                    ))}
-                    <div className="text-gray-400 px-2 py-0.5">…</div>
-                  </div>
-                ))}
+              <div className="overflow-x-auto">
+                <img src={`${import.meta.env.BASE_URL}images/step3-1-select-range.png`} alt="データ範囲を選択した状態" className="rounded border border-gray-300 dark:border-gray-600" />
               </div>
-              <p className="text-xs text-blue-600 dark:text-blue-400 mt-1">A1〜データ最終行・最終列まで青く選択された状態にする（ショートカット：A1 をクリック → Ctrl+Shift+End）</p>
+              <p className="text-xs text-blue-600 dark:text-blue-400 mt-1">A3〜データ最終行・最終列まで青く選択された状態にする（ショートカット：A3 をクリック → Ctrl+Shift+End）</p>
             </div>
 
             {/* 手順2: 挿入→テーブル */}
             <div>
               <p className="font-semibold mb-2">② 「挿入」タブ → 「テーブル」をクリック</p>
-              <div className="border border-gray-400 dark:border-gray-500 rounded overflow-hidden text-xs bg-white dark:bg-gray-900">
-                <div className="flex bg-gray-100 dark:bg-gray-700 border-b border-gray-300 dark:border-gray-600 overflow-x-auto">
-                  {['ファイル','ホーム','挿入','ページレイアウト','数式','データ'].map(tab => (
-                    <div key={tab} className={`px-3 py-1.5 whitespace-nowrap ${tab==='挿入' ? 'bg-green-700 text-white font-bold' : 'text-gray-500 dark:text-gray-400'}`}>{tab}</div>
-                  ))}
-                </div>
-                <div className="p-2 flex gap-2">
-                  <div className="flex flex-col items-center p-2 rounded border-2 border-yellow-400 bg-yellow-50 dark:bg-yellow-900/20">
-                    <span className="text-xl">📋</span>
-                    <span className="font-bold text-yellow-700 dark:text-yellow-300 text-xs mt-0.5">テーブル</span>
-                  </div>
-                  <div className="flex flex-col items-center p-2 text-gray-300 dark:text-gray-600"><span className="text-xl">📊</span><span className="text-xs">グラフ</span></div>
-                  <div className="flex flex-col items-center p-2 text-gray-300 dark:text-gray-600"><span className="text-xl">🖼️</span><span className="text-xs">図</span></div>
-                </div>
+              <div className="overflow-x-auto">
+                <img src={`${import.meta.env.BASE_URL}images/step3-2-insert-table.png`} alt="挿入タブのテーブルボタン" className="rounded border border-gray-300 dark:border-gray-600" />
               </div>
             </div>
 
             {/* 手順3: ダイアログ確認 */}
             <div>
               <p className="font-semibold mb-2">③ ダイアログを確認して「OK」をクリック</p>
-              <div className="border-2 border-gray-400 dark:border-gray-500 rounded-lg overflow-hidden shadow-md max-w-xs text-sm bg-white dark:bg-gray-800">
-                <div className="bg-gray-200 dark:bg-gray-700 px-3 py-2 font-bold text-gray-700 dark:text-gray-200">テーブルの作成</div>
-                <div className="p-4 space-y-3 text-xs">
-                  <div className="flex items-center gap-2">
-                    <div className="w-4 h-4 border-2 border-blue-500 bg-blue-100 dark:bg-blue-900/40 rounded-sm flex items-center justify-center shrink-0">
-                      <span className="text-blue-600 dark:text-blue-300 font-bold">✓</span>
-                    </div>
-                    <span>先頭行をテーブルの見出しとして使用する</span>
-                  </div>
-                  <p className="text-green-600 dark:text-green-400">↑ チェックが入っていることを確認してから OK をクリック</p>
-                  <div className="flex justify-end gap-2 pt-1 border-t border-gray-200 dark:border-gray-600">
-                    <button className="px-4 py-1.5 bg-blue-600 text-white rounded font-medium">OK</button>
-                    <button className="px-4 py-1.5 border border-gray-300 dark:border-gray-600 rounded text-gray-600 dark:text-gray-400">キャンセル</button>
-                  </div>
-                </div>
+              <div className="overflow-x-auto">
+                <img src={`${import.meta.env.BASE_URL}images/step3-3-table-dialog.png`} alt="テーブルの作成ダイアログ" className="rounded border border-gray-300 dark:border-gray-600" />
               </div>
+              <p className="text-xs text-green-600 dark:text-green-400 mt-1">「先頭行をテーブルの見出しとして使用する」にチェックが入っていることを確認してから OK をクリック</p>
             </div>
 
             {/* 手順4: テーブルデザインタブ */}
             <div>
-              <p className="font-semibold mb-2">④ 「テーブルデザイン」タブでテーブル名を設定</p>
-              <div className="border border-gray-400 dark:border-gray-500 rounded overflow-hidden text-xs bg-white dark:bg-gray-900">
-                <div className="flex bg-gray-100 dark:bg-gray-700 border-b border-gray-300 dark:border-gray-600 overflow-x-auto">
-                  {['ファイル','ホーム','挿入','データ'].map(tab => (
-                    <div key={tab} className="px-2 py-1.5 text-gray-400 dark:text-gray-500 whitespace-nowrap shrink-0">{tab}</div>
-                  ))}
-                  <div className="px-3 py-1.5 bg-teal-600 text-white font-bold whitespace-nowrap shrink-0">テーブルデザイン</div>
-                </div>
-                <div className="p-3 flex items-start gap-4">
-                  <div className="border-2 border-yellow-400 bg-yellow-50 dark:bg-yellow-900/20 rounded-lg p-3 shrink-0">
-                    <p className="text-xs text-yellow-700 dark:text-yellow-400 font-bold mb-1">👆 ここを変更！</p>
-                    <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">テーブル名：</p>
-                    <div className="bg-white dark:bg-gray-800 border-2 border-blue-400 rounded px-2 py-1 font-mono">Sales</div>
-                    <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">（初期値：テーブル1）</p>
-                  </div>
-                  <div className="text-gray-300 dark:text-gray-600 text-xs space-y-1 pt-6">
-                    <p>縞模様（行）</p>
-                    <p>縞模様（列）</p>
-                    <p>集計行</p>
-                  </div>
-                </div>
+              <p className="font-semibold mb-2">④ 「テーブルデザイン」タブでテーブル名「ProjectTaskTable」を設定</p>
+              <div className="overflow-x-auto">
+                <img src={`${import.meta.env.BASE_URL}images/step3-4-table-design.png`} alt="テーブルデザインタブのテーブル名入力欄" className="rounded border border-gray-300 dark:border-gray-600" />
               </div>
               <div className="mt-2 p-2 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-300 dark:border-yellow-700 rounded text-xs">
                 <span className="font-bold text-yellow-700 dark:text-yellow-400">⚠️ ポイント：</span>
@@ -764,31 +710,6 @@ export const steps: Step[] = [
               </div>
             </div>
 
-          </div>
-
-          <div className="mt-6 border-t border-gray-200 dark:border-gray-700 pt-4">
-            <p className="text-sm font-semibold mb-3">サンプルデータへの適用</p>
-            <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
-              ダウンロードした <code className="bg-gray-100 dark:bg-gray-800 px-1 rounded">sample-data.xlsx</code> を開き、以下の手順でテーブルに変換して保存します。
-            </p>
-            <div className="space-y-3 text-sm">
-              {[
-                { n: 1, title: 'データ範囲（A1〜AL31）を選択', desc: 'A1 をクリック → Ctrl+Shift+End で一括選択' },
-                { n: 2, title: '「挿入」タブ → 「テーブル」をクリック', desc: null },
-                { n: 3, title: 'ダイアログを確認して OK', desc: '「先頭行をテーブルの見出しとして使用する」にチェック・範囲が =$A$1:$AL$31 であることを確認' },
-                { n: 4, title: '「テーブルデザイン」タブでテーブル名を変更', desc: 'リボン左端の入力欄を ProjectTasks に書き換えて Enter' },
-                { n: 5, title: 'ファイルを保存（Ctrl+S）', desc: 'ファイル名：project_tasks.xlsx　保存場所：デスクトップ推奨' },
-              ].map(({ n, title, desc }) => (
-                <div key={n} className="flex gap-3 items-start p-3 border border-gray-200 dark:border-gray-700 rounded-lg">
-                  <span className="bg-blue-600 text-white text-xs font-bold rounded-full w-6 h-6 flex items-center justify-center shrink-0 mt-0.5">{n}</span>
-                  <div>
-                    <p className="font-medium">{title}</p>
-                    {desc && <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">{desc}</p>}
-                  </div>
-                </div>
-              ))}
-            </div>
-            <p className="text-sm text-green-700 dark:text-green-400 mt-4">以上で、Power BI への取り込み準備が完了です。</p>
           </div>
         </Section>
 
@@ -799,7 +720,6 @@ export const steps: Step[] = [
               <ul className="space-y-1">
                 <li>・定期的に更新されるデータ</li>
                 <li>・Power BI や他の BI ツールに連携するデータ</li>
-                <li>・複数人で共有するデータ</li>
                 <li>・計算式を含むデータ</li>
               </ul>
             </div>
