@@ -91,21 +91,41 @@ const ws = wb.addWorksheet('ProjectTasks')
 ws.getCell('A1').value = 'プロジェクト工数計画'
 ws.getCell('A1').font = { size: 16, bold: true }
 
-ws.addTable({
-  name: 'ProjectTasksTable',
-  ref: 'A3',
-  headerRow: true,
-  totalsRow: false,
-  style: {
-    theme: 'TableStyleMedium2',
-    showRowStripes: true,
-  },
-  columns: [
-    { name: 'プロジェクト', filterButton: true },
-    { name: 'タスク',       filterButton: true },
-    ...dates.map(d => ({ name: d.label, filterButton: true })),
-  ],
-  rows: dataRows,
+const colCount = 2 + dates.length
+
+const thinBorder = { style: 'thin' }
+const mediumBorder = { style: 'medium' }
+
+function applyBorders(row, rowIndex, totalRows) {
+  const isHeader = rowIndex === 0
+  const isLastRow = rowIndex === totalRows - 1
+  for (let c = 1; c <= colCount; c++) {
+    const cell = row.getCell(c)
+    const isFirstCol = c === 1
+    const isLastCol = c === colCount
+    cell.border = {
+      top:    isHeader   ? mediumBorder : thinBorder,
+      bottom: isLastRow  ? mediumBorder : thinBorder,
+      left:   isFirstCol ? mediumBorder : thinBorder,
+      right:  isLastCol  ? mediumBorder : thinBorder,
+    }
+    if (isHeader) {
+      cell.font = { bold: true }
+      cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFD9E1F2' } }
+    }
+  }
+}
+
+// ヘッダー行（3行目）
+const headerRow = ws.getRow(3)
+headerRow.values = ['プロジェクト', 'タスク', ...dates.map(d => d.label)]
+applyBorders(headerRow, 0, dataRows.length + 1)
+
+// データ行（4行目以降）
+dataRows.forEach((row, i) => {
+  const wsRow = ws.getRow(4 + i)
+  wsRow.values = row
+  applyBorders(wsRow, i + 1, dataRows.length + 1)
 })
 
 ws.getColumn(1).width = 16
