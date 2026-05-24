@@ -808,27 +808,113 @@ export const steps: Step[] = [
     content: (
       <div className="space-y-4">
         <Section title="5.1 Power BI Desktop を起動">
-          <p className="text-sm mb-3">Power BI Desktop を開くと、以下のような画面が表示されます。</p>
-          {/* Power BI 起動画面 */}
-          <div className="border border-gray-400 dark:border-gray-500 rounded overflow-hidden text-xs bg-white dark:bg-gray-900">
-            <div className="flex bg-gray-800 text-white text-xs">
-              {['ファイル','ホーム','挿入','モデリング','表示','最適化','ヘルプ'].map(tab => (
-                <div key={tab} className={`px-3 py-1.5 whitespace-nowrap ${tab==='ホーム' ? 'border-b-2 border-yellow-400 text-yellow-300' : 'text-gray-300'}`}>{tab}</div>
-              ))}
-            </div>
-            <div className="bg-gray-700 p-2 flex gap-2 items-center text-xs text-gray-200 border-b border-gray-600">
-              <div className="flex flex-col items-center p-1.5 rounded border border-gray-500 text-gray-300 cursor-pointer">
-                <span>💾</span><span className="mt-0.5">保存</span>
-              </div>
-              <div className="flex flex-col items-center p-1.5 rounded border border-gray-500 text-gray-300 cursor-pointer">
-                <span>↩️</span><span className="mt-0.5">元に戻す</span>
+          <div className="space-y-6 text-sm">
+
+            {/* ① 起動 → スタート画面で「空のレポート」を選択 */}
+            <div>
+              <p className="font-semibold mb-2">① Power BI Desktop を起動し、「空のレポート」をクリックして新規作成</p>
+              <div className="overflow-x-auto">
+                <img
+                  src={`${import.meta.env.BASE_URL}images/step5-1-startup.png`}
+                  alt="Power BI Desktop のスタート画面。「空のレポート」を選択する"
+                  className="rounded border border-gray-300 dark:border-gray-600"
+                />
               </div>
             </div>
-            <div className="flex bg-gray-50 dark:bg-gray-800 min-h-20 items-center justify-center">
-              <p className="text-gray-400 text-xs">← 左アイコンで「レポート」「データ」「モデル」を切替</p>
+
+            {/* ② 編集画面 */}
+            <div>
+              <p className="font-semibold mb-2">② レポートの編集画面が開きます</p>
+              <div className="overflow-x-auto">
+                <img
+                  src={`${import.meta.env.BASE_URL}images/step5-1-editor.png`}
+                  alt="Power BI Desktop レポート編集画面"
+                  className="rounded border border-gray-300 dark:border-gray-600"
+                />
+              </div>
+
+              {/* 画面構成の疑似レイアウト図 */}
+              <div className="mt-4 border border-gray-400 dark:border-gray-500 rounded overflow-hidden text-xs select-none bg-white dark:bg-gray-900">
+                {/* ② リボン */}
+                <div className="bg-indigo-100 dark:bg-indigo-900/40 border-b-2 border-indigo-300 dark:border-indigo-600 px-3 py-1.5 flex items-center gap-2">
+                  <span className="font-bold text-indigo-700 dark:text-indigo-300">② リボン</span>
+                  <span className="text-indigo-500 dark:text-indigo-400">ホーム ／ 挿入 ／ モデリング ／ 表示 …</span>
+                </div>
+                {/* 本体（左ナビ・キャンバス・右ペイン） */}
+                <div className="flex" style={{minHeight: '9rem'}}>
+                  {/* ① 左側ナビゲーション */}
+                  <div className="bg-yellow-50 dark:bg-yellow-900/20 border-r-2 border-yellow-300 dark:border-yellow-600 flex flex-col items-center justify-center gap-2 px-2 py-3">
+                    <span className="font-bold text-yellow-700 dark:text-yellow-300 [writing-mode:vertical-lr]">① 左側ナビ</span>
+                    <div className="space-y-1 text-center text-yellow-600 dark:text-yellow-400">
+                      <div className="bg-yellow-200 dark:bg-yellow-800 rounded px-1">📊</div>
+                      <div className="rounded px-1">🗂️</div>
+                      <div className="rounded px-1">🔗</div>
+                    </div>
+                  </div>
+                  {/* ③ キャンバス */}
+                  <div className="flex-1 bg-green-50 dark:bg-green-900/10 border-r-2 border-green-300 dark:border-green-700 flex flex-col items-center justify-center gap-2 p-3">
+                    <span className="font-bold text-green-700 dark:text-green-300">③ キャンバス</span>
+                    <div className="flex gap-2 flex-wrap justify-center">
+                      <div className="border border-green-400 dark:border-green-600 rounded px-2 py-1 text-green-600 dark:text-green-400">📈 折れ線グラフ</div>
+                      <div className="border border-green-400 dark:border-green-600 rounded px-2 py-1 text-green-600 dark:text-green-400">📋 テーブル</div>
+                      <div className="border border-green-400 dark:border-green-600 rounded px-2 py-1 text-green-600 dark:text-green-400">🔽 スライサー</div>
+                    </div>
+                    <span className="text-green-500 dark:text-green-500 text-xs">ビジュアルを配置する作業エリア</span>
+                  </div>
+                  {/* ④視覚化 ＋ ⑤フィールド（縦積み） ＋ ⑥データ（横並び） */}
+                  <div className="flex">
+                    <div className="flex flex-col border-r-2 border-purple-300 dark:border-purple-700">
+                      <div className="flex-1 bg-pink-50 dark:bg-pink-900/20 border-b-2 border-pink-300 dark:border-pink-700 flex flex-col items-center justify-center p-2 gap-1">
+                        <span className="font-bold text-pink-700 dark:text-pink-300 text-center">④ 視覚化</span>
+                        <span className="text-pink-500 dark:text-pink-400 text-center">グラフ選択・書式</span>
+                      </div>
+                      <div className="flex-1 bg-orange-50 dark:bg-orange-900/20 flex flex-col items-center justify-center p-2 gap-1">
+                        <span className="font-bold text-orange-700 dark:text-orange-300 text-center">⑤ フィールド</span>
+                        <span className="text-orange-500 dark:text-orange-400 text-center">X軸・Y軸・凡例…</span>
+                      </div>
+                    </div>
+                    <div className="flex-1 bg-purple-50 dark:bg-purple-900/20 flex flex-col items-center justify-center p-2 gap-1">
+                      <span className="font-bold text-purple-700 dark:text-purple-300 text-center">⑥ データ</span>
+                      <span className="text-purple-500 dark:text-purple-400 text-center">テーブル・</span>
+                      <span className="text-purple-500 dark:text-purple-400 text-center">フィールド一覧</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* 各エリアの説明テーブル */}
+              <div className="mt-4 overflow-x-auto">
+                <table className="w-full text-xs border-collapse">
+                  <thead>
+                    <tr className="bg-gray-100 dark:bg-gray-700">
+                      <th className="border border-gray-300 dark:border-gray-600 px-2 py-1.5 text-left whitespace-nowrap">#</th>
+                      <th className="border border-gray-300 dark:border-gray-600 px-2 py-1.5 text-left whitespace-nowrap">エリア</th>
+                      <th className="border border-gray-300 dark:border-gray-600 px-2 py-1.5 text-left">役割</th>
+                      <th className="border border-gray-300 dark:border-gray-600 px-2 py-1.5 text-left">本チュートリアルでの使用</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {[
+                      { num: '①', color: 'text-yellow-700 dark:text-yellow-300', name: '左側ナビゲーション', role: 'レポート・テーブル・モデルの 3 ビューを切り替え', usage: '§8.1 でレポートビューに切り替え' },
+                      { num: '②', color: 'text-indigo-700 dark:text-indigo-300', name: 'リボン', role: 'データ取得・ビジュアル追加などの操作ボタン群（タブ形式）', usage: '§5.2 でホームタブの「データを取得」を使用' },
+                      { num: '③', color: 'text-green-700 dark:text-green-300', name: 'キャンバス', role: 'グラフ・テーブルを配置するメインの作業エリア', usage: '§8.2〜8.5 でビジュアルを配置' },
+                      { num: '④', color: 'text-pink-700 dark:text-pink-300', name: '視覚化ペイン', role: 'グラフの種類を選択し、書式（色・タイトル等）を設定するエリア', usage: '§8.2〜8.5 でグラフ種類選択、§8.3 で書式設定' },
+                      { num: '⑤', color: 'text-orange-700 dark:text-orange-300', name: 'フィールドペイン', role: '視覚化ペインの下部。X軸・Y軸・凡例などの枠にデータペインからフィールドをドラッグして割り当てる', usage: '§8.2〜8.5 で各フィールドをドラッグ' },
+                      { num: '⑥', color: 'text-purple-700 dark:text-purple-300', name: 'データペイン', role: '読み込んだテーブルとフィールドの一覧。フィールドペインの各枠にドラッグする元になる', usage: '§8.2〜8.5 でフィールドをドラッグ' },
+                    ].map(({ num, color, name, role, usage }) => (
+                      <tr key={num} className="even:bg-gray-50 dark:even:bg-gray-800">
+                        <td className={`border border-gray-300 dark:border-gray-600 px-2 py-1.5 font-bold whitespace-nowrap ${color}`}>{num}</td>
+                        <td className={`border border-gray-300 dark:border-gray-600 px-2 py-1.5 font-semibold whitespace-nowrap ${color}`}>{name}</td>
+                        <td className="border border-gray-300 dark:border-gray-600 px-2 py-1.5 text-gray-700 dark:text-gray-300">{role}</td>
+                        <td className="border border-gray-300 dark:border-gray-600 px-2 py-1.5 text-gray-500 dark:text-gray-400">{usage}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
+
           </div>
-          <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">新しいレポートを作成する場合は、起動後そのまま進めます。</p>
         </Section>
 
         <Section title="5.2 Excel ファイルを取得">
@@ -837,95 +923,36 @@ export const steps: Step[] = [
             {/* ① データを取得 */}
             <div>
               <p className="font-semibold mb-2">① 「ホーム」タブで「データを取得」をクリック</p>
-              <div className="border border-gray-400 dark:border-gray-500 rounded overflow-hidden text-xs bg-white dark:bg-gray-900">
-                <div className="flex bg-gray-800 text-white">
-                  {['ファイル','ホーム','挿入','モデリング','表示'].map(tab => (
-                    <div key={tab} className={`px-3 py-1.5 whitespace-nowrap ${tab==='ホーム' ? 'border-b-2 border-yellow-400 text-yellow-300 font-bold' : 'text-gray-400'}`}>{tab}</div>
-                  ))}
-                </div>
-                <div className="p-2 bg-gray-700 flex gap-2">
-                  <div className="flex flex-col items-center p-2 rounded border-2 border-yellow-400 bg-yellow-900/40 cursor-pointer">
-                    <span className="text-xl">📂</span>
-                    <span className="font-bold text-yellow-300 text-xs mt-0.5">データを取得</span>
-                    <span className="text-yellow-300 text-xs">▼</span>
-                  </div>
-                  <div className="flex flex-col items-center p-2 text-gray-500"><span className="text-xl">🔄</span><span className="text-xs">更新</span></div>
-                  <div className="flex flex-col items-center p-2 text-gray-500"><span className="text-xl">⚙️</span><span className="text-xs">変換データ</span></div>
-                  <div className="flex flex-col items-center p-2 text-gray-500"><span className="text-xl">📊</span><span className="text-xs">発行</span></div>
-                </div>
+              <div className="overflow-x-auto">
+                <img
+                  src={`${import.meta.env.BASE_URL}images/step5-2-1-get-data.png`}
+                  alt="Power BI Desktop ホームタブの「データを取得」ボタン"
+                  className="rounded border border-gray-300 dark:border-gray-600"
+                />
               </div>
             </div>
 
             {/* ② Excel ブックを選択 */}
             <div>
               <p className="font-semibold mb-2">② 「Excel ブック」を選択</p>
-              <div className="border-2 border-gray-400 dark:border-gray-500 rounded-lg overflow-hidden shadow-md max-w-xs text-xs bg-white dark:bg-gray-800">
-                <div className="bg-gray-200 dark:bg-gray-700 px-3 py-2 font-bold text-gray-700 dark:text-gray-200 text-sm">データソースの選択</div>
-                <div className="p-3 space-y-1">
-                  <div className="flex items-center gap-2 p-1.5 rounded border-2 border-yellow-400 bg-yellow-50 dark:bg-yellow-900/20 cursor-pointer">
-                    <span className="text-lg">📗</span>
-                    <span className="font-bold text-yellow-700 dark:text-yellow-300">Excel ブック</span>
-                    <span className="ml-auto text-yellow-600 dark:text-yellow-400">← 選択！</span>
-                  </div>
-                  <div className="flex items-center gap-2 p-1.5 rounded text-gray-400 cursor-pointer"><span className="text-lg">🗄️</span><span>データベース</span></div>
-                  <div className="flex items-center gap-2 p-1.5 rounded text-gray-400 cursor-pointer"><span className="text-lg">☁️</span><span>SharePoint</span></div>
-                  <div className="flex items-center gap-2 p-1.5 rounded text-gray-400 cursor-pointer"><span className="text-lg">🌐</span><span>Web</span></div>
-                  <div className="text-gray-400 text-center py-1">…他多数</div>
-                </div>
+              <div className="overflow-x-auto">
+                <img
+                  src={`${import.meta.env.BASE_URL}images/step5-2-2-excel-source.png`}
+                  alt="データソースの選択ダイアログで「Excel ブック」を選択"
+                  className="rounded border border-gray-300 dark:border-gray-600"
+                />
               </div>
             </div>
 
             {/* ③ ナビゲーター */}
             <div>
               <p className="font-semibold mb-2">③ ナビゲーター（ファイル内のテーブル一覧）で「ProjectTasks」にチェックを入れて「データの変換」</p>
-              <div className="border-2 border-gray-400 dark:border-gray-500 rounded-lg overflow-hidden shadow-md text-xs bg-white dark:bg-gray-800">
-                <div className="bg-gray-200 dark:bg-gray-700 px-3 py-2 font-bold text-gray-700 dark:text-gray-200 text-sm">ナビゲーター</div>
-                <div className="flex">
-                  {/* 左パネル */}
-                  <div className="w-48 border-r border-gray-300 dark:border-gray-600 p-2">
-                    <div className="mb-2">
-                      <input className="border border-gray-300 dark:border-gray-600 rounded px-2 py-0.5 w-full text-xs bg-white dark:bg-gray-700 dark:text-gray-300" placeholder="🔍 検索..." readOnly />
-                    </div>
-                    <div className="space-y-1">
-                      <div className="flex items-center gap-1 text-gray-500 dark:text-gray-400">
-                        <span>▶</span>
-                        <span className="text-xs">📗 project_tasks.xlsx</span>
-                      </div>
-                      <div className="ml-4 flex items-center gap-2 p-1 rounded bg-blue-100 dark:bg-blue-900/40 border border-blue-300 dark:border-blue-600">
-                        <div className="w-3.5 h-3.5 border-2 border-blue-500 bg-blue-500 rounded-sm flex items-center justify-center shrink-0">
-                          <span className="text-white text-xs font-bold leading-none">✓</span>
-                        </div>
-                        <span className="font-bold text-blue-700 dark:text-blue-300">ProjectTasks</span>
-                        <span className="text-blue-500 dark:text-blue-400 ml-auto">←</span>
-                      </div>
-                    </div>
-                  </div>
-                  {/* 右パネル（プレビュー） */}
-                  <div className="flex-1 p-2">
-                    <p className="font-semibold text-gray-600 dark:text-gray-300 mb-1">プレビュー：ProjectTasks</p>
-                    <table className="text-xs border-collapse w-full">
-                      <thead>
-                        <tr className="bg-blue-50 dark:bg-blue-900/30">
-                          {['プロジェクト','タスク','2022/01/01','2022/02/01'].map(h => (
-                            <th key={h} className="border border-gray-300 dark:border-gray-600 px-1 py-0.5 text-left">{h}</th>
-                          ))}
-                          <th className="border border-gray-300 dark:border-gray-600 px-1 py-0.5">…</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {[['プロジェクトA','要件定義','14','8'],['プロジェクトA','設計','7','19'],['…','…','…','…']].map((row, i) => (
-                          <tr key={i}>{row.map((c,j) => <td key={j} className="border border-gray-300 dark:border-gray-600 px-1 py-0.5 text-gray-600 dark:text-gray-300">{c}</td>)}
-                          <td className="border border-gray-300 dark:border-gray-600 px-1 py-0.5 text-gray-400">…</td></tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-                <div className="flex justify-end gap-2 p-2 border-t border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-800">
-                  <button className="px-3 py-1 text-xs bg-blue-600 text-white rounded font-bold">データの変換</button>
-                  <button className="px-3 py-1 text-xs border border-gray-300 dark:border-gray-600 rounded text-gray-500 dark:text-gray-400">読み込む</button>
-                  <button className="px-3 py-1 text-xs border border-gray-300 dark:border-gray-600 rounded text-gray-500 dark:text-gray-400">キャンセル</button>
-                </div>
+              <div className="overflow-x-auto">
+                <img
+                  src={`${import.meta.env.BASE_URL}images/step5-2-3-navigator.png`}
+                  alt="ナビゲーターで ProjectTasks にチェックを入れて「データの変換」をクリック"
+                  className="rounded border border-gray-300 dark:border-gray-600"
+                />
               </div>
             </div>
 
@@ -973,18 +1000,12 @@ export const steps: Step[] = [
               </div>
               <div className="p-3 text-xs">
                 <p className="mb-2 text-gray-700 dark:text-gray-300">「データを取得」をクリックし、データソース一覧から <strong>「Web」</strong> を選択します。</p>
-                <div className="border-2 border-gray-300 dark:border-gray-500 rounded-lg overflow-hidden shadow-sm max-w-xs">
-                  <div className="bg-gray-200 dark:bg-gray-700 px-3 py-1.5 font-bold text-gray-700 dark:text-gray-200 text-xs">データソースの選択</div>
-                  <div className="p-2 space-y-1 bg-white dark:bg-gray-800">
-                    <div className="flex items-center gap-2 p-1.5 rounded text-gray-400"><span>📗</span><span>Excel ブック</span></div>
-                    <div className="flex items-center gap-2 p-1.5 rounded text-gray-400"><span>🗄️</span><span>データベース</span></div>
-                    <div className="flex items-center gap-2 p-1.5 rounded text-gray-400"><span>☁️</span><span>SharePoint</span></div>
-                    <div className="flex items-center gap-2 p-1.5 rounded border-2 border-yellow-400 bg-yellow-50 dark:bg-yellow-900/20 cursor-pointer">
-                      <span>🌐</span>
-                      <span className="font-bold text-yellow-700 dark:text-yellow-300">Web</span>
-                      <span className="ml-auto text-yellow-600 dark:text-yellow-400">← 選択！</span>
-                    </div>
-                  </div>
+                <div className="overflow-x-auto">
+                  <img
+                    src={`${import.meta.env.BASE_URL}images/step5-3-1-web-connector.png`}
+                    alt="データソースの選択ダイアログで「Web」を選択"
+                    className="rounded border border-gray-300 dark:border-gray-600"
+                  />
                 </div>
               </div>
             </div>
@@ -996,15 +1017,12 @@ export const steps: Step[] = [
                 URL を入力して接続・認証
               </div>
               <div className="p-3 space-y-2 text-xs">
-                <div className="border border-gray-300 dark:border-gray-600 rounded p-2 bg-white dark:bg-gray-800 max-w-sm">
-                  <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">URL</p>
-                  <div className="flex items-center gap-1 border border-blue-400 rounded px-2 py-1 bg-blue-50 dark:bg-blue-900/20 font-mono text-xs text-blue-700 dark:text-blue-300 break-all">
-                    https://contoso.sharepoint.com/sites/MySite/Shared Documents/project_tasks.xlsx
-                  </div>
-                  <div className="flex justify-end mt-2 gap-1">
-                    <button className="px-2 py-0.5 text-xs bg-blue-600 text-white rounded">OK</button>
-                    <button className="px-2 py-0.5 text-xs border border-gray-300 dark:border-gray-600 rounded text-gray-500">キャンセル</button>
-                  </div>
+                <div className="overflow-x-auto">
+                  <img
+                    src={`${import.meta.env.BASE_URL}images/step5-3-2-url-input.png`}
+                    alt="Web コネクターの URL 入力ダイアログ"
+                    className="rounded border border-gray-300 dark:border-gray-600"
+                  />
                 </div>
                 <p className="text-gray-700 dark:text-gray-300">認証ダイアログが開いたら <strong>「組織アカウント」</strong> を選択し、Microsoft 365 アカウントでサインインして「接続」をクリックします。</p>
               </div>
@@ -1122,45 +1140,12 @@ export const steps: Step[] = [
             {/* Power Query エディタ レイアウト図 */}
             <div>
               <p className="font-semibold mb-2 text-sm">Power Query エディタの画面構成：</p>
-              <div className="border border-gray-400 dark:border-gray-500 rounded overflow-hidden text-xs bg-white dark:bg-gray-900">
-                {/* リボン */}
-                <div className="flex bg-gray-700 text-white border-b border-gray-600 overflow-x-auto">
-                  {['ホーム','変換','列の追加','表示'].map(tab => (
-                    <div key={tab} className={`px-3 py-1.5 whitespace-nowrap ${tab==='ホーム' ? 'border-b-2 border-yellow-400 text-yellow-300' : 'text-gray-300'}`}>{tab}</div>
-                  ))}
-                </div>
-                <div className="flex" style={{minHeight:'6rem'}}>
-                  {/* 左パネル: クエリ一覧 */}
-                  <div className="w-28 border-r border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-800 p-2 shrink-0">
-                    <p className="font-bold text-gray-500 dark:text-gray-400 mb-1">クエリ</p>
-                    <div className="p-1 rounded bg-blue-100 dark:bg-blue-900/40 border border-blue-300 dark:border-blue-600 text-blue-700 dark:text-blue-300 font-bold text-xs">ProjectTasks</div>
-                  </div>
-                  {/* 中央: データプレビュー */}
-                  <div className="flex-1 p-2 overflow-x-auto">
-                    <p className="font-bold text-gray-500 dark:text-gray-400 mb-1">データプレビュー（中央）</p>
-                    <table className="text-xs border-collapse">
-                      <thead>
-                        <tr className="bg-gray-100 dark:bg-gray-700">
-                          {['プロジェクト','タスク','2022/01/01','2022/02/01','…'].map(h => (
-                            <th key={h} className="border border-gray-300 dark:border-gray-600 px-2 py-1 text-left font-semibold whitespace-nowrap">{h}</th>
-                          ))}
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>{['プロジェクトA','要件定義','14','8','…'].map((c,i) => <td key={i} className="border border-gray-300 dark:border-gray-600 px-2 py-0.5 whitespace-nowrap">{c}</td>)}</tr>
-                        <tr className="bg-gray-50 dark:bg-gray-800">{['…','…','…','…','…'].map((c,i) => <td key={i} className="border border-gray-300 dark:border-gray-600 px-2 py-0.5 text-gray-400">{c}</td>)}</tr>
-                      </tbody>
-                    </table>
-                  </div>
-                  {/* 右パネル: ステップ */}
-                  <div className="w-32 border-l border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-800 p-2 shrink-0">
-                    <p className="font-bold text-gray-500 dark:text-gray-400 mb-1">適用したステップ</p>
-                    <div className="space-y-1 text-xs text-gray-600 dark:text-gray-300">
-                      <div className="p-1 rounded bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600">ソース</div>
-                      <div className="p-1 rounded bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600">ナビゲーション</div>
-                    </div>
-                  </div>
-                </div>
+              <div className="overflow-x-auto">
+                <img
+                  src={`${import.meta.env.BASE_URL}images/step6-2-1-pq-editor.png`}
+                  alt="Power Query エディタの画面構成（クエリ一覧・データプレビュー・適用したステップ）"
+                  className="rounded border border-gray-300 dark:border-gray-600"
+                />
               </div>
             </div>
           </div>
@@ -1177,30 +1162,12 @@ export const steps: Step[] = [
               <div className="mb-3">
                 <p className="font-medium mb-2">① 「プロジェクト」列をクリック、続けて <strong>Ctrl+クリック</strong> で「タスク」列も選択（2列同時選択）</p>
                 <p className="font-medium mb-2">② いずれかの列ヘッダーを右クリック → 「他の列のピボット解除」</p>
-                <div className="border border-gray-300 dark:border-gray-600 rounded overflow-hidden text-xs bg-white dark:bg-gray-900 max-w-md">
-                  <table className="w-full border-collapse">
-                    <thead>
-                      <tr>
-                        <th className="border border-gray-300 dark:border-gray-600 px-2 py-1.5 text-left bg-blue-100 dark:bg-blue-900/40 text-blue-800 dark:text-blue-200 font-bold cursor-pointer">
-                          プロジェクト <span className="text-blue-500">✓</span>
-                        </th>
-                        <th className="border border-gray-300 dark:border-gray-600 px-2 py-1.5 text-left bg-blue-100 dark:bg-blue-900/40 text-blue-800 dark:text-blue-200 font-bold cursor-pointer relative">
-                          タスク <span className="text-blue-500">✓</span>
-                          <span className="absolute left-0 top-full bg-white dark:bg-gray-800 border border-gray-400 dark:border-gray-500 rounded shadow-lg p-1 text-left z-10 whitespace-nowrap" style={{minWidth:'10rem'}}>
-                            <div className="py-0.5 px-2 text-gray-500">フィルター</div>
-                            <div className="py-0.5 px-2 text-gray-500">列の削除</div>
-                            <div className="py-0.5 px-2 font-bold text-green-700 dark:text-green-400 bg-green-50 dark:bg-green-900/30">他の列のピボット解除 ←</div>
-                          </span>
-                        </th>
-                        {['2022/01/01','2022/02/01','…'].map(h => (
-                          <th key={h} className="border border-gray-300 dark:border-gray-600 px-2 py-1.5 text-left bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 whitespace-nowrap">{h}</th>
-                        ))}
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>{['プロジェクトA','要件定義','14','8','…'].map((c,i) => <td key={i} className="border border-gray-300 dark:border-gray-600 px-2 py-0.5 whitespace-nowrap">{c}</td>)}</tr>
-                    </tbody>
-                  </table>
+                <div className="overflow-x-auto">
+                  <img
+                    src={`${import.meta.env.BASE_URL}images/step6-3-1-other-columns.png`}
+                    alt="プロジェクト・タスク列を選択して右クリック →「他の列のピボット解除」を選択"
+                    className="rounded border border-gray-300 dark:border-gray-600"
+                  />
                 </div>
               </div>
 
@@ -1301,90 +1268,29 @@ export const steps: Step[] = [
       <div className="space-y-4">
         <Section title="8.0 完成イメージ">
           <p className="text-sm mb-3">このセクションで作成するレポートのレイアウトです。スライサーを操作するとグラフとテーブルが連動します。</p>
-          <div className="border-2 border-gray-300 dark:border-gray-600 rounded-lg p-3 bg-gray-50 dark:bg-gray-800 space-y-2">
-            <div className="border border-blue-300 dark:border-blue-600 rounded p-2 bg-white dark:bg-gray-700">
-              <p className="text-xs font-bold text-blue-600 dark:text-blue-300 mb-1.5">🔽 スライサー（タスク）</p>
-              <div className="flex flex-wrap gap-1.5">
-                {['要件定義', '設計', '開発', 'テスト', 'リリース', '課題設定', 'データ分析', '…'].map(t => (
-                  <span key={t} className="text-xs px-2 py-0.5 bg-blue-100 dark:bg-blue-900/40 rounded border border-blue-200 dark:border-blue-700 text-blue-700 dark:text-blue-300">
-                    {t}
-                  </span>
-                ))}
-              </div>
-            </div>
-            <div className="grid grid-cols-2 gap-2">
-              <div className="border border-yellow-300 dark:border-yellow-600 rounded p-2 bg-white dark:bg-gray-700 flex flex-col" style={{minHeight: '7rem'}}>
-                <p className="text-xs font-bold text-yellow-600 dark:text-yellow-300">📈 折れ線グラフ</p>
-                <p className="text-xs text-gray-400 mt-0.5 mb-1">タスク別の月ごとの工数推移</p>
-                <svg viewBox="0 0 120 55" className="flex-1 w-full">
-                  <line x1="10" y1="50" x2="115" y2="50" stroke="#d1d5db" strokeWidth="1"/>
-                  <line x1="10" y1="10" x2="10" y2="50" stroke="#d1d5db" strokeWidth="1"/>
-                  <polyline points="10,42 34,35 58,38 82,25 106,18" fill="none" stroke="#f59e0b" strokeWidth="1.5"/>
-                  <polyline points="10,46 34,44 58,42 82,45 106,38" fill="none" stroke="#3b82f6" strokeWidth="1.5"/>
-                  <polyline points="10,32 34,28 58,30 82,20 106,12" fill="none" stroke="#10b981" strokeWidth="1.5"/>
-                  {['1月','2月','3月','4月','5月'].map((m, i) => (
-                    <text key={m} x={10 + i * 24} y="55" fontSize="5" fill="#9ca3af" textAnchor="middle">{m}</text>
-                  ))}
-                </svg>
-              </div>
-              <div className="border border-green-300 dark:border-green-600 rounded p-2 bg-white dark:bg-gray-700">
-                <p className="text-xs font-bold text-green-600 dark:text-green-300 mb-1.5">📋 テーブル</p>
-                <table className="text-xs w-full border-collapse">
-                  <thead>
-                    <tr className="bg-green-50 dark:bg-green-900/30">
-                      {['タスク', '月', '工数'].map(h => (
-                        <th key={h} className="border border-green-200 dark:border-green-700 px-1 py-0.5 text-left font-semibold">{h}</th>
-                      ))}
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {[
-                      ['営業報告', '1月', 10],
-                      ['営業報告', '2月', 12],
-                      ['データ分析', '1月', 8],
-                      ['…', '…', '…'],
-                    ].map((r, i) => (
-                      <tr key={i} className={i % 2 === 0 ? '' : 'bg-green-50/50 dark:bg-green-900/10'}>
-                        {r.map((c, j) => (
-                          <td key={j} className="border border-green-200 dark:border-green-700 px-1 py-0.5">{c}</td>
-                        ))}
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-            <p className="text-xs text-center text-gray-400">↑ スライサーを選択するとグラフとテーブルが連動して絞り込まれます</p>
+          <div className="overflow-x-auto">
+            <img
+              src={`${import.meta.env.BASE_URL}images/step8-0-1-report-preview.png`}
+              alt="このセクションで作成するレポートの完成イメージ（スライサー・折れ線グラフ・テーブル）"
+              className="rounded border border-gray-300 dark:border-gray-600"
+            />
           </div>
         </Section>
 
         <Section title="8.1 レポートビューに切り替え">
           <div className="space-y-3 text-sm">
             <p>Power BI Desktop の左端にある3つのアイコンで画面を切り替えます。</p>
-            {/* 左サイドバー図解 */}
-            <div className="flex gap-4 items-start">
-              <div className="border border-gray-400 dark:border-gray-500 rounded overflow-hidden text-xs bg-white dark:bg-gray-900 shrink-0">
-                <div className="bg-gray-800 text-white text-center py-1 text-xs font-bold">Power BI</div>
-                <div className="flex flex-col">
-                  <div className="flex items-center gap-2 p-2 border-l-4 border-yellow-400 bg-yellow-50 dark:bg-yellow-900/20 cursor-pointer">
-                    <span className="text-lg">📊</span>
-                    <span className="font-bold text-yellow-700 dark:text-yellow-300 text-xs">レポート</span>
-                  </div>
-                  <div className="flex items-center gap-2 p-2 text-gray-400 dark:text-gray-600 cursor-pointer">
-                    <span className="text-lg">🗂️</span>
-                    <span className="text-xs">データ</span>
-                  </div>
-                  <div className="flex items-center gap-2 p-2 text-gray-400 dark:text-gray-600 cursor-pointer">
-                    <span className="text-lg">🔗</span>
-                    <span className="text-xs">モデル</span>
-                  </div>
-                </div>
-              </div>
-              <div className="text-sm text-gray-600 dark:text-gray-400 space-y-1.5 pt-6">
-                <p>📊 <strong>レポート</strong>：グラフやビジュアルを配置する画面（今回使用）</p>
-                <p>🗂️ <strong>データ</strong>：テーブルのデータ内容を確認する画面</p>
-                <p>🔗 <strong>モデル</strong>：テーブル間の関連付けを設定する画面</p>
-              </div>
+            <div className="overflow-x-auto">
+              <img
+                src={`${import.meta.env.BASE_URL}images/step8-1-1-report-view.png`}
+                alt="Power BI Desktop の左側ナビゲーションでレポートビューを選択"
+                className="rounded border border-gray-300 dark:border-gray-600"
+              />
+            </div>
+            <div className="text-sm text-gray-600 dark:text-gray-400 space-y-1.5">
+              <p>📊 <strong>レポート</strong>：グラフやビジュアルを配置する画面（今回使用）</p>
+              <p>🗂️ <strong>データ</strong>：テーブルのデータ内容を確認する画面</p>
+              <p>🔗 <strong>モデル</strong>：テーブル間の関連付けを設定する画面</p>
             </div>
           </div>
         </Section>
@@ -1396,30 +1302,12 @@ export const steps: Step[] = [
             <div>
               <p className="font-semibold mb-2">① 「視覚化」ペインで「折れ線グラフ」を選択</p>
               <p className="text-gray-600 dark:text-gray-400 mb-2 text-xs">Power BI 画面の右側に「視覚化」ペインがあります。グラフアイコンをクリックして種類を選びます。</p>
-              <div className="border border-gray-400 dark:border-gray-500 rounded overflow-hidden text-xs bg-white dark:bg-gray-900 max-w-xs">
-                <div className="bg-gray-100 dark:bg-gray-700 px-2 py-1.5 font-bold text-gray-600 dark:text-gray-300 border-b border-gray-300 dark:border-gray-600">視覚化</div>
-                <div className="p-2">
-                  <p className="text-gray-400 dark:text-gray-500 text-xs mb-1">ビジュアルのビルド</p>
-                  <div className="grid grid-cols-5 gap-1">
-                    {[
-                      {icon:'📊',label:'棒グラフ',active:false},
-                      {icon:'📈',label:'折れ線グラフ',active:true},
-                      {icon:'🥧',label:'円グラフ',active:false},
-                      {icon:'🔵',label:'散布図',active:false},
-                      {icon:'🗺️',label:'マップ',active:false},
-                      {icon:'📋',label:'テーブル',active:false},
-                      {icon:'🃏',label:'カード',active:false},
-                      {icon:'🎯',label:'ゲージ',active:false},
-                      {icon:'🔽',label:'スライサー',active:false},
-                      {icon:'📑',label:'マトリックス',active:false},
-                    ].map(({icon,label,active}) => (
-                      <div key={label} title={label} className={`flex flex-col items-center p-1 rounded cursor-pointer text-xs ${active ? 'border-2 border-yellow-400 bg-yellow-50 dark:bg-yellow-900/30' : 'border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800'}`}>
-                        <span className="text-base">{icon}</span>
-                      </div>
-                    ))}
-                  </div>
-                  <p className="mt-1 text-yellow-600 dark:text-yellow-400 text-xs">📈 折れ線グラフを選択（黄枠）</p>
-                </div>
+              <div className="overflow-x-auto">
+                <img
+                  src={`${import.meta.env.BASE_URL}images/step8-2-1-viz-select.png`}
+                  alt="視覚化ペインで折れ線グラフのアイコンを選択"
+                  className="rounded border border-gray-300 dark:border-gray-600"
+                />
               </div>
             </div>
 
@@ -1427,46 +1315,12 @@ export const steps: Step[] = [
             <div>
               <p className="font-semibold mb-2">② 「フィールド」ペインから各軸にドラッグ</p>
               <p className="text-gray-600 dark:text-gray-400 mb-2 text-xs">視覚化ペインの下に X 軸・Y 軸・凡例などのエリアが表示されます。そこにフィールドをドラッグします。</p>
-              <div className="flex gap-3 flex-wrap">
-                {/* フィールド一覧 */}
-                <div className="border border-gray-400 dark:border-gray-500 rounded overflow-hidden text-xs bg-white dark:bg-gray-900">
-                  <div className="bg-gray-100 dark:bg-gray-700 px-2 py-1.5 font-bold text-gray-600 dark:text-gray-300 border-b border-gray-300 dark:border-gray-600">データ</div>
-                  <div className="p-2 space-y-1">
-                    <div className="font-semibold text-gray-500 dark:text-gray-400">▼ ProjectTasks</div>
-                    <div className="ml-3 space-y-1">
-                      {[
-                        {field:'タスク',arrow:'→ 凡例',color:'text-purple-600 dark:text-purple-400'},
-                        {field:'月',arrow:'→ X軸',color:'text-blue-600 dark:text-blue-400'},
-                        {field:'工数',arrow:'→ Y軸',color:'text-green-600 dark:text-green-400'},
-                      ].map(({field,arrow,color}) => (
-                        <div key={field} className="flex items-center gap-2">
-                          <div className="flex items-center gap-1 border border-gray-300 dark:border-gray-600 rounded px-1.5 py-0.5 bg-gray-50 dark:bg-gray-800 cursor-grab">
-                            <span className="text-gray-400">⠿</span>
-                            <span>{field}</span>
-                          </div>
-                          <span className={`font-bold ${color}`}>{arrow}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-
-                {/* 軸エリア */}
-                <div className="border border-gray-400 dark:border-gray-500 rounded overflow-hidden text-xs bg-white dark:bg-gray-900 flex-1 min-w-40">
-                  <div className="bg-gray-100 dark:bg-gray-700 px-2 py-1.5 font-bold text-gray-600 dark:text-gray-300 border-b border-gray-300 dark:border-gray-600">📈 折れ線グラフ</div>
-                  <div className="p-2 space-y-2">
-                    {[
-                      {label:'X 軸',value:'月',color:'border-blue-300 dark:border-blue-600 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300'},
-                      {label:'Y 軸',value:'工数の合計',color:'border-green-300 dark:border-green-600 bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-300'},
-                      {label:'凡例',value:'タスク',color:'border-purple-300 dark:border-purple-600 bg-purple-50 dark:bg-purple-900/20 text-purple-700 dark:text-purple-300'},
-                    ].map(({label,value,color}) => (
-                      <div key={label}>
-                        <p className="font-semibold text-gray-500 dark:text-gray-400 mb-0.5">{label}</p>
-                        <div className={`border-2 rounded px-2 py-1 ${color} font-medium`}>{value}</div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
+              <div className="overflow-x-auto">
+                <img
+                  src={`${import.meta.env.BASE_URL}images/step8-2-2-field-assign.png`}
+                  alt="データペインからフィールドペインの X軸・Y軸・凡例にドラッグして割り当て"
+                  className="rounded border border-gray-300 dark:border-gray-600"
+                />
               </div>
             </div>
 
@@ -1476,27 +1330,12 @@ export const steps: Step[] = [
         <Section title="8.3 グラフの書式設定">
           <div className="space-y-3 text-sm">
             <p>グラフをクリックした後、視覚化ペインの「書式」タブ（🎨 ブラシアイコン）をクリックします。</p>
-            <div className="border border-gray-400 dark:border-gray-500 rounded overflow-hidden text-xs bg-white dark:bg-gray-900 max-w-xs">
-              <div className="bg-gray-100 dark:bg-gray-700 px-2 py-1 font-bold text-gray-600 dark:text-gray-300 border-b border-gray-300 dark:border-gray-600">視覚化</div>
-              <div className="flex border-b border-gray-300 dark:border-gray-600">
-                <div className="flex-1 text-center p-1.5 text-gray-400">📊 ビルド</div>
-                <div className="flex-1 text-center p-1.5 border-b-2 border-yellow-400 text-yellow-600 dark:text-yellow-400 font-bold">🎨 書式 ←</div>
-                <div className="flex-1 text-center p-1.5 text-gray-400">🔍 分析</div>
-              </div>
-              <div className="p-2 space-y-1.5">
-                <div className="p-1.5 rounded border border-gray-200 dark:border-gray-700">
-                  <p className="font-semibold text-gray-600 dark:text-gray-300">タイトル</p>
-                  <div className="mt-1 border border-gray-300 dark:border-gray-600 rounded px-1.5 py-0.5 bg-gray-50 dark:bg-gray-700 text-gray-700 dark:text-gray-300">タスク別の月ごとの工数推移</div>
-                </div>
-                <div className="p-1.5 rounded border border-gray-200 dark:border-gray-700 flex items-center justify-between">
-                  <span className="text-gray-600 dark:text-gray-300">凡例</span>
-                  <div className="flex gap-1">
-                    <div className="px-1.5 py-0.5 rounded bg-gray-100 dark:bg-gray-700 text-gray-400 text-xs">上</div>
-                    <div className="px-1.5 py-0.5 rounded bg-yellow-100 dark:bg-yellow-900/40 text-yellow-700 dark:text-yellow-400 font-bold text-xs border border-yellow-400">右</div>
-                    <div className="px-1.5 py-0.5 rounded bg-gray-100 dark:bg-gray-700 text-gray-400 text-xs">下</div>
-                  </div>
-                </div>
-              </div>
+            <div className="overflow-x-auto">
+              <img
+                src={`${import.meta.env.BASE_URL}images/step8-3-1-format.png`}
+                alt="視覚化ペインの書式タブでタイトルと凡例の位置を設定"
+                className="rounded border border-gray-300 dark:border-gray-600"
+              />
             </div>
           </div>
         </Section>
@@ -1509,22 +1348,12 @@ export const steps: Step[] = [
               <li>フィールドペインから「タスク」「月」「工数」をそれぞれドラッグ</li>
               <li>テーブルの端をドラッグしてサイズを調整</li>
             </ol>
-            <div className="border border-gray-400 dark:border-gray-500 rounded overflow-hidden text-xs bg-white dark:bg-gray-900 max-w-xs">
-              <div className="bg-gray-100 dark:bg-gray-700 px-2 py-1 font-bold text-gray-600 dark:text-gray-300 border-b border-gray-300 dark:border-gray-600">📋 テーブル（完成イメージ）</div>
-              <table className="w-full border-collapse">
-                <thead>
-                  <tr className="bg-gray-800 text-white text-xs">
-                    {['タスク','月','工数'].map(h => <th key={h} className="px-2 py-1 text-left border-r border-gray-600">{h}</th>)}
-                  </tr>
-                </thead>
-                <tbody>
-                  {[['営業報告','1月','10'],['営業報告','2月','12'],['データ分析','1月','8'],['…','…','…']].map((r,i) => (
-                    <tr key={i} className={i%2===0 ? '' : 'bg-gray-50 dark:bg-gray-800'}>
-                      {r.map((c,j) => <td key={j} className="px-2 py-0.5 border-r border-b border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300">{c}</td>)}
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+            <div className="overflow-x-auto">
+              <img
+                src={`${import.meta.env.BASE_URL}images/step8-4-1-table-result.png`}
+                alt="キャンバスに配置したテーブルの完成イメージ"
+                className="rounded border border-gray-300 dark:border-gray-600"
+              />
             </div>
           </div>
         </Section>
@@ -1537,17 +1366,12 @@ export const steps: Step[] = [
               <li>フィールドペインから「タスク」をドラッグ</li>
               <li>スライサーの項目をクリックして、グラフとテーブルが絞り込まれることを確認</li>
             </ol>
-            <div className="border border-gray-400 dark:border-gray-500 rounded overflow-hidden text-xs bg-white dark:bg-gray-900 max-w-xs">
-              <div className="bg-gray-100 dark:bg-gray-700 px-2 py-1 font-bold text-gray-600 dark:text-gray-300 border-b border-gray-300 dark:border-gray-600">🔽 スライサー（完成イメージ）</div>
-              <div className="p-2 space-y-1">
-                {['営業報告','データ分析','マーケティング','プロジェクト管理','システム開発'].map(task => (
-                  <div key={task} className="flex items-center gap-2 py-0.5 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800 rounded px-1">
-                    <div className="w-3 h-3 border border-gray-400 dark:border-gray-500 rounded-sm"></div>
-                    <span className="text-gray-700 dark:text-gray-300">{task}</span>
-                  </div>
-                ))}
-              </div>
-              <p className="px-2 pb-2 text-xs text-blue-600 dark:text-blue-400">↑ チェックを入れるとグラフとテーブルが連動して絞り込まれます</p>
+            <div className="overflow-x-auto">
+              <img
+                src={`${import.meta.env.BASE_URL}images/step8-5-1-slicer-result.png`}
+                alt="キャンバスに配置したスライサーの完成イメージ"
+                className="rounded border border-gray-300 dark:border-gray-600"
+              />
             </div>
           </div>
         </Section>
